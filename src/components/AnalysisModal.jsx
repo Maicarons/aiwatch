@@ -6,13 +6,13 @@ import { computePredictionOutcome, verdictLabel, estimateExceeded, exceededRecov
 import { hasLiveIncident, readsResolved } from '../utils/liveIncident'
 import { recoveryBaselineText } from '../utils/recoveryBaseline'
 
-function timeAgo(date, lang) {
+function timeAgo(date, t) {
   const diff = Date.now() - new Date(date).getTime()
   const mins = Math.floor(diff / 60000)
-  if (mins < 1) return lang === 'ko' ? '방금 전' : 'just now'
-  if (mins < 60) return lang === 'ko' ? `${mins}분 전` : `${mins}m ago`
+  if (mins < 1) return t('analysis.time.justNow')
+  if (mins < 60) return t('analysis.time.minAgo').replace('{n}', String(mins))
   const hrs = Math.floor(mins / 60)
-  return lang === 'ko' ? `${hrs}시간 전` : `${hrs}h ago`
+  return t('analysis.time.hourAgo').replace('{n}', String(hrs))
 }
 
 /** #1233 — the worst DISPLAY state across a grouped incident's services.
@@ -114,7 +114,7 @@ export default function AnalysisModal({ aiAnalysis, recoveryBaseline, services, 
         <div className="flex items-center justify-between border-b border-[var(--border)]" style={{ padding: '14px 16px' }}>
           <div className="flex items-center gap-2">
             <span style={{ fontSize: '16px' }}>🤖</span>
-            <span className="mono text-[12px] font-medium text-[var(--text0)]">AI Analysis</span>
+            <span className="mono text-[12px] font-medium text-[var(--text0)]">{t('analysis.title')}</span>
             <span className="mono text-[9px] rounded" style={{ color: 'var(--purple)', background: 'rgba(124,58,237,0.15)', padding: '2px 6px' }}>Beta</span>
             <span className="mono text-[9px] text-[var(--text2)]">({totalCount})</span>
           </div>
@@ -179,22 +179,20 @@ export default function AnalysisModal({ aiAnalysis, recoveryBaseline, services, 
                   <span className="w-[6px] h-[6px] rounded-full" style={{ background: worstStatus === 'operational' ? 'var(--green)' : worstStatus === 'down' ? 'var(--red)' : worstStatus === 'unknown' ? 'var(--text2)' : 'var(--amber)' }} />
                   <span className="text-[13px] font-medium text-[var(--text0)]">{svcs.map(s => s.name).join(', ')}</span>
                   {analyses.length > 1 && (
-                    <span className="mono text-[9px] text-[var(--text2)]">({analyses.length} {lang === 'ko' ? '건' : 'incidents'})</span>
+                    <span className="mono text-[9px] text-[var(--text2)]">({t('analysis.count').replace('{n}', String(analyses.length))})</span>
                   )}
                   {readsResolved(svcs) && (
                     <span className="mono text-[9px] rounded" style={{ color: 'var(--green)', background: 'var(--status-bg-green)', padding: '3px 8px', display: 'inline-block' }}>
-                      Resolved
+                      {t('incidents.status.resolved')}
                     </span>
                   )}
                   {isolatedModelIssue && (
                     <span
                       className="mono text-[9px] rounded"
                       style={{ color: 'var(--amber)', background: 'var(--status-bg-amber)', padding: '3px 8px', display: 'inline-block' }}
-                      title={lang === 'ko'
-                        ? '서비스 전체는 정상이지만 일부 모델/컴포넌트에서 이슈가 감지되었습니다'
-                        : 'Service operational — isolated model/component issues detected'}
+                      title={t('analysis.isolated.title')}
                     >
-                      {lang === 'ko' ? '부분 이슈' : 'Isolated issue'}
+                      {t('analysis.isolated')}
                     </span>
                   )}
                 </div>
@@ -231,23 +229,23 @@ export default function AnalysisModal({ aiAnalysis, recoveryBaseline, services, 
                       <div className="mono text-[10px] text-[var(--text2)]" style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                         {outcome ? (
                           // #827 F4 — resolved: show our estimate vs what actually happened (richer than the bare estimate)
-                          <span>🎯 <strong style={{ color: 'var(--text1)' }}>{lang === 'ko' ? '예측 대비 실제' : 'Predicted vs actual'}:</strong> {lang === 'ko' ? '예측' : 'est'} ~{outcome.predictedText} · {lang === 'ko' ? '실제' : 'actual'} {outcome.actualText}{outcomeVerdict ? ` (${outcomeVerdict})` : ''}</span>
+                          <span>🎯 <strong style={{ color: 'var(--text1)' }}>{t('analysis.predictedVsActual')}:</strong> {t('analysis.est')} ~{outcome.predictedText} · {t('analysis.actual')} {outcome.actualText}{outcomeVerdict ? ` (${outcomeVerdict})` : ''}</span>
                         ) : (
-                          <span>⏱ <strong style={{ color: 'var(--text1)' }}>{lang === 'ko' ? '예상 복구' : 'Est. Recovery'}:</strong> {analysis.estimatedRecovery === 'No historical data for estimation'
-                            ? (lang === 'ko' ? '복구 신호 모니터링 중...' : 'Monitoring recovery signals...')
+                          <span>⏱ <strong style={{ color: 'var(--text1)' }}>{t('analysis.estRecovery')}:</strong> {analysis.estimatedRecovery === 'No historical data for estimation'
+                            ? t('analysis.monitoringRecovery')
                             // incident already past its estimate → show elapsed vs estimate, not the stale range
                             : estimateExceeded(analysis, inc)
                               ? exceededRecoveryText(analysis, inc, lang)
                               : analysis.estimatedRecovery === 'N/A'
-                                ? (lang === 'ko' ? '일반 패턴 초과 — 예측 불가' : 'Exceeded typical pattern')
+                                ? t('analysis.exceeded')
                                 : analysis.estimatedRecovery}
                           </span>
                         )}
                         {analysis.affectedScope?.length > 0 && (
-                          <span>📡 <strong style={{ color: 'var(--text1)' }}>{lang === 'ko' ? '영향 범위' : 'Scope'}:</strong> {analysis.affectedScope.join(', ')}</span>
+                          <span>📡 <strong style={{ color: 'var(--text1)' }}>{t('analysis.scope')}:</strong> {analysis.affectedScope.join(', ')}</span>
                         )}
-                        {isRecovered && <span>✅ {t('analysis.recoveredAt')}: {timeAgo(analysis.resolvedAt, lang)}</span>}
-                        <span>🕐 {lang === 'ko' ? '분석 업데이트' : 'Analysis updated'} {timeAgo(analysis.analyzedAt, lang)}{modelLabel ? ` · ${modelLabel}` : ''}</span>
+                        {isRecovered && <span>✅ {t('analysis.recoveredAt')}: {timeAgo(analysis.resolvedAt, t)}</span>}
+                        <span>🕐 {t('analysis.updated')} {timeAgo(analysis.analyzedAt, t)}{modelLabel ? ` · ${modelLabel}` : ''}</span>
                       </div>
                     </div>
                   )
@@ -265,7 +263,7 @@ export default function AnalysisModal({ aiAnalysis, recoveryBaseline, services, 
                     "No operational alternatives" claim (subjective, may be inaccurate). */}
                 {showFallback && fallbackGroups.length > 0 && (
                   <div className="mono text-[10px]" style={{ marginTop: '10px', padding: '8px 10px', background: 'var(--bg1)', borderRadius: '6px', borderLeft: '3px solid var(--amber)' }}>
-                    <span style={{ color: 'var(--text1)', fontWeight: 600 }}>🔄 {lang === 'ko' ? '대안 서비스' : 'Alternatives'}</span>
+                    <span style={{ color: 'var(--text1)', fontWeight: 600 }}>🔄 {t('analysis.alternatives')}</span>
                     <div style={{ marginTop: '4px', display: 'flex', flexDirection: 'column', gap: '3px' }}>
                       {fallbackGroups.map(grp => (
                         <span key={`${grp.category}:${grp.label}`} style={{ color: 'var(--text1)' }}>

@@ -7,6 +7,7 @@ import IncidentTimeline from '../components/IncidentTimeline'
 import ReportModal from '../components/ReportModal'
 import RecentUserReports from '../components/RecentUserReports'
 import { useLang } from '../hooks/useLang'
+import { intlLocale } from '../utils/lang'
 import { usePage } from '../utils/pageContext'
 import { usePolling } from '../hooks/usePolling'
 import { trackEvent } from '../utils/analytics'
@@ -83,7 +84,7 @@ const CALENDAR_CLASS = {
 // Compute calendar date label for index i (0 = oldest, last = today)
 function calendarDate(i, lang, days = 30) {
   const d = new Date(Date.now() - (days - 1 - i) * 86_400_000)
-  return new Intl.DateTimeFormat(lang === 'ko' ? 'ko-KR' : 'en-US', {
+  return new Intl.DateTimeFormat(intlLocale(lang), {
     month: 'short',
     day: 'numeric',
   }).format(d)

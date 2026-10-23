@@ -32,7 +32,9 @@ function cspHeaderValue(): string {
 // SHA-256 (base64) of each EXECUTABLE inline <script> in index.html (skip src loaders + JSON-LD) —
 // the served dist/index.html is byte-identical (Vite preserves these inline scripts).
 function indexHtmlScriptHashes(): string[] {
-  const html = readFileSync(join(repoRoot, 'index.html'), 'utf8')
+  // Normalise CRLF: a Windows checkout rewrites line endings, but the hash vercel.json pins is over
+  // the LF bytes the deployment serves (Vite preserves the inline scripts).
+  const html = readFileSync(join(repoRoot, 'index.html'), 'utf8').replace(/\r\n/g, '\n')
   const re = /<script\b([^>]*)>([\s\S]*?)<\/script>/g
   const out: string[] = []
   let m: RegExpExecArray | null

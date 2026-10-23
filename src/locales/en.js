@@ -452,6 +452,45 @@ const en = {
   'install.desc': 'Instant access — no app store needed',
   'install.btn': 'Add App',
   'install.ios': 'Tap the Share button in Safari, then "Add to Home Screen"',
+
+  // Page metadata
+  'app.title': 'AIWatch — Real-time AI service monitoring',
+  'app.description': 'Real-time status monitoring for 48 AI services — Claude, ChatGPT, Gemini, Cursor, Codex and more. Check if AI services are down, track uptime and incidents.',
+
+  // Analysis extras (strings previously inlined per-language in components/utils)
+  'analysis.title': 'AI Analysis',
+  'analysis.time.justNow': 'just now',
+  'analysis.time.minAgo': '{n}m ago',
+  'analysis.time.hourAgo': '{n}h ago',
+  'analysis.count': '{n} incidents',
+  'analysis.isolated': 'Isolated issue',
+  'analysis.isolated.title': 'Service operational — isolated model/component issues detected',
+  'analysis.predictedVsActual': 'Predicted vs actual',
+  'analysis.est': 'est',
+  'analysis.actual': 'actual',
+  'analysis.estRecovery': 'Est. Recovery',
+  'analysis.monitoringRecovery': 'Monitoring recovery signals...',
+  'analysis.exceeded': 'Exceeded typical pattern',
+  'analysis.exceeded.range': 'Ongoing ~{approx} · exceeded ~{range} est.',
+  'analysis.exceeded.far': 'Ongoing ~{approx} · far exceeded est.',
+  'analysis.scope': 'Scope',
+  'analysis.updated': 'Analysis updated',
+  'analysis.alternatives': 'Alternatives',
+  'analysis.verdict.accurate': 'within estimate',
+  'analysis.verdict.under': 'slower than est.',
+  'analysis.verdict.over': 'faster than est.',
+  'analysis.est.within': 'within ~{p} est.',
+  'analysis.est.over': 'over ~{p} est.',
+  'analysis.est.faster': 'faster than ~{p} est.',
+  'analysis.elapsed.min': '{n}m',
+  'analysis.elapsed.hour': '{n}h',
+  'analysis.recovery.baseline': 'Past incidents on this service: median {median}, 80% resolved within {p80} (based on {n} recorded incidents since {since})',
+  'analysis.recovered.in': 'recovered in {d}',
+  'analysis.recovered': 'recovered',
+
+  // Error boundary
+  'error.page.title': 'Failed to load this page.',
+  'error.page.reload': 'Reload',
 }
 
 export default en

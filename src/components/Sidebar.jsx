@@ -285,7 +285,7 @@ export default function Sidebar({ visibleServiceIds, onNavigate }) {
         </a>
         {/* "Request a service" is a feedback link, not a Claude Code integration — grouped with the data/resources items above the divider. */}
         <a
-          href="https://github.com/bentleypark/aiwatch/issues/new?template=service_request.md"
+          href="https://github.com/Maicarons/aiwatch/issues/new?template=service_request.md"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => { trackEvent('click_request_service', {}); onNavigate?.() }}

@@ -39,6 +39,7 @@
 
 import fs from 'node:fs'
 import { execFileSync } from 'node:child_process'
+import { pathToFileURL } from 'node:url'
 
 const ZERO = /^0+$/
 
@@ -90,6 +91,11 @@ export function spawnedAgents(auditText) {
   return out
 }
 
+/** True when a push URL points at the ORIGINAL repository. The fork's own URL must never match. */
+export function isUpstreamUrl(url) {
+  return /(^|[/:])bentleypark\/aiwatch(\.git)?\/?$/i.test(String(url || '').trim())
+}
+
 /** The decision. Pure, so it is testable without a repo or a push. */
 export function unverified(nameStatus, auditText, override) {
   if (override) return []
@@ -116,6 +122,20 @@ export function denyMessage(names) {
 }
 
 function main() {
+  // Fork guard — this checkout publishes to Maicarons/aiwatch ONLY. `remote.upstream.pushurl` is
+  // already DISABLED, so git normally refuses before we run; this catches the other paths (a
+  // re-added remote, a pasted URL, `git push git@github.com:bentleypark/aiwatch.git`).
+  const remoteUrl = process.argv[3] || ''
+  if (isUpstreamUrl(remoteUrl)) {
+    process.stderr.write(
+      `\nBLOCKED — push targets the ORIGINAL repository (${remoteUrl}).\n\n` +
+      `This working tree is a fork: commits go to Maicarons/aiwatch, never to bentleypark/aiwatch.\n` +
+      `Push with \`git push origin <branch>\` (origin = your fork). If you renamed remotes, check\n` +
+      `\`git remote -v\`; the fork's URL must end in Maicarons/aiwatch.\n\n`
+    )
+    process.exit(1)
+  }
+
   const stdin = (() => { try { return fs.readFileSync(0, 'utf8') } catch { return '' } })()
   // Fail-OPEN on an unreadable payload. This guards a sequencing habit, not data integrity, and a hook
   // that cannot read its own input has no basis to block a push.
@@ -141,5 +161,8 @@ function main() {
   process.exit(1)
 }
 
-// Only run when git invoked us, not when a test imports the pure functions above.
-if (process.env.PREPUSH_SELFTEST !== '1' && import.meta.url === `file://${process.argv[1]}`) main()
+// Only run when git invoked us, not when a test imports the pure functions above. pathToFileURL keeps
+// the comparison true on Windows, where `process.argv[1]` is a backslash path and a hand-built
+// `file://${…}` URL never matches `import.meta.url` — which silently made the hook inert there.
+if (process.env.PREPUSH_SELFTEST !== '1' && process.argv[1] &&
+    import.meta.url === pathToFileURL(process.argv[1]).href) main()

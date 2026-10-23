@@ -139,6 +139,7 @@ const SAFE = {
   'src/utils/predictionAccuracy.js': 'every entry point returns early without an ai:analysis, and a synthesized incident is never analyzed',
   'src/locales/en.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'src/locales/ko.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
+  'src/locales/zh.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'api/_is-down/upstream-note.ts': 'renders UpstreamLink records built by upstream-link.ts, which sources causal incidents from incident-text.ts — resolved skipped',
   'worker/src/monthly-narrative.ts': 'names the divisor without asserting a cause for the excluded rows',
   'worker/src/weekly-briefing.ts': 'labels the figure "incident records", not events',
@@ -274,6 +275,7 @@ const RB_SAFE = {
   'worker/src/parse-failure-log.ts': 'counts SOURCE-READ failures by reason; reads no incident field at all',
   'src/locales/en.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'src/locales/ko.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
+  'src/locales/zh.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'api/_is-down/seo-content.ts': 'static per-service SEO copy, no logic',
   'api/_methodology/html-template.ts': 'static prose describing the Score, no logic',
   'api/_is-down/upstream-note.ts': 'renders UpstreamLink records sourced from incident-text.ts\'s causalIncidents, already excluded there',
@@ -395,6 +397,7 @@ const SU_SAFE = {
   'src/pages/Uptime.jsx': 'uptime figures, not incident measurements',
   'src/locales/en.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'src/locales/ko.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
+  'src/locales/zh.js': 'a flat key→string copy map; the match is a dotted i18n KEY, not a field read',
   'api/_is-down/seo-content.ts': 'static per-service SEO copy',
   'api/_methodology/html-template.ts': 'static prose describing the Score',
   'api/_is-down/upstream-note.ts': 'renders UpstreamLink records sourced from causal incidents, which skip resolved',
@@ -438,7 +441,8 @@ describe('#1292 — every incident-field consumer is classified', () => {
     // 82 → 83: #1697 added worker/src/recovery-baseline.ts, which summarises history records; SAFE on all three.
     // 83 → 84: #1711 added worker/src/latest-report.ts, which copies archive totals; SAFE on all three.
     // 84 → 85: #1752 added worker/src/parsers/incident-io-proxy.ts, which renders the incident feed into page text; SAFE on all three.
-    expect(all.length, 'the detector drifted — it no longer matches what it did when this was pinned').toBe(85)
+    // 85 → 86: added src/locales/zh.js — a third flat key→string copy map, SAFE on all three.
+    expect(all.length, 'the detector drifted — it no longer matches what it did when this was pinned').toBe(86)
   })
 
   it('leaves none unclassified', () => {
@@ -492,7 +496,7 @@ describe('#1384 — every incident-field consumer is classified for retainedBrid
     // If this ever fails while the #1292 "finds the consumers" test above still passes at 76, the
     // count didn't change but a file moved in/out — impossible today (both axes scan identically),
     // kept as a canary in case that ever stops being true.
-    expect(all.length).toBe(85)
+    expect(all.length).toBe(86)
   })
 
   it('leaves none unclassified for retainedBridge', () => {
@@ -538,7 +542,7 @@ describe('#1390 — every incident-field consumer is classified for startUnknown
   const all = consumers()
 
   it('classifies every file the #1292 scan finds — same list, no drift between the three axes', () => {
-    expect(all.length).toBe(85)
+    expect(all.length).toBe(86)
   })
 
   it('leaves none unclassified for startUnknown', () => {
@@ -574,7 +578,7 @@ describe('#1390 — every incident-field consumer is classified for startUnknown
     //
     // The two locale maps are the documented exception and their own reasons say why: the match is a
     // dotted i18n KEY (`incidents.startUnknown.note`), not a member access on an incident.
-    const KEY_ONLY = new Set(['src/locales/en.js', 'src/locales/ko.js'])
+    const KEY_ONLY = new Set(['src/locales/en.js', 'src/locales/ko.js', 'src/locales/zh.js'])
     const readers = []
     let scanned = 0
     for (const file of Object.keys(SU_SAFE)) {

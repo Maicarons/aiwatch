@@ -14,6 +14,7 @@
 // same minimum shape. The prediction fragment stays optional — it genuinely requires an analysis.
 
 import { computePredictionOutcome, fmtMin, withinEstimateText } from './predictionAccuracy'
+import { t } from './lang'
 
 /** Actual recovery minutes from the incident's own timestamps — no AI analysis needed. Prefers the
  *  analysis `resolvedAt` when present (the worker stamps it at the same moment it writes the
@@ -88,10 +89,9 @@ export function buildRecoveredRows(recentlyRecovered, services, aiAnalysis = {})
  * The prediction fragment stays optional because it's the one part that genuinely needs an analysis.
  */
 export function recoveredDetailText(row, lang) {
-  const ko = lang === 'ko'
-  if (row?.durationMin == null) return ko ? '복구됨' : 'recovered'
+  if (row?.durationMin == null) return t('analysis.recovered', lang)
   const duration = fmtMin(row.durationMin)
-  const lead = ko ? `${duration} 만에 복구` : `recovered in ${duration}`
+  const lead = t('analysis.recovered.in', lang).replace('{d}', duration)
   const estimate = row.outcome && withinEstimateText(row.outcome, lang)
   return estimate ? `${lead} (${estimate})` : lead
 }

@@ -145,6 +145,128 @@ export const PRESET_BRANDED = presetSnippet(SLUG_BRANDED)
 
 export default function Statusline() {
   const { lang } = useLang()
+
+  // Chinese translation of this guide. The page is long-form technical prose with inline code,
+  // so it lives beside the English copy (the same pragmatic exception LegalContent documents)
+  // rather than in the flat key→string locale maps.
+  if (lang === 'zh') {
+    return (
+      <div className="flex flex-col gap-4" style={{ maxWidth: '860px' }}>
+        <div>
+          <h1 className="text-[var(--text0)] font-semibold" style={{ fontSize: '20px', marginBottom: '8px' }}>
+            将 AIWatch 接入 Claude Code 状态栏
+          </h1>
+          <p className="text-[var(--text2)] text-[13px]" style={{ lineHeight: '1.6' }}>
+            直接在 Claude Code 状态栏中显示 AI 服务故障 — 包括 Claude API、OpenAI、Gemini、GitHub Copilot 等。推荐预设保留常驻且可点击的 <code className="mono text-[var(--text0)]">AIWatch</code> 标签 — 全部正常时显示 <code className="mono text-[var(--text0)]">AIWatch 🟢</code>，出问题时显示 <code className="mono text-[var(--text0)]">AIWatch 🔴 Claude API</code>（最多 3 个服务名，更多则显示 <code className="mono text-[var(--text0)]">+N</code> 溢出标记 — 点击可查看完整列表），AIWatch 无法读取自身状态数据时显示 <code className="mono text-[var(--text0)]">AIWatch ⚪</code> — 任何时候点击都能打开仪表盘。希望健康时完全零占用？<em>其他预设</em>中的极简预设除非有服务降级或状态未知，否则保持空白。
+          </p>
+          <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginTop: '10px' }}>
+            想要主动提醒和 <code className="mono text-[var(--text0)]">/aiwatch</code> 命令，而不只是状态栏？请查看{' '}
+            <a href="/plugin" className="underline" style={{ color: 'var(--blue)' }}>AIWatch Claude Code 插件</a>。
+          </p>
+        </div>
+
+        <div
+          className="border rounded-md text-[var(--text2)]"
+          style={{ padding: '10px 14px', fontSize: '12px', lineHeight: '1.6', borderColor: 'var(--border-hi)', background: 'var(--bg2)' }}
+        >
+          <strong className="text-[var(--text0)]">已经添加过旧版片段？</strong>这些预设现在由服务器完成格式化（不再需要 <code className="mono text-[var(--text0)]">jq</code>），未来的改进会自动送达。再复制一次推荐预设即可切换 — 之后无需再次粘贴。
+        </div>
+
+        <Section title="快速开始（推荐预设）">
+          <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '12px' }}>
+            添加到 <code className="mono text-[var(--text0)]">~/.claude/settings.json</code>。常驻且可点击的 <code className="mono text-[var(--text0)]">AIWatch</code> 标签：全部正常时显示 <code className="mono text-[var(--text0)]">AIWatch 🟢</code>，出问题时显示 <code className="mono text-[var(--text0)]">AIWatch 🔴 Claude API</code>（最多 3 个服务名，更多显示 <code className="mono text-[var(--text0)]">+N</code> — 点击标签查看完整列表）— 在 macOS 上 <code className="mono text-[var(--text0)]">cmd+click</code> / Linux 上 <code className="mono text-[var(--text0)]">ctrl+click</code> <code className="mono text-[var(--text0)]">AIWatch</code> 标签可打开仪表盘，或点击红色服务名跳转到详情页。第三种状态 <code className="mono text-[var(--text0)]">AIWatch ⚪</code> 表示 AIWatch 无法读取自身状态数据 — 有意不使用绿色，因为无法确认一切正常。需要支持 OSC 8 的终端（iTerm2、Warp、kitty、WezTerm、VS Code 集成终端、macOS 12+ 的 Terminal.app）；其他终端会显示为纯文本 — 不影响使用。
+          </p>
+          <Snippet code={PRESET_BRANDED} eventLabel={SLUG_BRANDED} />
+        </Section>
+
+        <Section title="其他预设">
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-[var(--text0)] text-[13px] font-medium" style={{ marginBottom: '6px' }}>紧凑徽章</h3>
+              <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '8px' }}>
+                显示单个计数（例如 <code className="mono text-[var(--text0)]">🔴 2 AI services</code>）而不是服务名。适合状态栏空间紧张时。
+              </p>
+              <Snippet code={PRESET_COMPACT_BADGE} eventLabel={SLUG_COMPACT_BADGE} />
+            </div>
+
+            <div>
+              <h3 className="text-[var(--text0)] text-[13px] font-medium" style={{ marginBottom: '6px' }}>带严重级别的完整列表</h3>
+              <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '8px' }}>
+                显示所有降级/故障服务，并带一个字符的严重级别前缀 — <code className="mono text-[var(--text0)]">X</code> 表示故障，<code className="mono text-[var(--text0)]">!</code> 表示降级。无表情符号，纯文本 — 适合自带图标体系的 Powerline 主题。
+              </p>
+              <Snippet code={PRESET_FULL_LIST} eventLabel={SLUG_FULL_LIST} />
+            </div>
+
+            <div>
+              <h3 className="text-[var(--text0)] text-[13px] font-medium" style={{ marginBottom: '6px' }}>仅核心 LLM</h3>
+              <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '8px' }}>
+                仅显示三个旗舰 LLM — <code className="mono text-[var(--text0)]">Claude</code>、<code className="mono text-[var(--text0)]">OpenAI</code>、<code className="mono text-[var(--text0)]">Gemini</code> — 其他服务保持安静。适合只关心这些服务商的情况。
+              </p>
+              <Snippet code={PRESET_SCOPED} eventLabel={SLUG_SCOPED} />
+            </div>
+
+            <div>
+              <h3 className="text-[var(--text0)] text-[13px] font-medium" style={{ marginBottom: '6px' }}>可点击（OSC 8 超链接）</h3>
+              <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '8px' }}>
+                每个服务名都变成可点击超链接，打开 AIWatch 服务详情页（macOS 上 <code className="mono text-[var(--text0)]">cmd+click</code>，Linux 上 <code className="mono text-[var(--text0)]">ctrl+click</code>）。当状态栏显示异常时，可直接跳转到故障详情。需要支持 OSC 8 的终端 — 大多数现代终端（iTerm2、Warp、kitty、WezTerm、VS Code 集成终端、macOS 12+ 的 Terminal.app）都支持；tmux 和部分旧版 shell 可能会把转义序列显示为原始文本。
+              </p>
+              <Snippet code={PRESET_CLICKABLE} eventLabel={SLUG_CLICKABLE} />
+            </div>
+
+            <div>
+              <h3 className="text-[var(--text0)] text-[13px] font-medium" style={{ marginBottom: '6px' }}>极简（健康时为空）</h3>
+              <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.6', marginBottom: '8px' }}>
+                无品牌标签 — 所有服务正常时输出完全为空，节省状态栏空间；仅在出问题时显示前 3 个降级/故障服务名和红点，超过 3 个时显示 <code className="mono text-[var(--text0)]">+N</code> 标记。如果希望一切正常时零占用，请选择此项。它确实会在一种非故障情况下打破沉默：AIWatch 无法读取自身状态数据时显示 <code className="mono text-[var(--text0)]">⚪ AIWatch status unknown</code>，因为保持空白会与我们无法保证的“全部正常”无法区分。
+              </p>
+              <Snippet code={PRESET_DEGRADED_ONLY} eventLabel={SLUG_DEGRADED_ONLY} />
+            </div>
+          </div>
+        </Section>
+
+        <Section title="工作原理">
+          <ul className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.7', listStyle: 'disc', paddingLeft: '20px' }}>
+            <li>每次状态栏渲染只向 <code className="mono text-[var(--text0)]">{STATUSLINE_API}/&lt;preset&gt;</code> 发送一次 GET 请求。Worker 在服务端渲染最终文本并以纯文本返回 — <strong className="text-[var(--text0)]">无需 <code className="mono">jq</code>，也无需客户端格式化</strong>。支持 CORS，无需认证，不收集客户端标识符。</li>
+            <li>该端点从 Cloudflare 边缘网络返回缓存 5 分钟的 KV 状态 — 大多数地区的典型响应时间低于 100 毫秒。</li>
+            <li>shell 命令设置 2 秒超时（<code className="mono text-[var(--text0)]">--max-time 2</code>）并静默失败（<code className="mono text-[var(--text0)]">2{'>'}/dev/null || true</code>），因此网络波动不会弄坏状态栏。我们这一侧失败则不同：Worker 不会用不存在的数据渲染一条看似正常的行，而是返回 <code className="mono text-[var(--text0)]">⚪</code> 未知标记。</li>
+            <li>由于所有格式化都在 Worker 中完成，<strong className="text-[var(--text0)]">显示改进会自动送达</strong> — 你无需重新粘贴就能获得新功能。预设位于 URL 路径（<code className="mono text-[var(--text0)]">/api/statusline/&lt;preset&gt;</code>），这也是我们统计各预设采用量的方式 — 没有查询字符串，没有用户标识符。</li>
+            <li>不向 Anthropic API 发送任何请求。AIWatch 独立运营自己的状态源。</li>
+          </ul>
+        </Section>
+
+        <Section title="兼容范围">
+          <p className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.7', marginBottom: '8px' }}>
+            上面的片段使用 Claude Code 原生的 <code className="mono text-[var(--text0)]">statusLine</code> 设置，可通过任何支持 shell 命令输出的工具运行。可放入：
+          </p>
+          <ul className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.7', listStyle: 'disc', paddingLeft: '20px' }}>
+            <li><strong className="text-[var(--text0)]">原生 Claude Code</strong> — 按示例直接粘贴到 <code className="mono text-[var(--text0)]">~/.claude/settings.json</code>。</li>
+            <li>
+              <strong className="text-[var(--text0)]">
+                <a href="https://github.com/sirmalloc/ccstatusline" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--blue)' }}>
+                  ccstatusline
+                </a>
+              </strong>
+              {' '}— 在 TUI 中添加为 Custom Command 组件；命令就是 <code className="mono text-[var(--text0)]">"command":</code> 字段中的部分。
+            </li>
+            <li><strong className="text-[var(--text0)]">任何其他提供 shell 命令输出组件的状态栏工具</strong>（大多数流行工具中的 Custom Command 模式）。</li>
+          </ul>
+        </Section>
+
+        <Section title="实际限制">
+          <ul className="text-[var(--text2)] text-[12px]" style={{ lineHeight: '1.7', listStyle: 'disc', paddingLeft: '20px' }}>
+            <li><strong className="text-[var(--text0)]">5 分钟缓存延迟</strong> — AIWatch 检测到故障后，状态栏最多可能需要 5 分钟才会显示。</li>
+            <li><strong className="text-[var(--text0)]">需要 curl</strong> — macOS 和大多数 Linux 发行版已预装（Windows 10+ 也自带）。不再需要 <code className="mono text-[var(--text0)]">jq</code> — Worker 会为你渲染整行。</li>
+            <li><strong className="text-[var(--text0)]">Claude Code 仅限 Claude</strong> — 此功能仅提供信息，不是回退路由。Claude API 故障时你会立即知道，但无法在会话中切换服务商。</li>
+          </ul>
+        </Section>
+
+        <div className="text-[var(--text2)] text-[11px]" style={{ lineHeight: '1.6' }}>
+          AIWatch 以 AGPL-3.0 开源。源码见{' '}
+          <a href="https://github.com/Maicarons/aiwatch" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--blue)' }}>GitHub</a>。
+        </div>
+      </div>
+    )
+  }
+
   return (
     // Doc-style reading column: cap the width on desktop so the prose/snippet lines don't
     // stretch edge-to-edge (unreadable measure on wide screens). flex-col so the KO notice's
@@ -285,7 +407,7 @@ export default function Statusline() {
 
       <div className="text-[var(--text2)] text-[11px]" style={{ lineHeight: '1.6' }}>
         AIWatch is open-source under AGPL-3.0. Source on{' '}
-        <a href="https://github.com/bentleypark/aiwatch" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--blue)' }}>GitHub</a>.
+        <a href="https://github.com/Maicarons/aiwatch" target="_blank" rel="noopener noreferrer" className="underline" style={{ color: 'var(--blue)' }}>GitHub</a>.
       </div>
     </div>
   )

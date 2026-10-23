@@ -59,17 +59,18 @@ class ChunkErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
+      const t = this.props.t ?? ((k) => k)
       return (
         <div style={{ padding: '2rem', textAlign: 'center' }}>
           <p className="text-[var(--text1)]" style={{ marginBottom: '1rem' }}>
-            Failed to load this page.
+            {t('error.page.title')}
           </p>
           <button
             onClick={() => window.location.reload()}
             className="mono text-[12px] text-[var(--text0)] bg-[var(--bg3)] border border-[var(--border)] rounded-md hover:bg-[var(--bg4)] transition-colors cursor-pointer"
             style={{ padding: '6px 16px' }}
           >
-            Reload
+            {t('error.page.reload')}
           </button>
         </div>
       )
@@ -192,7 +193,7 @@ function AppInner() {
         sidebarOpen={sidebarOpen}
         onSidebarClose={() => setSidebarOpen(false)}
       >
-        <ChunkErrorBoundary key={page.name + (page.serviceId ?? '')}>
+        <ChunkErrorBoundary key={page.name + (page.serviceId ?? '')} t={t}>
           {resolvePage(page)}
         </ChunkErrorBoundary>
       </Layout>

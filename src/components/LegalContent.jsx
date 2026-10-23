@@ -64,6 +64,59 @@ export function PrivacyContent() {
     </div>
   )
 
+  if (lang === 'zh') return (
+    <div>
+      <p style={dateStyle}>最后更新：2026 年 10 月</p>
+      <h3 style={headingStyle}>1. 我们收集的信息</h3>
+      <p style={paraStyle}>AIWatch 使用 Google Analytics 4（GA4）收集以下信息以改进服务。<br /><br />
+        · 页面访问记录及会话时长<br />
+        · 按钮点击事件（刷新、筛选变更等）<br />
+        · 设备类型、浏览器及操作系统<br />
+        · 国家/地区（已进行 IP 匿名化）<br /><br />
+        我们不会收集姓名或电子邮件等可识别个人身份的信息。在未获得分析同意时，GA4 会在 Google Consent Mode v2 的无 Cookie 模式下运行 — 仅发送聚合、匿名的 ping，不存储客户端标识符。<br /><br />
+        为检测加载缓慢，我们会记录匿名性能测量值，并附带访客所在国家及处理请求的 Cloudflare 数据中心。不会存储 IP 地址。每批测量值都会携带页面加载时生成的随机标识符并一同记录，以便按访问归组慢加载。该标识符仅保存在页面内存中，不会写入你的设备，刷新页面会重新生成。</p>
+      <h3 style={headingStyle}>2. Cookie 与本地存储</h3>
+      <p style={paraStyle}>AIWatch 使用以下类型的浏览器存储：<br /><br />
+        <strong>分析 Cookie（可选）</strong> — 在你同意后，GA4 会存储 _ga、_ga_&lt;measurement_id&gt; 和 _gid Cookie 用于使用情况分析。如果加载了 Google 标签库，可能还会出现 _gcl_au；AIWatch 不会将其用于广告。你可以通过 Cookie 横幅或浏览器设置拒绝；通过横幅撤回时，AIWatch 会立即删除这些 Cookie；通过其他方式撤回同意时，会在下次页面加载时删除。<br /><br />
+        <strong>默认拒绝行为</strong> — 未经明确同意，无论你首次访问的是哪个 AIWatch 界面（仪表盘、“Is X down?” 页面、月度报告），都不会在你的设备上设置分析或广告 Cookie。由于所有 AIWatch 页面共享 ai-watch.dev 源，同一同意选择会应用于所有页面。<br /><br />
+        <strong>必要本地存储（始终启用）</strong> — AIWatch 会在浏览器的 localStorage 中保存以下偏好。这些数据保留在你的设备上，但 Discord Webhook URL 除外：为发送提醒，该地址也会加密存储在我们的服务器上（见下文；“添加到 Slack”安装所存储的内容见“第三方服务”）：<br />
+        · 主题偏好（深色/浅色）<br />
+        · 语言偏好（韩语/英语/中文）<br />
+        · 仪表盘设置（监控周期、SLA 目标、启用的服务）<br />
+        · Cookie 同意选择（aiwatch-cookie-consent）<br />
+        · PWA 安装横幅的关闭状态<br />
+        · Discord Webhook URL — 由你自愿输入以接收提醒。提醒筛选偏好保存在 localStorage；在你确认频道控制权后，Webhook URL 本身会以 <strong>加密（AES-GCM）</strong>形式存储在我们的服务器上，以便向其发送提醒。其用途与删除方式见下文“第三方服务”。</p>
+      <h3 style={headingStyle}>3. Cookie 横幅</h3>
+      <p style={paraStyle}>首次访问任何 AIWatch 页面时，会出现询问分析同意的 Cookie 横幅（全部接受 / 仅必要）。你的选择会保存在 <code>localStorage.aiwatch-cookie-consent</code> 中，并在之后访问任何 AIWatch 页面时复用。除非你清除浏览器存储，否则横幅不会再次出现。两种选择在仪表盘、“Is X down?” SEO 页面和月度报告中完全一致地生效。</p>
+      <h3 style={headingStyle}>4. 广告</h3>
+      <p style={paraStyle}>AIWatch 不展示广告。Google Consent Mode v2 的 <code>ad_storage</code>、<code>ad_user_data</code> 和 <code>ad_personalization</code> 信号默认设为“denied”，即使你接受分析同意后仍保持“denied” — 只有 <code>analytics_storage</code> 会被升级。不会根据你的访问建立广告画像。</p>
+      <h3 style={headingStyle}>5. Service Worker（PWA）</h3>
+      <p style={paraStyle}>AIWatch 使用 Service Worker 在本地缓存静态资源，以加快加载并提供有限的离线访问。Service Worker 不会收集或传输任何个人数据。</p>
+      <h3 style={headingStyle}>6. 数据保留</h3>
+      <p style={paraStyle}>通过 GA4 收集的分析数据按 GA4 设置最多保留 14 个月。本地存储数据会保留在你的浏览器中，直到你手动清除。加密的 Discord 或 Slack Webhook URL 会保留在服务器上，直到你退订 — 退订会立即永久删除；Webhook 不再接受投递的订阅也可能被自动移除。</p>
+      <h3 style={headingStyle}>7. 第三方服务</h3>
+      <p style={paraStyle}>AIWatch 使用以下可能处理你数据的第三方服务：<br /><br />
+        · Google Analytics 4 — 使用情况分析<br />
+        · Cloudflare Workers — API 代理与缓存<br />
+        · Vercel — 网站托管<br />
+        · GitHub API — 仓库 star 数展示<br />
+        · Discord Webhook API — 提醒投递代理（仅在用户配置时）<br />
+        · Slack API — “添加到 Slack”安装及提醒投递（仅在你将 AIWatch 添加到 Slack 频道时）<br /><br />
+        当你订阅 Discord Webhook 接收提醒时，我们会将其 URL 以 <strong>加密（AES-GCM）</strong>形式存储在我们的服务器上，并由定时 Worker 直接向其投递故障/状态提醒。该 URL 仅用于该投递及你选择的提醒筛选；你可以随时通过 设置 → 提醒（退订）删除，删除后立即永久移除。当你通过“添加到 Slack”将 AIWatch 添加到 Slack 频道时，Slack 会提供你所选频道的 Webhook URL。我们会将其以 <strong>加密（AES-GCM）</strong>形式存储，并附带你的提醒筛选以及工作区和频道 ID 的单向哈希（以便同一频道只订阅一次）；我们不会存储工作区或频道名称。要更改服务或退订，请使用发布到该频道的欢迎消息中的链接；在那里退订会立即删除这些数据。在 Slack 中移除 AIWatch 应用会停止投递，但要删除已存储的数据，请使用该链接退订。替代方案 Slack 内置的 /feed 命令读取我们的公开 RSS 源，我们这边不存储任何内容。<br /><br />
+        收集的信息不会与任何其他第三方共享。</p>
+      <h3 style={headingStyle}>8. 你的权利</h3>
+      <p style={paraStyle}>你有权请求访问、更正或删除你的数据。由于 AIWatch 不收集可识别个人身份的信息，大多数数据是匿名的，无法与个人关联。你可以随时撤回分析同意：<br /><br />
+        · <strong>推荐</strong>：在浏览器开发者工具中运行 <code>localStorage.removeItem('aiwatch-cookie-consent')</code>，让 Cookie 横幅重新出现，然后选择“仅必要”。这会保留你的仪表盘偏好（主题、语言、启用的服务）。<br />
+        · <strong>手动</strong>：在浏览器开发者工具控制台运行 <code>localStorage.setItem('aiwatch-cookie-consent','denied')</code>。下次页面加载时，AIWatch 会读取该值并自动删除剩余的 Cookie — 手动路径与横幅“仅必要”选项产生相同的最终状态。</p>
+      <h3 style={headingStyle}>9. 儿童隐私</h3>
+      <p style={paraStyle}>AIWatch 不会有意收集 14 岁以下儿童的信息。</p>
+      <h3 style={headingStyle}>10. 联系我们</h3>
+      <p>如有隐私相关问题，请联系 <a href="mailto:contact@ai-watch.dev" style={linkStyle}>contact@ai-watch.dev</a>。</p>
+      <p style={{ ...paraStyle, marginTop: 8 }}>使用 AIWatch <strong>Chrome 扩展</strong>？它有自己的独立隐私政策（不使用分析或 Cookie）— 见 <a href="/extension-privacy" style={linkStyle}>扩展隐私政策</a>。</p>
+      <p style={{ ...paraStyle, marginTop: 8 }}>使用 AIWatch <strong>Claude Code 插件</strong>？它也有独立的隐私政策（无 Cookie、无分析、不读取代码）— 见 <a href="/plugin-privacy" style={linkStyle}>插件隐私政策</a>。</p>
+    </div>
+  )
+
   return (
     <div>
       <p style={dateStyle}>최종 수정일: 2026년 10월</p>
@@ -139,13 +192,42 @@ export function TermsContent() {
       <h3 style={headingStyle}>6. Disclaimer</h3>
       <p style={paraStyle}>AIWatch is provided "as is" without warranties of any kind. We are not responsible for decisions made based on the information displayed, including but not limited to business, operational, or financial decisions.</p>
       <h3 style={headingStyle}>7. Open Source and Licensing</h3>
-      <p style={paraStyle}>AIWatch is open-source software licensed under the <a href="https://github.com/bentleypark/aiwatch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style={linkStyle}>GNU Affero General Public License v3.0 (AGPL-3.0)</a>. The source code is available on GitHub. Contributions and usage are subject to the terms of this license.</p>
+      <p style={paraStyle}>AIWatch is open-source software licensed under the <a href="https://github.com/Maicarons/aiwatch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style={linkStyle}>GNU Affero General Public License v3.0 (AGPL-3.0)</a>. The source code is available on GitHub. Contributions and usage are subject to the terms of this license.</p>
       <h3 style={headingStyle}>8. Governing Law</h3>
       <p style={paraStyle}>These terms are governed by and construed in accordance with the laws of the Republic of Korea.</p>
       <h3 style={headingStyle}>9. Changes to Terms</h3>
       <p style={paraStyle}>These terms may be updated from time to time. Significant changes will be announced on the service. Continued use after changes constitutes acceptance.</p>
       <h3 style={headingStyle}>10. Contact</h3>
       <p>For inquiries regarding these terms, please contact <a href="mailto:contact@ai-watch.dev" style={linkStyle}>contact@ai-watch.dev</a>.</p>
+    </div>
+  )
+
+  if (lang === 'zh') return (
+    <div>
+      <p style={dateStyle}>最后更新：2026 年 3 月</p>
+      <h3 style={headingStyle}>1. 服务概述</h3>
+      <p style={paraStyle}>AIWatch 是一个免费、开源的仪表盘，用于监控主要 AI 服务（包括 API 平台、Web 应用和编程智能体）的运行状态。所有信息均基于各服务的官方 Status API 或状态页。</p>
+      <h3 style={headingStyle}>2. 信息准确性</h3>
+      <p style={paraStyle}>AIWatch 努力提供准确的信息，但状态数据依赖于各服务提供商的官方数据。我们不保证信息的准确性或及时性，也不对因使用这些信息而产生的任何损害承担责任。</p>
+      <h3 style={headingStyle}>3. 服务可用性</h3>
+      <p style={paraStyle}>本服务可能在不事先通知的情况下被修改或停止。计划维护或基础设施问题可能导致临时中断。</p>
+      <h3 style={headingStyle}>4. 公开 API 与徽章</h3>
+      <p style={paraStyle}>AIWatch 提供公开 API（/api/v1/status）和可嵌入的状态徽章（/badge/:serviceId）供外部使用。这些端点按现状提供，不保证可用率或稳定性。禁止可能干扰服务的过度自动化请求。</p>
+      <h3 style={headingStyle}>5. 使用限制</h3>
+      <p style={paraStyle}>禁止以下行为：<br /><br />
+        · 可能干扰服务的过度自动化 API 调用<br />
+        · 未注明来源的数据抓取或再分发<br />
+        · 任何违反适用法律的使用</p>
+      <h3 style={headingStyle}>6. 免责声明</h3>
+      <p style={paraStyle}>AIWatch 按“现状”提供，不附带任何形式的保证。对于基于所显示信息做出的决定（包括但不限于业务、运营或财务决定），我们不承担责任。</p>
+      <h3 style={headingStyle}>7. 开源与许可</h3>
+      <p style={paraStyle}>AIWatch 是采用 <a href="https://github.com/Maicarons/aiwatch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style={linkStyle}>GNU Affero General Public License v3.0 (AGPL-3.0)</a> 许可的开源软件。源代码可在 GitHub 上获取。贡献和使用均受该许可条款约束。</p>
+      <h3 style={headingStyle}>8. 适用法律</h3>
+      <p style={paraStyle}>本条款受大韩民国法律管辖并据其解释。</p>
+      <h3 style={headingStyle}>9. 条款变更</h3>
+      <p style={paraStyle}>本条款可能不时更新。重大变更将在服务内公告。变更后继续使用即视为接受。</p>
+      <h3 style={headingStyle}>10. 联系我们</h3>
+      <p>如对本条款有疑问，请联系 <a href="mailto:contact@ai-watch.dev" style={linkStyle}>contact@ai-watch.dev</a>。</p>
     </div>
   )
 
@@ -168,7 +250,7 @@ export function TermsContent() {
       <h3 style={headingStyle}>6. 면책 조항</h3>
       <p style={paraStyle}>AIWatch는 어떠한 종류의 보증 없이 "있는 그대로" 제공됩니다. 표시된 정보를 기반으로 내린 비즈니스, 운영, 재무 등 모든 결정에 대해 AIWatch는 책임을 지지 않습니다.</p>
       <h3 style={headingStyle}>7. 오픈소스 및 라이선스</h3>
-      <p style={paraStyle}>AIWatch는 <a href="https://github.com/bentleypark/aiwatch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style={linkStyle}>GNU Affero General Public License v3.0 (AGPL-3.0)</a> 라이선스에 따라 배포되는 오픈소스 소프트웨어입니다. 소스 코드는 GitHub에서 확인할 수 있으며, 기여 및 이용은 해당 라이선스 조건을 따릅니다.</p>
+      <p style={paraStyle}>AIWatch는 <a href="https://github.com/Maicarons/aiwatch/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" style={linkStyle}>GNU Affero General Public License v3.0 (AGPL-3.0)</a> 라이선스에 따라 배포되는 오픈소스 소프트웨어입니다. 소스 코드는 GitHub에서 확인할 수 있으며, 기여 및 이용은 해당 라이선스 조건을 따릅니다.</p>
       <h3 style={headingStyle}>8. 준거법</h3>
       <p style={paraStyle}>본 약관은 대한민국 법률에 따라 해석됩니다.</p>
       <h3 style={headingStyle}>9. 약관 변경</h3>

@@ -32,8 +32,9 @@ function calendarCalls() {
     const code = fs.readFileSync(file, 'utf-8')
     for (const m of code.matchAll(/buildCalendarFromIncidents\(([^)]*)\)/g)) {
       // The declaration in calendar.js itself is `export function buildCalendarFromIncidents(` — no
-      // preceding `=` or `{`, and it is the only match in that file.
-      if (file.endsWith('utils/calendar.js')) continue
+      // preceding `=` or `{`, and it is the only match in that file. Compared by resolved path so the
+      // skip also holds on Windows, where relative paths use backslashes.
+      if (file === path.join(SRC, 'utils', 'calendar.js')) continue
       out.push({ file: path.relative(SRC, file), args: m[1] })
     }
   }
@@ -47,7 +48,7 @@ describe('#1390 — every calendar call site passes the provenance flag', () => 
     // Pinned, not a floor: the failure this guards is the scan going quiet. A legitimate new render
     // moves this number in the same diff.
     expect(calls.length, 'the scan drifted — it no longer finds what it did when this was pinned').toBe(3)
-    expect(calls.map((c) => c.file).sort()).toEqual(['pages/Overview.jsx', 'pages/Overview.jsx', 'pages/ServiceDetails.jsx'])
+    expect(calls.map((c) => c.file.split(path.sep).join('/')).sort()).toEqual(['pages/Overview.jsx', 'pages/Overview.jsx', 'pages/ServiceDetails.jsx'])
   })
 
   it('passes dailyImpactComplete at every one', () => {

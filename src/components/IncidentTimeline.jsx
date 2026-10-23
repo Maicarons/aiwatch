@@ -2,6 +2,7 @@
 // Used in: Incidents, Overview, ServiceDetails pages
 
 import { useRef, useEffect } from 'react'
+import { intlLocale } from '../utils/lang'
 
 const STAGE_DOT = {
   investigating: 'bg-[var(--amber)]',
@@ -21,7 +22,7 @@ function formatDate(iso, lang) {
   if (!iso) return ''
   const d = new Date(iso)
   if (isNaN(d.getTime())) return ''
-  return d.toLocaleString(lang === 'ko' ? 'ko-KR' : 'en-US', {
+  return d.toLocaleString(intlLocale(lang), {
     month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit',
     hour12: false, timeZoneName: 'short',
   })

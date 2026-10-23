@@ -12,6 +12,7 @@ import {
 import { OSV_PACKAGES, NVD_FIRST_PARTY } from '../../worker/src/security-monitor'
 import ko from '../locales/ko'
 import en from '../locales/en'
+import zh from '../locales/zh'
 
 // Minimal service fixtures — list order matters (primary = first api-category, else first).
 // langsmith included: its OSV label ('LangChain'), id ('langsmith') and name all differ,
@@ -179,10 +180,10 @@ describe('securitySourceLabel (#949 — card labels each finding by what it is a
     expect(securitySourceLabel(undefined)).toBeNull()
   })
 
-  it('every label token has both i18n keys in ko AND en (else the UI renders a raw key)', () => {
+  it('every label token has both i18n keys in ko, en AND zh (else the UI renders a raw key)', () => {
     for (const source of ['nvd', 'osv', 'hackernews']) {
       const token = securitySourceLabel(source)
-      for (const locale of [ko, en]) {
+      for (const locale of [ko, en, zh]) {
         expect(locale[`svc.security.src.${token}`]).toBeTruthy()
         expect(locale[`svc.security.src.${token}.title`]).toBeTruthy()
       }

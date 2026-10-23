@@ -8,7 +8,7 @@ export const THEME_STORAGE_KEY = 'aiwatch-theme'
 
 export const LANG_STORAGE_KEY = 'aiwatch-lang'
 
-export const VALID_LANGS = ['ko', 'en']
+export const VALID_LANGS = ['ko', 'en', 'zh']
 
 export const SETTINGS_STORAGE_KEY = 'aiwatch-settings'
 

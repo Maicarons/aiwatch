@@ -6,6 +6,7 @@ import { useLang } from '../hooks/useLang'
 import { useTheme } from '../hooks/useTheme'
 import { useSettings } from '../hooks/useSettings'
 import { VALID_THEMES, VALID_LANGS, VALID_PERIODS, SERVICE_AND_APP_IDS, AGENT_SERVICE_IDS, ALL_SERVICE_IDS, DEFAULT_SETTINGS, ALL_SERVICES_FEED_URL } from '../utils/constants'
+import { LANG_LABELS } from '../utils/lang'
 import { usePolling } from '../hooks/usePolling'
 import { trackEvent } from '../utils/analytics'
 import { slackInstallUrl } from '../../api/_shared/slack-install'
@@ -355,7 +356,7 @@ export default function Settings({ focus } = {}) {
           <SegmentControl
             value={lang}
             onChange={setLang}
-            options={VALID_LANGS.map((v) => ({ value: v, label: v === 'ko' ? '한국어' : 'English' }))}
+            options={VALID_LANGS.map((v) => ({ value: v, label: LANG_LABELS[v] ?? v }))}
           />
         </FieldRow>
       </section>

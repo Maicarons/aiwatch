@@ -90,6 +90,15 @@ test.describe('Settings', () => {
     const enBtn = page.locator('main button').filter({ hasText: 'English' })
     await enBtn.evaluate((el) => el.click())
     await expect(page.locator('main').getByText('General')).toBeVisible()
+
+    // Chinese is a third locale, not an English fallback: the picker must switch the
+    // whole page and persist the choice like the other two.
+    const zhBtn = page.locator('main button').filter({ hasText: '中文' })
+    await zhBtn.evaluate((el) => el.click())
+    await expect(page.locator('main').getByText('通用', { exact: true })).toBeVisible()
+    await expect(page.locator('main').getByText('显示', { exact: true })).toBeVisible()
+    expect(await page.evaluate(() => localStorage.getItem('aiwatch-lang'))).toBe('zh')
+    await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN')
   })
 
   test('save button shows feedback', async ({ page }) => {

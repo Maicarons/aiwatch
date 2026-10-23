@@ -8,7 +8,7 @@ import { trackEvent } from '../utils/analytics'
 import AnalysisModal from './AnalysisModal'
 
 const VERSION = `v${__APP_VERSION__}`
-const GITHUB_URL = 'https://github.com/bentleypark/aiwatch'
+const GITHUB_URL = 'https://github.com/Maicarons/aiwatch'
 
 function GearIcon() {
   return (

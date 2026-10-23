@@ -12,12 +12,12 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { execFileSync, spawnSync } from 'node:child_process'
-import { mkdtempSync, writeFileSync, mkdirSync, chmodSync, statSync } from 'node:fs'
+import { mkdtempSync, writeFileSync, mkdirSync, chmodSync, statSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
-  agentNameFromPath, changedAgentNames, rangeForLine, spawnedAgents, unverified,
+  agentNameFromPath, changedAgentNames, rangeForLine, spawnedAgents, unverified, isUpstreamUrl,
 } from '../.githooks/pre-push'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
@@ -144,12 +144,52 @@ test('EXECUTED: empty stdin fails OPEN rather than blocking a push it cannot jud
   assert.equal(r.status, 0)
 })
 
+test('isUpstreamUrl matches every URL shape that names the ORIGINAL repository', () => {
+  for (const url of [
+    'https://github.com/bentleypark/aiwatch.git',
+    'https://github.com/bentleypark/aiwatch',
+    'git@github.com:bentleypark/aiwatch.git',
+    'ssh://git@github.com/bentleypark/aiwatch.git',
+  ]) {
+    assert.equal(isUpstreamUrl(url), true, url)
+  }
+  for (const url of [
+    'https://github.com/Maicarons/aiwatch.git',
+    'git@github.com:Maicarons/aiwatch.git',
+    'https://github.com/bentleypark/aiwatch-reports.git',
+    '',
+  ]) {
+    assert.equal(isUpstreamUrl(url), false, url)
+  }
+})
+
+test('EXECUTED: a push aimed at the original repository is denied', () => {
+  const r = spawnSync('node', [HOOK, 'upstream', 'https://github.com/bentleypark/aiwatch.git'], {
+    input: '', encoding: 'utf8',
+  })
+  assert.equal(r.status, 1)
+  assert.match(r.stderr, /BLOCKED/)
+})
+
+test('EXECUTED: the same payload aimed at the fork is not denied', () => {
+  const r = spawnSync('node', [HOOK, 'origin', 'https://github.com/Maicarons/aiwatch.git'], {
+    input: '', encoding: 'utf8',
+  })
+  assert.equal(r.status, 0)
+})
+
 test('the hook is executable and shebanged — git runs it directly, unlike a Claude hook', () => {
   // The previous gate died on exactly this: a `.mjs` committed 100644 and invoked bare exits 126, which
   // is a non-blocking error rather than a deny. Claude hooks are wired with an explicit `node`; git is
-  // not, so here the mode bit is load-bearing.
-  assert.ok(statSync(HOOK).mode & 0o111, 'pre-push has no exec bit — git will not run it')
-  const first = execFileSync('head', ['-1', HOOK], { encoding: 'utf8' })
+  // not, so here the mode bit is load-bearing. Windows has no executable bit on disk, so read the mode
+  // git actually committed — that is what a clone gets.
+  if (process.platform === 'win32') {
+    const indexMode = execFileSync('git', ['ls-files', '-s', '.githooks/pre-push'], { encoding: 'utf8' }).split(' ')[0]
+    assert.equal(indexMode, '100755', 'the index must record the exec bit, or a clone drops it')
+  } else {
+    assert.ok(statSync(HOOK).mode & 0o111, 'pre-push has no exec bit — git will not run it')
+  }
+  const first = readFileSync(HOOK, 'utf8').split('\n')[0]
   assert.match(first, /^#!.*\bnode\b/)
 })
 
@@ -157,7 +197,7 @@ test('the repo ships the core.hooksPath wiring, or the hook is dead on every clo
   // `.git/hooks` is not version-controlled, so a committed hook does nothing until git is pointed at
   // `.githooks`. Without this the gate is present in the tree and inert everywhere — the same failure
   // mode as before, one layer over.
-  const pkg = JSON.parse(execFileSync('cat', [path.join(HERE, '..', 'package.json')], { encoding: 'utf8' }))
+  const pkg = JSON.parse(readFileSync(path.join(HERE, '..', 'package.json'), 'utf8'))
   const prepare = pkg.scripts?.prepare ?? ''
   assert.match(prepare, /core\.hooksPath\s+\.githooks/, 'no prepare script points git at .githooks')
 })

@@ -448,6 +448,44 @@ const ko = {
   'install.desc': '앱 설치 없이 홈 화면에서 바로 접근',
   'install.btn': '홈 화면 추가',
   'install.ios': 'Safari 하단 공유 버튼 → "홈 화면에 추가"를 선택하세요',
+  // Page metadata
+  'app.title': 'AIWatch — AI 서비스 실시간 모니터링',
+  'app.description': 'Claude, ChatGPT, Gemini, Cursor, Codex 등 48개 AI 서비스의 상태를 실시간으로 확인하세요. AI 서비스 장애 여부와 가동률, 인시던트를 추적합니다.',
+
+  // Analysis extras (strings previously inlined per-language in components/utils)
+  'analysis.title': 'AI 분석',
+  'analysis.time.justNow': '방금 전',
+  'analysis.time.minAgo': '{n}분 전',
+  'analysis.time.hourAgo': '{n}시간 전',
+  'analysis.count': '{n}건',
+  'analysis.isolated': '부분 이슈',
+  'analysis.isolated.title': '서비스 전체는 정상이지만 일부 모델/컴포넌트에서 이슈가 감지되었습니다',
+  'analysis.predictedVsActual': '예측 대비 실제',
+  'analysis.est': '예측',
+  'analysis.actual': '실제',
+  'analysis.estRecovery': '예상 복구',
+  'analysis.monitoringRecovery': '복구 신호 모니터링 중...',
+  'analysis.exceeded': '일반 패턴 초과 — 예측 불가',
+  'analysis.exceeded.range': '약 {approx}째 진행 · 예측({range}) 초과',
+  'analysis.exceeded.far': '약 {approx}째 진행 · 예측 대폭 초과',
+  'analysis.scope': '영향 범위',
+  'analysis.updated': '분석 업데이트',
+  'analysis.alternatives': '대안 서비스',
+  'analysis.verdict.accurate': '예측 범위 내',
+  'analysis.verdict.under': '예측보다 오래',
+  'analysis.verdict.over': '예측보다 빨리',
+  'analysis.est.within': '예측 ~{p} 이내',
+  'analysis.est.over': '예측 ~{p} 초과',
+  'analysis.est.faster': '예측 ~{p}보다 빨리',
+  'analysis.elapsed.min': '{n}분',
+  'analysis.elapsed.hour': '{n}시간',
+  'analysis.recovery.baseline': '이 서비스의 과거 인시던트: 중앙값 {median}, 80%가 {p80} 안에 복구 ({since} 이후 기록된 인시던트 {n}건 기준)',
+  'analysis.recovered.in': '{d} 만에 복구',
+  'analysis.recovered': '복구됨',
+
+  // Error boundary
+  'error.page.title': '페이지를 불러오지 못했습니다.',
+  'error.page.reload': '새로고침',
 }
 
 export default ko

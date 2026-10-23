@@ -11,7 +11,7 @@
 [![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
 [![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://ai-watch.dev/is-github-copilot-down)
 
-**English** | [한국어](README.ko.md)
+**English** | [한국어](README.ko.md) | [中文](README_zh.md)
 
 Real-time monitoring dashboard for **48 AI services** — track status, latency, uptime, and incidents across major AI providers.
 

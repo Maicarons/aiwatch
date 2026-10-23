@@ -40,25 +40,25 @@ describe('AnalysisModal "Resolved" pill wiring (#1104)', () => {
     // THE discriminating case. Old expression: `allRecovered` is true → pill renders over a live
     // incident. New: `readsResolved(svcs)` asks the SERVICE, so it does not.
     const html = renderModal([service({ incidents: [LIVE, CLOSED] })], { openai: [RESOLVED_ANALYSIS] })
-    expect(html).not.toContain('>Resolved<')
+    expect(html).not.toContain('incidents.status.resolved')
     // …and the reader is told why, rather than being left with an unexplained card. This half is
     // discriminating too: the pre-#1104 `isolatedModelIssue` required `!allRecovered`, which is false here.
-    expect(html).toContain('Isolated issue')
+    expect(html).toContain('analysis.isolated')
   })
 
   it('still renders the pill when the service is operational and nothing is open', () => {
     // The control — without it the assertion above would also pass on a component that never renders
     // the pill at all.
     const html = renderModal([service({ incidents: [CLOSED] })], { openai: [RESOLVED_ANALYSIS] })
-    expect(html).toContain('>Resolved<')
-    expect(html).not.toContain('Isolated issue')
+    expect(html).toContain('incidents.status.resolved')
+    expect(html).not.toContain('analysis.isolated')
   })
 
   it('withholds the pill for a live incident that has no analysis of its own', () => {
     // The modal draws from `aiAnalysis` alone, so this incident has no row here — the badge is the
     // only thing that would have spoken for it, and the badge is green.
     const html = renderModal([service({ incidents: [LIVE, CLOSED] })], { openai: [analysis()] })
-    expect(html).not.toContain('>Resolved<')
+    expect(html).not.toContain('incidents.status.resolved')
   })
 })
 

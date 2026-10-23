@@ -1,7 +1,7 @@
 // Time formatting utilities using Intl APIs.
-// `lang` must be 'ko' or 'en' — unrecognized values fall back to 'en-US'.
+// `lang` must be 'ko', 'en' or 'zh' — unrecognized values fall back to 'en-US'.
 
-const LOCALE_MAP = { ko: 'ko-KR', en: 'en-US' }
+const LOCALE_MAP = { ko: 'ko-KR', en: 'en-US', zh: 'zh-CN' }
 
 export function formatTime(date, lang) {
   if (!date) return ''

@@ -5,6 +5,8 @@
 // /api/status `aiAnalysis` payload (estimatedRecoveryHours / estimatedRecovery / resolvedAt) plus the
 // incident's startedAt — no new API field needed, and it lights up the moment an incident resolves.
 
+import { t } from './lang'
+
 /** Compact minute formatter that DROPS a trailing "0m" — "45m", "1h", "3h 10m". The single source
  *  for both the actual and predicted text here, so the dashboard matches the worker `formatDurationMin`
  *  / Edge `fmtMinEn` (which also drop "0m"); the app-wide `recovery.js` formatRecoveryMin keeps "1h 0m"
@@ -87,9 +89,9 @@ export function accuracyVerdict(predictedHours, actualMin) {
  * Shared by the modal + Overview banner so the wording can't drift. Returns null for 'unknown'.
  */
 export function verdictLabel(verdict, lang) {
-  if (verdict === 'accurate') return lang === 'ko' ? '예측 범위 내' : 'within estimate'
-  if (verdict === 'under') return lang === 'ko' ? '예측보다 오래' : 'slower than est.'
-  if (verdict === 'over') return lang === 'ko' ? '예측보다 빨리' : 'faster than est.'
+  if (verdict === 'accurate') return t('analysis.verdict.accurate', lang)
+  if (verdict === 'under') return t('analysis.verdict.under', lang)
+  if (verdict === 'over') return t('analysis.verdict.over', lang)
   return null
 }
 
@@ -104,9 +106,9 @@ export function verdictLabel(verdict, lang) {
 export function withinEstimateText(outcome, lang) {
   if (!outcome) return null
   const p = outcome.predictedText
-  if (outcome.verdict === 'under') return lang === 'ko' ? `예측 ~${p} 초과` : `over ~${p} est.`
-  if (outcome.verdict === 'over') return lang === 'ko' ? `예측 ~${p}보다 빨리` : `faster than ~${p} est.`
-  return lang === 'ko' ? `예측 ~${p} 이내` : `within ~${p} est.`
+  if (outcome.verdict === 'under') return t('analysis.est.over', lang).replace('{p}', p)
+  if (outcome.verdict === 'over') return t('analysis.est.faster', lang).replace('{p}', p)
+  return t('analysis.est.within', lang).replace('{p}', p)
 }
 
 /**
@@ -130,10 +132,10 @@ export function estimateExceeded(analysis, incident, nowMs = Date.now()) {
 /** Approximate elapsed-duration label for the "still ongoing" recovery text — rounded to whole
  *  units so a live, ever-ticking value reads cleanly ("12시간" / "12h", "40분" / "40m"). */
 export function approxElapsedText(min, lang) {
-  if (!(min > 0)) return lang === 'ko' ? '방금' : 'just now'
-  if (min < 60) return lang === 'ko' ? `${Math.round(min)}분` : `${Math.round(min)}m`
+  if (!(min > 0)) return t('analysis.time.justNow', lang)
+  if (min < 60) return t('analysis.elapsed.min', lang).replace('{n}', String(Math.round(min)))
   const h = Math.round(min / 60)
-  return lang === 'ko' ? `${h}시간` : `${h}h`
+  return t('analysis.elapsed.hour', lang).replace('{n}', String(h))
 }
 
 /** Overshoot multiple past which the specific estimate range is dropped as noise (see #900). Elapsed
@@ -157,18 +159,16 @@ export function exceededRecoveryText(analysis, incident, lang, nowMs = Date.now(
     ? raw
     : (bound != null ? predictedHoursText(bound) : null)
   if (!Number.isFinite(elapsedMin) || elapsedMin <= 0 || !range) {
-    return lang === 'ko' ? '일반 패턴 초과 — 예측 불가' : 'Exceeded typical pattern'
+    return t('analysis.exceeded', lang)
   }
   const approx = approxElapsedText(elapsedMin, lang)
   // Once the incident has run FAR past the estimate (> FAR_EXCEEDED_FACTOR× the upper bound), the
   // specific short range is noise (a 4–8h estimate on a 69h incident) that just repeats every refresh
   // — drop it and signal the large overshoot instead. Mild overshoot keeps the range (still credible).
   if (bound != null && elapsedMin > bound * 60 * FAR_EXCEEDED_FACTOR) {
-    return lang === 'ko' ? `약 ${approx}째 진행 · 예측 대폭 초과` : `Ongoing ~${approx} · far exceeded est.`
+    return t('analysis.exceeded.far', lang).replace('{approx}', approx)
   }
-  return lang === 'ko'
-    ? `약 ${approx}째 진행 · 예측(${range}) 초과`
-    : `Ongoing ~${approx} · exceeded ~${range} est.`
+  return t('analysis.exceeded.range', lang).replace('{approx}', approx).replace('{range}', range)
 }
 
 /**
