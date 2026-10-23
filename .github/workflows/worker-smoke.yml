@@ -1,0 +1,19 @@
+name: worker-smoke
+
+on: push
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Status
+        run: |
+          curl -sS --max-time 120 -o status.json -w 'HTTP %{http_code} bytes %{size_download} time %{time_total}\n' https://aiwatch-worker.maicarons2023.workers.dev/api/status || true
+          head -c 1500 status.json; echo
+      - name: Cached
+        run: |
+          curl -sS --max-time 30 -o cached.json -w 'HTTP %{http_code} bytes %{size_download} time %{time_total}\n' https://aiwatch-worker.maicarons2023.workers.dev/api/status/cached || true
+          head -c 1500 cached.json; echo
+      - name: Badge and CORS
+        run: |
+          curl -sSI --max-time 30 -H 'Origin: https://aiwatch.maicarons.cc' https://aiwatch-worker.maicarons2023.workers.dev/badge/claude | head -n 20
