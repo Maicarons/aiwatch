@@ -243,9 +243,11 @@ VITE_GA4_ID=                # 선택: Google Analytics 측정 ID
 
 **Worker (wrangler.toml + secrets)**
 ```
-ALLOWED_ORIGIN=https://your-domain.com
-DISCORD_WEBHOOK_URL=        # Worker Secret: Discord 웹훅 URL
-ANTHROPIC_API_KEY=          # Worker Secret: Claude Sonnet API 키 (AI 분석 fallback)
+ALLOWED_ORIGIN=https://aiwatch.maicarons.cc,*-maicarons-projects.vercel.app
+CONFIRM_BASE_URL=https://aiwatch.maicarons.cc   # 웹훅 확인 링크
+DISCORD_WEBHOOK_URL=        # Worker Secret: Discord 웹훅 URL (선택)
+ANTHROPIC_API_KEY=          # Worker Secret: Claude Sonnet API 키 (선택)
+# KV 네임스페이스 + 전체 시크릿 목록: docs/reference/worker-self-hosting.md
 ```
 
 ## 스크립트
@@ -263,6 +265,7 @@ npm run test:worker  # Worker 단위 테스트 (vitest)
 
 # Worker 배포
 npm run deploy:worker  # Cloudflare 배포 (npm 스크립트만 사용)
+# 최초 배포: docs/reference/worker-self-hosting.md (KV, 시크릿, Vercel 리라이트, 자동 배포)
 ```
 
 ## API 엔드포인트

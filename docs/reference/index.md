@@ -20,6 +20,7 @@ Read this index first, then load only the pages you need.
 - [Adding a New Service — Full Checklist](adding-a-service.md) — the lockstep files + the Step-0 data-richness audit.
 - [Operator Tools — `POST /api/admin/analyze`](operator-tools.md) — force a Sonnet re-analysis on an active incident.
 - [Parallel AI-agent sessions (git worktrees)](parallel-agents.md) — multiple sessions without file/git/port collisions.
+- [Worker self-hosting](worker-self-hosting.md) — deploy the backend to your own Cloudflare account: KV, secrets, Vercel rewiring, auto-deploy, rollback.
 
 ## reference — lookup tables, schemas, policies
 - [Worker HTTP Endpoints](api-endpoints.md) — per-endpoint auth/projections/dedup/#-rationale.

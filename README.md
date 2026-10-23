@@ -244,9 +244,11 @@ VITE_GA4_ID=                # Optional: Google Analytics measurement ID
 
 **Worker (wrangler.toml + secrets)**
 ```
-ALLOWED_ORIGIN=https://your-domain.com
-DISCORD_WEBHOOK_URL=        # Worker Secret: Discord webhook for alerts
-ANTHROPIC_API_KEY=          # Worker Secret: Claude Sonnet API key (AI Analysis fallback)
+ALLOWED_ORIGIN=https://aiwatch.maicarons.cc,*-maicarons-projects.vercel.app
+CONFIRM_BASE_URL=https://aiwatch.maicarons.cc   # Webhook confirmation links
+DISCORD_WEBHOOK_URL=        # Worker Secret: Discord webhook for alerts (optional)
+ANTHROPIC_API_KEY=          # Worker Secret: Claude Sonnet API key (optional)
+# KV namespace + full secret matrix: docs/reference/worker-self-hosting.md
 ```
 
 ## Scripts
@@ -264,6 +266,7 @@ npm run test:worker  # Worker unit tests (vitest)
 
 # Worker deployment
 npm run deploy:worker  # Deploy to Cloudflare (use npm script only)
+# First-time setup: docs/reference/worker-self-hosting.md (KV, secrets, Vercel rewiring, auto-deploy)
 ```
 
 ## API Endpoints

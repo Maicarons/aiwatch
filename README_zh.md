@@ -247,9 +247,11 @@ VITE_GA4_ID=                # 可选：Google Analytics 衡量 ID
 
 **Worker（wrangler.toml + secrets）**
 ```
-ALLOWED_ORIGIN=https://your-domain.com
-DISCORD_WEBHOOK_URL=        # Worker Secret：用于提醒的 Discord webhook
-ANTHROPIC_API_KEY=          # Worker Secret：Claude Sonnet API 密钥（AI 分析兜底）
+ALLOWED_ORIGIN=https://aiwatch.maicarons.cc,*-maicarons-projects.vercel.app
+CONFIRM_BASE_URL=https://aiwatch.maicarons.cc   # Webhook 确认链接
+DISCORD_WEBHOOK_URL=        # Worker Secret：用于提醒的 Discord webhook（可选）
+ANTHROPIC_API_KEY=          # Worker Secret：Claude Sonnet API 密钥（可选）
+# KV 命名空间与完整密钥清单：docs/reference/worker-self-hosting.md
 ```
 
 ## 脚本
@@ -267,6 +269,7 @@ npm run test:worker  # Worker 单元测试（vitest）
 
 # Worker 部署
 npm run deploy:worker  # 部署到 Cloudflare（仅使用 npm 脚本）
+# 首次部署：docs/reference/worker-self-hosting.md（KV、密钥、Vercel 改指向、自动部署）
 ```
 
 ## API 端点

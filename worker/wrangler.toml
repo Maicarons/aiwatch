@@ -7,12 +7,17 @@ compatibility_date = "2024-12-01"
 # Vercel preview deployments rotate per branch+commit, so they're matched via
 # a team-scoped suffix pattern — never use the global `*.vercel.app`, which
 # would let any Vercel tenant call the API.
-ALLOWED_ORIGIN = "https://ai-watch.dev,https://www.ai-watch.dev,https://aiwatch-dev.vercel.app,*-bentleys-projects-5f6a1a8c.vercel.app"
+ALLOWED_ORIGIN = "https://aiwatch.maicarons.cc,https://aiwatch-snowy.vercel.app,*-maicarons-projects.vercel.app"
+# Webhook confirmation links must point at the fork, not upstream.
+CONFIRM_BASE_URL = "https://aiwatch.maicarons.cc"
 # Local dev override: create worker/.dev.vars with ALLOWED_ORIGIN=*
 
 [[kv_namespaces]]
 binding = "STATUS_CACHE"
-id = "e49508d80bb144e9a7ff872f2be771a4" # Not a secret — KV namespace IDs are public identifiers, inaccessible without API token
+# Not a secret — KV namespace IDs are public identifiers, inaccessible without an API token.
+# The checked-in id belongs to the upstream account: replace it with your own before deploying
+# (docs/reference/worker-self-hosting.md).
+id = "e49508d80bb144e9a7ff872f2be771a4"
 
 [ai]
 binding = "AI"
