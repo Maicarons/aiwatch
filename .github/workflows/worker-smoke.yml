@@ -1,6 +1,8 @@
 name: worker-smoke
 
-on: push
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   smoke:
@@ -14,6 +16,10 @@ jobs:
         run: |
           curl -sS --max-time 30 -o cached.json -w 'HTTP %{http_code} bytes %{size_download} time %{time_total}\n' https://aiwatch-worker.maicarons2023.workers.dev/api/status/cached || true
           head -c 1500 cached.json; echo
-      - name: Badge and CORS
+      - name: Badge and statusline (GET)
         run: |
-          curl -sSI --max-time 30 -H 'Origin: https://aiwatch.maicarons.cc' https://aiwatch-worker.maicarons2023.workers.dev/badge/claude | head -n 20
+          curl -sS --max-time 30 -D headers.txt -o badge.svg -w 'badge HTTP %{http_code} bytes %{size_download} type %{content_type}\n' -H 'Origin: https://aiwatch.maicarons.cc' https://aiwatch-worker.maicarons2023.workers.dev/badge/claude
+          grep -i 'access-control-allow-origin' headers.txt || true
+          head -c 200 badge.svg; echo
+          curl -sS --max-time 30 -o sl.txt -w 'statusline HTTP %{http_code} bytes %{size_download} type %{content_type}\n' https://aiwatch-worker.maicarons2023.workers.dev/api/statusline/branded
+          head -c 200 sl.txt; echo
