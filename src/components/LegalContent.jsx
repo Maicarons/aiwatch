@@ -25,7 +25,7 @@ export function PrivacyContent() {
       <h3 style={headingStyle}>2. Cookies and Local Storage</h3>
       <p style={paraStyle}>AIWatch uses the following types of browser storage:<br /><br />
         <strong>Analytics cookies (optional)</strong> — when you grant consent, GA4 stores _ga, _ga_&lt;measurement_id&gt;, and _gid cookies for usage analytics. _gcl_au may also appear if Google's tag library is loaded; AIWatch does not use it for advertising. You can opt out via the cookie banner or browser settings; on revoke through the banner, AIWatch removes these cookies immediately, and on the next page load when consent has been revoked through other means.<br /><br />
-        <strong>Default-denied behavior</strong> — without explicit consent, no analytics or advertising cookies are set on your device, regardless of which AIWatch surface (dashboard, "Is X down?" pages, monthly reports) you arrive on first. The same consent choice applies across all AIWatch pages because they share the ai-watch.dev origin.<br /><br />
+        <strong>Default-denied behavior</strong> — without explicit consent, no analytics or advertising cookies are set on your device, regardless of which AIWatch surface (dashboard, "Is X down?" pages, monthly reports) you arrive on first. The same consent choice applies across all AIWatch pages because they share the aiwatch.maicarons.cc origin.<br /><br />
         <strong>Essential local storage (always active)</strong> — AIWatch stores the following preferences in your browser's localStorage. This data stays on your device, except the Discord webhook URL, which is also stored encrypted on our server for alert delivery (see below; what an "Add to Slack" install stores is under "Third-Party Services"):<br />
         · Theme preference (dark/light)<br />
         · Language preference (ko/en)<br />
@@ -78,7 +78,7 @@ export function PrivacyContent() {
       <h3 style={headingStyle}>2. Cookie 与本地存储</h3>
       <p style={paraStyle}>AIWatch 使用以下类型的浏览器存储：<br /><br />
         <strong>分析 Cookie（可选）</strong> — 在你同意后，GA4 会存储 _ga、_ga_&lt;measurement_id&gt; 和 _gid Cookie 用于使用情况分析。如果加载了 Google 标签库，可能还会出现 _gcl_au；AIWatch 不会将其用于广告。你可以通过 Cookie 横幅或浏览器设置拒绝；通过横幅撤回时，AIWatch 会立即删除这些 Cookie；通过其他方式撤回同意时，会在下次页面加载时删除。<br /><br />
-        <strong>默认拒绝行为</strong> — 未经明确同意，无论你首次访问的是哪个 AIWatch 界面（仪表盘、“Is X down?” 页面、月度报告），都不会在你的设备上设置分析或广告 Cookie。由于所有 AIWatch 页面共享 ai-watch.dev 源，同一同意选择会应用于所有页面。<br /><br />
+        <strong>默认拒绝行为</strong> — 未经明确同意，无论你首次访问的是哪个 AIWatch 界面（仪表盘、“Is X down?” 页面、月度报告），都不会在你的设备上设置分析或广告 Cookie。由于所有 AIWatch 页面共享 aiwatch.maicarons.cc 源，同一同意选择会应用于所有页面。<br /><br />
         <strong>必要本地存储（始终启用）</strong> — AIWatch 会在浏览器的 localStorage 中保存以下偏好。这些数据保留在你的设备上，但 Discord Webhook URL 除外：为发送提醒，该地址也会加密存储在我们的服务器上（见下文；“添加到 Slack”安装所存储的内容见“第三方服务”）：<br />
         · 主题偏好（深色/浅色）<br />
         · 语言偏好（韩语/英语/中文）<br />
@@ -131,7 +131,7 @@ export function PrivacyContent() {
       <h3 style={headingStyle}>2. 쿠키 및 로컬 저장소</h3>
       <p style={paraStyle}>AIWatch는 다음 유형의 브라우저 저장소를 사용합니다.<br /><br />
         <strong>분석 쿠키 (선택)</strong> — 동의 시 GA4가 _ga, _ga_&lt;측정_id&gt;, _gid 쿠키를 이용 통계 분석을 위해 저장합니다. Google 태그 라이브러리 로드 시 _gcl_au가 함께 나타날 수 있으나, AIWatch는 이를 광고 목적으로 사용하지 않습니다. 쿠키 배너 또는 브라우저 설정에서 거부할 수 있으며, 배너에서 거부 시 즉시 삭제되고, 다른 방법으로 동의를 철회한 경우 다음 페이지 로드에서 자동 삭제됩니다.<br /><br />
-        <strong>기본 거부 동작</strong> — 명시적 동의가 없는 상태에서는 어떤 AIWatch 페이지(대시보드, "Is X down?" 페이지, 월간 리포트)에 처음 진입하든 분석/광고 쿠키가 기기에 저장되지 않습니다. 같은 ai-watch.dev origin을 공유하므로 모든 AIWatch 페이지에서 동일한 동의 선택이 적용됩니다.<br /><br />
+        <strong>기본 거부 동작</strong> — 명시적 동의가 없는 상태에서는 어떤 AIWatch 페이지(대시보드, "Is X down?" 페이지, 월간 리포트)에 처음 진입하든 분석/광고 쿠키가 기기에 저장되지 않습니다. 같은 aiwatch.maicarons.cc origin을 공유하므로 모든 AIWatch 페이지에서 동일한 동의 선택이 적용됩니다.<br /><br />
         <strong>필수 로컬 저장소 (항상 활성)</strong> — 다음 설정이 브라우저의 localStorage에 저장됩니다. 이 데이터는 기기에 보관되며, 다만 Discord webhook URL은 알림 전송을 위해 서버에도 암호화되어 저장됩니다(Slack 앱 설치 시 저장되는 정보는 아래 "개인정보 처리 위탁" 참고):<br />
         · 테마 설정 (다크/라이트)<br />
         · 언어 설정 (한국어/영어)<br />

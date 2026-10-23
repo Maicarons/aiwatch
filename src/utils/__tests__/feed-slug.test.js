@@ -10,7 +10,7 @@ import { feedUrlOf, NO_FEED_SERVICES, ALL_SERVICE_IDS } from '../constants'
 describe('feedUrlOf ↔ api/is-down slug-map sync (#432)', () => {
   it('feedUrlOf() matches SERVICE_ID_TO_SLUG for every is-down service', () => {
     for (const [id, slug] of Object.entries(SERVICE_ID_TO_SLUG)) {
-      expect(feedUrlOf(id), `feedUrlOf('${id}')`).toBe(`https://ai-watch.dev/feed/${slug}`)
+      expect(feedUrlOf(id), `feedUrlOf('${id}')`).toBe(`https://aiwatch.maicarons.cc/feed/${slug}`)
     }
   })
 

@@ -1,10 +1,10 @@
 // Vercel Edge Function — proxy /reports/* to the aiwatch-reports Jekyll/GH Pages
-// origin (#264). Originally pointed at reports.ai-watch.dev; switched to fetch
+// origin (#264). Originally pointed at reports.aiwatch.maicarons.cc; switched to fetch
 // GH Pages directly via bentleypark.github.io/aiwatch-reports/* so that a
-// Cloudflare Page Rule can 301 the public reports.ai-watch.dev hostname to
-// ai-watch.dev/reports/ without trapping the proxy in a redirect loop. With
+// Cloudflare Page Rule can 301 the public reports.aiwatch.maicarons.cc hostname to
+// aiwatch.maicarons.cc/reports/ without trapping the proxy in a redirect loop. With
 // the prior origin, a Page Rule on the public hostname would 301 the proxy's
-// own fetch back to ai-watch.dev/reports/ (= itself).
+// own fetch back to aiwatch.maicarons.cc/reports/ (= itself).
 //
 // vercel.json needs four rewrite sources for this to cover every Jekyll URL
 // shape — path-to-regexp's `:rest*` does not match requests with a trailing
@@ -21,15 +21,15 @@ import { notifyEdgeFallback } from './_shared/edge-fallback-alert'
 
 export const config = { runtime: 'edge' }
 
-// Direct GH Pages URL — bypasses the public reports.ai-watch.dev hostname so
+// Direct GH Pages URL — bypasses the public reports.aiwatch.maicarons.cc hostname so
 // that Cloudflare's 301 Page Rule on that hostname can't trap the proxy in
 // a redirect loop. Requires the aiwatch-reports repo to NOT have a CNAME
-// file pointing at reports.ai-watch.dev (else GH Pages 301s every request
+// file pointing at reports.aiwatch.maicarons.cc (else GH Pages 301s every request
 // from this URL back to the public hostname, defeating the bypass).
 //
 // During the deploy gap between this proxy change landing and the
 // aiwatch-reports CNAME removal, GH Pages still 301s from this URL back to
-// reports.ai-watch.dev — the fetch's `redirect: 'follow'` (below) is what
+// reports.aiwatch.maicarons.cc — the fetch's `redirect: 'follow'` (below) is what
 // keeps the proxy working in that interim. Don't change it to 'manual' or
 // 'error' without first verifying the CNAME has been removed.
 const UPSTREAM_ORIGIN = 'https://bentleypark.github.io/aiwatch-reports'
@@ -83,7 +83,7 @@ const DENYLIST_HEADERS = new Set([
 ])
 
 // Jekyll emits root-relative paths (href="/assets/main.css") so the browser would
-// request them from the proxy host (ai-watch.dev/assets/...), miss this Edge Function,
+// request them from the proxy host (aiwatch.maicarons.cc/assets/...), miss this Edge Function,
 // and fall through to the SPA. Rewrite the HTML so site-root links resolve under
 // /reports/ instead. Applied only to HTML responses, not CSS/JS/images (those are
 // served by the proxy at their final /reports/assets/* path and don't need rewriting).
@@ -177,7 +177,7 @@ export default async function handler(req: Request): Promise<Response> {
     const failedPath = (() => { try { return new URL(req.url).pathname } catch { return '/' } })()
     await notifyReportsFallback(failedPath, reason)
     return new Response(
-      `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reports unavailable</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Monthly reports temporarily unavailable</h1><p>The reports origin is unreachable. Please try again shortly, or return to the <a href="https://ai-watch.dev" style="color:#58a6ff">dashboard</a>.</p></body></html>`,
+      `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Reports unavailable</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Monthly reports temporarily unavailable</h1><p>The reports origin is unreachable. Please try again shortly, or return to the <a href="https://aiwatch.maicarons.cc" style="color:#58a6ff">dashboard</a>.</p></body></html>`,
       { status: 502, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store, max-age=0, must-revalidate' } },
     )
   }

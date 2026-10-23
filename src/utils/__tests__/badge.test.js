@@ -4,11 +4,11 @@ import { SERVICE_ID_TO_SLUG } from '../../../api/_is-down/slug-map'
 
 describe('buildBadgeLinkTarget — #805 backlinks must hit the crawlable is-down page', () => {
   it('links to the is-down page when slug == id', () => {
-    expect(buildBadgeLinkTarget('gemini')).toBe('https://ai-watch.dev/is-gemini-down')
+    expect(buildBadgeLinkTarget('gemini')).toBe('https://aiwatch.maicarons.cc/is-gemini-down')
   })
 
   it('uses the slug override when id != slug (claudeai → claude-ai)', () => {
-    expect(buildBadgeLinkTarget('claudeai')).toBe('https://ai-watch.dev/is-claude-ai-down')
+    expect(buildBadgeLinkTarget('claudeai')).toBe('https://aiwatch.maicarons.cc/is-claude-ai-down')
   })
 
   it.each([
@@ -23,25 +23,25 @@ describe('buildBadgeLinkTarget — #805 backlinks must hit the crawlable is-down
     ['claude', 'claude-api'],
     ['openai', 'openai-api'],
   ])('resolves the override slug for %s → is-%s-down', (id, slug) => {
-    expect(buildBadgeLinkTarget(id)).toBe(`https://ai-watch.dev/is-${slug}-down`)
+    expect(buildBadgeLinkTarget(id)).toBe(`https://aiwatch.maicarons.cc/is-${slug}-down`)
   })
 
   it('NEVER emits a non-crawlable hash route for a service that has an is-down page', () => {
     for (const id of Object.keys(SERVICE_ID_TO_SLUG)) {
-      expect(buildBadgeLinkTarget(id)).toMatch(/^https:\/\/ai-watch\.dev\/is-[a-z0-9-]+-down$/)
+      expect(buildBadgeLinkTarget(id)).toMatch(/^https:\/\/aiwatch\.maicarons\.cc\/is-[a-z0-9-]+-down$/)
     }
   })
 
   it('falls back to the SPA detail route for services with no is-down page (bedrock/azureopenai)', () => {
-    expect(buildBadgeLinkTarget('bedrock')).toBe('https://ai-watch.dev/#bedrock')
-    expect(buildBadgeLinkTarget('azureopenai')).toBe('https://ai-watch.dev/#azureopenai')
+    expect(buildBadgeLinkTarget('bedrock')).toBe('https://aiwatch.maicarons.cc/#bedrock')
+    expect(buildBadgeLinkTarget('azureopenai')).toBe('https://aiwatch.maicarons.cc/#azureopenai')
   })
 })
 
 describe('buildBadgeMarkdown', () => {
   it('embeds the badge image and links it to the is-down page', () => {
     expect(buildBadgeMarkdown('claude', 'Claude API')).toBe(
-      '[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-api-down)',
+      '[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-api-down)',
     )
   })
 })

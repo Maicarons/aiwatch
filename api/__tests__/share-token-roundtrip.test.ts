@@ -71,7 +71,7 @@ async function ogUrlFor(handler: typeof isDown, path: string, shared: string, se
   const fetchMock = vi.spyOn(globalThis, 'fetch')
     .mockResolvedValueOnce(statusResponse(services))
     .mockImplementation(() => Promise.resolve(statusResponse([])))
-  const html = await (await handler(new Request(`https://ai-watch.dev${path}&${new URL(shared).search.slice(1)}`))).text()
+  const html = await (await handler(new Request(`https://aiwatch.maicarons.cc${path}&${new URL(shared).search.slice(1)}`))).text()
   fetchMock.mockRestore()
   return /og:url" content="([^"]+)"/.exec(html)?.[1] ?? ''
 }
@@ -80,11 +80,11 @@ describe('share token round-trip: emitter and sanitizer agree (#1251)', () => {
   afterEach(() => { vi.restoreAllMocks() })
 
   it.each(TOKENS)('individual page pins the emitted id — %s', async (raw, pinned) => {
-    const shared = buildShareUrl('https://ai-watch.dev/is-claude-api-down', 'down', 'x', raw)
+    const shared = buildShareUrl('https://aiwatch.maicarons.cc/is-claude-api-down', 'down', 'x', raw)
     const og = await ogUrlFor(isDown, '/api/is-down?slug=claude-api', shared, [
       { id: 'claude', name: 'Claude API', status: 'down', incidents: [incident(raw)] },
     ])
-    expect(og).toBe(`https://ai-watch.dev/is-claude-api-down?e=down&amp;i=${pinned}`)
+    expect(og).toBe(`https://aiwatch.maicarons.cc/is-claude-api-down?e=down&amp;i=${pinned}`)
   })
 
   // The group page keeps a SEPARATE copy of the sanitizer, and its canonical is the family page. It runs
@@ -94,13 +94,13 @@ describe('share token round-trip: emitter and sanitizer agree (#1251)', () => {
   // What this pins is the defensive handling of an arbitrary inbound `&i=`, which is the reason the
   // second copy exists.
   it.each(TOKENS)('group page pins an arbitrary inbound token — %s', async (raw, pinned) => {
-    const shared = buildShareUrl('https://ai-watch.dev/is-claude-down', 'down', 'copy', raw)
+    const shared = buildShareUrl('https://aiwatch.maicarons.cc/is-claude-down', 'down', 'copy', raw)
     const og = await ogUrlFor(isDownGroup, '/api/is-down-group?family=claude', shared, [
       { id: 'claude', name: 'Claude API', status: 'down', incidents: [incident(raw)] },
       { id: 'claudeai', name: 'claude.ai', status: 'operational' },
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ])
-    expect(og).toBe(`https://ai-watch.dev/is-claude-down?e=down&amp;i=${pinned}`)
+    expect(og).toBe(`https://aiwatch.maicarons.cc/is-claude-down?e=down&amp;i=${pinned}`)
   })
 
   // Pooling (#804): the per-channel UTM differs in the SHARED link, and must not reach the pinned
@@ -110,7 +110,7 @@ describe('share token round-trip: emitter and sanitizer agree (#1251)', () => {
     const [raw] = TOKENS[1]
     const seen = new Set<string>()
     for (const channel of ['x', 'copy'] as const) {
-      const shared = buildShareUrl('https://ai-watch.dev/is-claude-api-down', 'down', channel, raw)
+      const shared = buildShareUrl('https://aiwatch.maicarons.cc/is-claude-api-down', 'down', channel, raw)
       expect(shared).toContain('utm_source=')   // the thing that must NOT survive into og:url
       seen.add(await ogUrlFor(isDown, '/api/is-down?slug=claude-api', shared, [
         { id: 'claude', name: 'Claude API', status: 'down', incidents: [incident(raw)] },
@@ -126,7 +126,7 @@ describe('share token round-trip: emitter and sanitizer agree (#1251)', () => {
     const og = await ogUrlFor(isDown, '/api/is-down?slug=claude-api', `https://x/?e=down&i=${raw}`, [
       { id: 'claude', name: 'Claude API', status: 'down', incidents: [incident('abc123')] },
     ])
-    expect(og).toBe(`https://ai-watch.dev/is-claude-api-down?e=down&amp;i=${'x'.repeat(64)}`)
+    expect(og).toBe(`https://aiwatch.maicarons.cc/is-claude-api-down?e=down&amp;i=${'x'.repeat(64)}`)
   })
 
   it('group page caps a crafted over-long inbound token at 64 chars', async () => {
@@ -136,6 +136,6 @@ describe('share token round-trip: emitter and sanitizer agree (#1251)', () => {
       { id: 'claudeai', name: 'claude.ai', status: 'operational' },
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ])
-    expect(og).toBe(`https://ai-watch.dev/is-claude-down?e=down&amp;i=${'y'.repeat(64)}`)
+    expect(og).toBe(`https://aiwatch.maicarons.cc/is-claude-down?e=down&amp;i=${'y'.repeat(64)}`)
   })
 })

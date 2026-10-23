@@ -58,8 +58,8 @@ function mkService(overrides: Partial<ServiceData> = {}): ServiceData {
 
 describe('outboundReferralUrl (#842)', () => {
   it('returns the curated provider URL with a disclosed ref param', () => {
-    expect(outboundReferralUrl('gemini')).toBe('https://ai.google.dev?ref=ai-watch.dev')
-    expect(outboundReferralUrl('claude')).toBe('https://claude.com?ref=ai-watch.dev')
+    expect(outboundReferralUrl('gemini')).toBe('https://ai.google.dev?ref=aiwatch.maicarons.cc')
+    expect(outboundReferralUrl('claude')).toBe('https://claude.com?ref=aiwatch.maicarons.cc')
   })
   it('returns null for a service with no curated URL (graceful)', () => {
     expect(outboundReferralUrl('bedrock')).toBeNull()
@@ -76,7 +76,7 @@ describe('renderFallbacks — outbound referral wedge (#842)', () => {
       { id: 'gemini', name: 'Gemini API', score: 95, status: 'operational' },
     ])
     expect(html).toContain('class="fallback-try"')
-    expect(html).toContain('href="https://ai.google.dev?ref=ai-watch.dev"')
+    expect(html).toContain('href="https://ai.google.dev?ref=aiwatch.maicarons.cc"')
     expect(html).toContain('target="_blank"')
     expect(html).toContain('rel="nofollow noopener noreferrer"') // unpaid editorial — NO `sponsored`
     expect(html).not.toContain('sponsored')                      // must not contradict the "not paid" disclosure
@@ -100,12 +100,12 @@ describe('renderFallbacks — outbound referral wedge (#842)', () => {
     expect((html.match(/class="fallback-try"/g) ?? []).length).toBe(1)
     expect((html.match(/data-ga="outbound_fallback_click"/g) ?? []).length).toBe(1)
     expect((html.match(/ranked by AIWatch Score, not paid/g) ?? []).length).toBe(1)
-    expect(html).toContain('href="https://ai.google.dev?ref=ai-watch.dev"') // the one button is Gemini's
+    expect(html).toContain('href="https://ai.google.dev?ref=aiwatch.maicarons.cc"') // the one button is Gemini's
   })
 
   it('#1119 — Stability\'s Open button targets the consumer surface (Brand Studio), not the corporate root', () => {
     // The link map is what makes a cross-category image recommendation actionable for a non-developer.
-    expect(outboundReferralUrl('stability')).toBe('https://stability.ai/brandstudio?ref=ai-watch.dev')
+    expect(outboundReferralUrl('stability')).toBe('https://stability.ai/brandstudio?ref=aiwatch.maicarons.cc')
   })
 })
 
@@ -741,15 +741,15 @@ describe('renderFooter — Also check category grouping', () => {
     // Regression: the footer link pointed at bare #settings (no scroll), diverging from the
     // CTA's #settings?focus=alerts (#546/#547). Both must carry focus=alerts.
     const html = renderFooter('claude')
-    expect(html).toContain('href="https://ai-watch.dev/#settings?focus=alerts"')
+    expect(html).toContain('href="https://aiwatch.maicarons.cc/#settings?focus=alerts"')
     expect(html).toContain('>Set up alerts</a>')
     // No bare #settings link (without the focus param) may remain in the footer.
-    expect(html).not.toMatch(/href="https:\/\/ai-watch\.dev\/#settings"/)
+    expect(html).not.toMatch(/href="https:\/\/aiwatch\.maicarons\.cc\/#settings"/)
   })
 
   it('footer carries a GA-tracked methodology link to /methodology#score (#681)', () => {
     const html = renderFooter('claude')
-    expect(html).toContain('href="https://ai-watch.dev/methodology#score"')
+    expect(html).toContain('href="https://aiwatch.maicarons.cc/methodology#score"')
     expect(html).toContain('>How we measure this</a>')
     // #482 — GA4 fires from the delegated [data-ga] listener (no inline onclick)
     expect(html).toContain('data-ga="click_methodology" data-ga-loc="is_down_page" data-ga-source="footer"')
@@ -1197,7 +1197,7 @@ describe('renderComponents (#604)', () => {
 describe('renderShareButtons share GA4 (#482 — data-ga, no inline onclick)', () => {
   const seo = mkSeo({ displayName: 'Claude API' })
   const service = mkService({ status: 'down' })
-  const canonical = 'https://ai-watch.dev/is-claude-down'
+  const canonical = 'https://aiwatch.maicarons.cc/is-claude-down'
   const ogImage = 'https://aiwatch-worker.p2c2kbf.workers.dev/api/og?v=1'
 
   it('share-x / share-threads carry the GA4 event on data-* attrs, with a plain item_id, no onclick', () => {
@@ -1223,7 +1223,7 @@ describe('renderShareButtons share GA4 (#482 — data-ga, no inline onclick)', (
 // incident was live). Deterministic here (no incident-state dependency).
 describe('renderShareButtons — copy text keeps AIWatch branding across statuses', () => {
   const seo = mkSeo({ displayName: 'Claude API' })
-  const canonical = 'https://ai-watch.dev/is-claude-down'
+  const canonical = 'https://aiwatch.maicarons.cc/is-claude-down'
   const ogImage = 'https://aiwatch-worker.p2c2kbf.workers.dev/api/og?v=1'
   const copyDataText = (status: string): string => {
     const html = renderShareButtons(seo, mkService({ status }), canonical, ogImage)
@@ -1242,14 +1242,14 @@ describe('RSS feed surfacing on /is-*-down (#430)', () => {
   it('emits a per-service RSS autodiscovery <link> in <head>', () => {
     const html = renderPage('claude', mkService(), mkSeo({ displayName: 'Claude' }), [])
     expect(html).toContain(
-      '<link rel="alternate" type="application/rss+xml" title="Claude incidents — AIWatch" href="https://ai-watch.dev/feed/claude">',
+      '<link rel="alternate" type="application/rss+xml" title="Claude incidents — AIWatch" href="https://aiwatch.maicarons.cc/feed/claude">',
     )
   })
 
   it('uses the page slug, not the service ID, for the feed URL', () => {
     const html = renderPage('claude-code', mkService({ id: 'claudecode' }), mkSeo({ displayName: 'Claude Code' }), [])
-    expect(html).toContain('href="https://ai-watch.dev/feed/claude-code"')
-    expect(html).toContain('data-rss="https://ai-watch.dev/feed/claude-code"')
+    expect(html).toContain('href="https://aiwatch.maicarons.cc/feed/claude-code"')
+    expect(html).toContain('data-rss="https://aiwatch.maicarons.cc/feed/claude-code"')
     expect(html).not.toContain('feed/claudecode')
   })
 
@@ -1262,10 +1262,10 @@ describe('RSS feed surfacing on /is-*-down (#430)', () => {
     for (const slug of Object.keys(SLUG_TO_SERVICE)) {
       const html = renderPage(slug, mkService(), seo, [])
       expect(html, `autodiscovery <link> for ${slug}`).toContain(
-        `type="application/rss+xml" title="${seo.displayName} incidents — AIWatch" href="https://ai-watch.dev/feed/${slug}">`,
+        `type="application/rss+xml" title="${seo.displayName} incidents — AIWatch" href="https://aiwatch.maicarons.cc/feed/${slug}">`,
       )
       expect(html, `RSS copy button for ${slug}`).toContain(
-        `data-rss="https://ai-watch.dev/feed/${slug}"`,
+        `data-rss="https://aiwatch.maicarons.cc/feed/${slug}"`,
       )
     }
   })
@@ -1280,7 +1280,7 @@ describe('RSS feed surfacing on /is-*-down (#430)', () => {
   it('keeps the /feed command as a secondary copy action for workspaces that block app installs (#696 → #1581)', () => {
     const html = renderPage('claude', mkService(), mkSeo(), [])
     expect(html).toContain(
-      '<p class="cta-alt">Can\'t install Slack apps? <button type="button" class="link-btn" data-slack="/feed subscribe https://ai-watch.dev/feed/claude" data-svc="claude" data-action="copy-slack">Copy the /feed command</button></p>',
+      '<p class="cta-alt">Can\'t install Slack apps? <button type="button" class="link-btn" data-slack="/feed subscribe https://aiwatch.maicarons.cc/feed/claude" data-svc="claude" data-action="copy-slack">Copy the /feed command</button></p>',
     )
     expect(html).toContain('function copySlackFeed(b)')
     expect(html).toContain("gtag('event','copy_slack_feed',{location:'is_down_page',service_id:b.dataset.svc})")
@@ -1291,7 +1291,7 @@ describe('RSS feed surfacing on /is-*-down (#430)', () => {
   it('renders the secondary RSS button labelled with what it does, and no helper line (#696 → #1581)', () => {
     const html = renderPage('claude', mkService(), mkSeo(), [])
     expect(html).toContain(
-      `<button type="button" class="btn btn-brand" data-rss="https://ai-watch.dev/feed/claude" data-svc="claude" data-action="copy-rss">${RSS_ICON_SVG}<span class="btn-label">Copy RSS feed</span></button>`,
+      `<button type="button" class="btn btn-brand" data-rss="https://aiwatch.maicarons.cc/feed/claude" data-svc="claude" data-action="copy-rss">${RSS_ICON_SVG}<span class="btn-label">Copy RSS feed</span></button>`,
     )
     expect(html).toContain('function copyRss(b)')
     expect(html).toContain('navigator.clipboard.writeText(u)')
@@ -1304,7 +1304,7 @@ describe('RSS feed surfacing on /is-*-down (#430)', () => {
     // The heavy Discord per-user push keeps the #546 deep-link (scrolls to the Alerts section)
     // but is no longer a btn-primary; it is a .cta-alt text link tagged status_banner_secondary
     // so the funnel comparison can tell post-reorder clicks from the old primary placement.
-    expect(html).toContain('<p class="cta-alt"><a href="https://ai-watch.dev/#settings?focus=alerts"')
+    expect(html).toContain('<p class="cta-alt"><a href="https://aiwatch.maicarons.cc/#settings?focus=alerts"')
     expect(html).toContain('data-ga="click_cta_alerts" data-ga-loc="is_down_page" data-ga-source="status_banner_secondary"')
     // No "email" channel exists yet — the link must not advertise one.
     expect(html).toContain('Prefer Discord push alerts?')
@@ -1359,26 +1359,26 @@ describe('date-literal guard (#443)', () => {
 
 describe('linkifyFaqAnswer (#654 — on-page FAQ URL linking)', () => {
   it('links curated status / dashboard URLs (bare domain → https:// anchor)', () => {
-    const out = linkifyFaqAnswer('Check status.openai.com or the AIWatch dashboard at ai-watch.dev.')
+    const out = linkifyFaqAnswer('Check status.openai.com or the AIWatch dashboard at aiwatch.maicarons.cc.')
     expect(out).toContain('<a href="https://status.openai.com" target="_blank" rel="noopener noreferrer">status.openai.com</a>')
-    expect(out).toContain('<a href="https://ai-watch.dev" target="_blank" rel="noopener noreferrer">ai-watch.dev</a>')
+    expect(out).toContain('<a href="https://aiwatch.maicarons.cc" target="_blank" rel="noopener noreferrer">aiwatch.maicarons.cc</a>')
   })
 
-  it('links a path/anchor URL (ai-watch.dev/#ranking) and aistudio status', () => {
-    expect(linkifyFaqAnswer('compare at ai-watch.dev/#ranking now')).toContain('href="https://ai-watch.dev/#ranking"')
+  it('links a path/anchor URL (aiwatch.maicarons.cc/#ranking) and aistudio status', () => {
+    expect(linkifyFaqAnswer('compare at aiwatch.maicarons.cc/#ranking now')).toContain('href="https://aiwatch.maicarons.cc/#ranking"')
     expect(linkifyFaqAnswer('Google AI Studio status at aistudio.google.com/status here')).toContain('href="https://aistudio.google.com/status"')
   })
 
   it('does NOT linkify bare brand domains in prose (claude.ai / character.ai)', () => {
-    const out = linkifyFaqAnswer('claude.ai depends on Claude API. Check ai-watch.dev for details.')
+    const out = linkifyFaqAnswer('claude.ai depends on Claude API. Check aiwatch.maicarons.cc for details.')
     expect(out).not.toContain('href="https://claude.ai"')
     expect(out).toContain('claude.ai depends')           // brand stays plain text
-    expect(out).toContain('href="https://ai-watch.dev"') // real URL still linked
+    expect(out).toContain('href="https://aiwatch.maicarons.cc"') // real URL still linked
   })
 
   it('does not swallow a sentence-ending period into the link', () => {
-    const out = linkifyFaqAnswer('See ai-watch.dev.')
-    expect(out).toContain('>ai-watch.dev</a>.')          // period stays outside the anchor
+    const out = linkifyFaqAnswer('See aiwatch.maicarons.cc.')
+    expect(out).toContain('>aiwatch.maicarons.cc</a>.')          // period stays outside the anchor
   })
 
   it('escapes non-URL text (no HTML injection)', () => {
@@ -1516,15 +1516,15 @@ describe('renderPage — og:url + og:title pinned to share hint (?e=)', () => {
   const op = mkService({ status: 'operational' })
 
   it('appends ?e=<hint> to og:url so each share moment is a distinct card identity', () => {
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'down'))).toBe('https://ai-watch.dev/is-claude-down?e=down')
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'degraded'))).toBe('https://ai-watch.dev/is-claude-down?e=degraded')
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'resolved'))).toBe('https://ai-watch.dev/is-claude-down?e=resolved')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'down'))).toBe('https://aiwatch.maicarons.cc/is-claude-down?e=down')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'degraded'))).toBe('https://aiwatch.maicarons.cc/is-claude-down?e=degraded')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'resolved'))).toBe('https://aiwatch.maicarons.cc/is-claude-down?e=resolved')
   })
 
   it('keeps og:url clean (no ?e=) when the hint is absent or non-status', () => {
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, []))).toBe('https://ai-watch.dev/is-claude-down')
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'reddit'))).toBe('https://ai-watch.dev/is-claude-down')
-    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'bogus'))).toBe('https://ai-watch.dev/is-claude-down')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, []))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'reddit'))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
+    expect(ogUrl(renderPage('claude', op, mkSeo(), [], null, null, [], 'bogus'))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
   })
 
   it('pins og:title to the hint status, overriding live (card headline matches the pinned image)', () => {
@@ -1542,7 +1542,7 @@ describe('renderPage — og:url + og:title pinned to share hint (?e=)', () => {
   })
 
   it('keeps <link rel="canonical"> clean even when the hint pins the social card (SEO unaffected)', () => {
-    expect(canonicalHref(renderPage('claude', op, mkSeo(), [], null, null, [], 'down'))).toBe('https://ai-watch.dev/is-claude-down')
+    expect(canonicalHref(renderPage('claude', op, mkSeo(), [], null, null, [], 'down'))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
   })
 })
 
@@ -1565,7 +1565,7 @@ describe('renderPage — og:url per-incident token (#804)', () => {
     renderPage('claude', mkService({ status: 'operational' }), mkSeo(), [], null, null, [], hint, null, token)
 
   it('appends &i=<token> to og:url alongside the status hint (distinct card per outage)', () => {
-    expect(ogUrl(page('down', 'incA'))).toBe('https://ai-watch.dev/is-claude-down?e=down&i=incA')
+    expect(ogUrl(page('down', 'incA'))).toBe('https://aiwatch.maicarons.cc/is-claude-down?e=down&i=incA')
   })
 
   it('makes og:url differ across incident tokens — the cross-outage cache-collision fix', () => {
@@ -1573,16 +1573,16 @@ describe('renderPage — og:url per-incident token (#804)', () => {
   })
 
   it('includes the token even without a status hint (still a distinct card)', () => {
-    expect(ogUrl(page(null, 'incA'))).toBe('https://ai-watch.dev/is-claude-down?i=incA')
+    expect(ogUrl(page(null, 'incA'))).toBe('https://aiwatch.maicarons.cc/is-claude-down?i=incA')
   })
 
   it('omits &i= when no token is passed (unchanged #740 behavior)', () => {
-    expect(ogUrl(page('down', null))).toBe('https://ai-watch.dev/is-claude-down?e=down')
-    expect(ogUrl(page(null, null))).toBe('https://ai-watch.dev/is-claude-down')
+    expect(ogUrl(page('down', null))).toBe('https://aiwatch.maicarons.cc/is-claude-down?e=down')
+    expect(ogUrl(page(null, null))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
   })
 
   it('keeps canonical clean — the token rides og:url only, never the SEO canonical', () => {
-    expect(canonicalHref(page('down', 'incA'))).toBe('https://ai-watch.dev/is-claude-down')
+    expect(canonicalHref(page('down', 'incA'))).toBe('https://aiwatch.maicarons.cc/is-claude-down')
   })
 })
 
@@ -1612,8 +1612,8 @@ describe('renderPage — supply-chain note (#574)', () => {
 describe('renderBadgeEmbed (#805 Problem B — discoverability)', () => {
   it('renders the embed markdown linking to the crawlable is-down page (not a hash route)', () => {
     const html = renderBadgeEmbed('claude', mkSeo())
-    expect(html).toContain('](https://ai-watch.dev/is-claude-down)')
-    expect(html).not.toContain('ai-watch.dev/#claude')
+    expect(html).toContain('](https://aiwatch.maicarons.cc/is-claude-down)')
+    expect(html).not.toContain('aiwatch.maicarons.cc/#claude')
     expect(html).toContain('/badge/claude)') // worker badge image, serviceId == slug here
   })
 
@@ -1621,13 +1621,13 @@ describe('renderBadgeEmbed (#805 Problem B — discoverability)', () => {
     // slug "claude-ai" → worker id "claudeai"; the page link keeps the slug, the badge uses the id
     const html = renderBadgeEmbed('claude-ai', mkSeo({ displayName: 'claude.ai' }))
     expect(html).toContain('/badge/claudeai)')
-    expect(html).toContain('](https://ai-watch.dev/is-claude-ai-down)')
+    expect(html).toContain('](https://aiwatch.maicarons.cc/is-claude-ai-down)')
   })
 
   it('is wired into the full page after the share buttons', () => {
     const html = renderPage('claude', mkService({ status: 'down' }), mkSeo(), [])
     expect(html).toContain('Embed this status badge')
-    expect(html).toContain('](https://ai-watch.dev/is-claude-down)')
+    expect(html).toContain('](https://aiwatch.maicarons.cc/is-claude-down)')
   })
 
   it('does NOT reuse the share-copy class (keeps button.share-copy unique for the e2e selector)', () => {

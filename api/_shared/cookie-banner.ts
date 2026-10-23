@@ -15,7 +15,7 @@
 
 const COOKIE_BANNER_MARKUP = `<div id="aiwatch-cookie-banner" hidden role="dialog" aria-label="Cookie consent" aria-live="polite">
 <div class="aiwatch-cb-inner">
-<div class="aiwatch-cb-text"><strong>Cookie Notice</strong><p>AIWatch uses Google Analytics cookies to improve the service. Only anonymous usage statistics are collected. <a href="https://ai-watch.dev/" rel="noopener">Open dashboard</a> to review later.</p></div>
+<div class="aiwatch-cb-text"><strong>Cookie Notice</strong><p>AIWatch uses Google Analytics cookies to improve the service. Only anonymous usage statistics are collected. <a href="https://aiwatch.maicarons.cc/" rel="noopener">Open dashboard</a> to review later.</p></div>
 <div class="aiwatch-cb-actions"><button type="button" data-aiwatch-cb="essential">Essential Only</button><button type="button" data-aiwatch-cb="accept">Accept All</button></div>
 </div>
 </div>

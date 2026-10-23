@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { BYPASS, NETWORK_FIRST, STALE_WHILE_REVALIDATE, routeFor, mayCache } from '../policy.js'
 
-const ORIGIN = 'https://ai-watch.dev'
+const ORIGIN = 'https://aiwatch.maicarons.cc'
 
 // Only the fields the SW actually reads. The real Request carries the same ones.
 const req = (url, { method = 'GET', mode = 'no-cors', destination = '' } = {}) => ({

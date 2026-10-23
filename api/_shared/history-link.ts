@@ -2,7 +2,7 @@
 // beacon, as one primitive the per-service and family is-down pages both emit.
 
 function historyLinkHref(svcId: string): string {
-  return `https://ai-watch.dev/#incidents?service=${encodeURIComponent(svcId)}&amp;period=30`
+  return `https://aiwatch.maicarons.cc/#incidents?service=${encodeURIComponent(svcId)}&amp;period=30`
 }
 
 /** Attributes for one link; `svcId` must already be HTML-safe (a SERVICES id). */

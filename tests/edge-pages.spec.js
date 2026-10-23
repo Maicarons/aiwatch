@@ -40,7 +40,7 @@ test.describe('Edge SSR pages — shared contract (#1051)', () => {
       await expect(page).toHaveTitle(title)
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
         'href',
-        `https://ai-watch.dev${path}`,
+        `https://aiwatch.maicarons.cc${path}`,
       )
       // Anchored: /index/ also matches "noindex" — a page silently flipped to noindex would pass.
       // Not hypothetical, api/confirm.ts ships content="noindex". For methodology/badges/*-privacy

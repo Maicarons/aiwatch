@@ -9,7 +9,7 @@ import { renderLandingPage } from '../html-template'
 import handler from '../../intro'
 
 const FIXTURE: AnnouncementMap = {
-  launch: { html: '🚀 We launched', href: 'https://ai-watch.dev/' },
+  launch: { html: '🚀 We launched', href: 'https://aiwatch.maicarons.cc/' },
   notice: { html: 'Heads up' },
 }
 
@@ -28,7 +28,7 @@ describe('resolveAnnouncementFrom', () => {
     expect(resolveAnnouncementFrom(FIXTURE, 'launch')).toEqual({
       id: 'launch',
       html: '🚀 We launched',
-      href: 'https://ai-watch.dev/',
+      href: 'https://aiwatch.maicarons.cc/',
     })
     expect(resolveAnnouncementFrom(FIXTURE, 'notice')).toEqual({ id: 'notice', html: 'Heads up' })
   })
@@ -57,10 +57,10 @@ describe('renderLandingPage announcement banner', () => {
   })
 
   it('renders a link banner (with rel=noopener + GA4 tracking) when an announcement has an href', () => {
-    const html = renderLandingPage({ announcement: { id: 'launch', html: '🚀 We launched', href: 'https://ai-watch.dev/' } })
+    const html = renderLandingPage({ announcement: { id: 'launch', html: '🚀 We launched', href: 'https://aiwatch.maicarons.cc/' } })
     expect(html).toContain('id="announcement-banner"')
     expect(html).toContain('🚀 We launched')
-    expect(html).toContain('href="https://ai-watch.dev/"')
+    expect(html).toContain('href="https://aiwatch.maicarons.cc/"')
     // click-through must open safely and be tracked
     expect(html).toContain('target="_blank"')
     expect(html).toContain('rel="noopener"')
@@ -85,7 +85,7 @@ describe('renderLandingPage announcement banner', () => {
 })
 
 describe('intro handler wiring (?banner → resolve → render)', () => {
-  const get = (path: string) => handler(new Request(`https://ai-watch.dev${path}`))
+  const get = (path: string) => handler(new Request(`https://aiwatch.maicarons.cc${path}`))
 
   it('serves /intro no-store (per-response CSP nonce → uncacheable, #482) + a nonce-bearing CSP header', async () => {
     const res = await get('/intro')

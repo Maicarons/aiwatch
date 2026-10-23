@@ -33,7 +33,7 @@ export function hashToPage(hash) {
   const id = hash.replace(/^#/, '').split(/[?&#]/)[0]
   if (!id) return { name: 'overview' }
   // #673: the in-dashboard #about-score page was unified into the public /methodology page.
-  // Redirect legacy hash links (bookmarks + the monthly report's ai-watch.dev/#about-score)
+  // Redirect legacy hash links (bookmarks + the monthly report's aiwatch.maicarons.cc/#about-score)
   // to the Score section of the new page so nothing 404s.
   if (id === 'about-score') {
     window.location.replace('/methodology#score')

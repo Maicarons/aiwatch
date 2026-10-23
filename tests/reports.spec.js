@@ -1,6 +1,6 @@
 import { test, expect } from './fixtures.js'
 
-// Edge Function /api/reports proxies ai-watch.dev/reports/* to the aiwatch-reports
+// Edge Function /api/reports proxies aiwatch.maicarons.cc/reports/* to the aiwatch-reports
 // Jekyll origin (#264). A regression here — falling through to the SPA — is exactly
 // what happened with the previous external-URL rewrite approach, so these tests
 // fetch the proxy and verify the response body is Jekyll content, not the SPA.
@@ -48,7 +48,7 @@ test.describe('Reports proxy (/reports/*)', () => {
 
   test('HTML paths rewritten so assets resolve under /reports/', async ({ request }) => {
     // Jekyll emits root-relative paths (/assets/main.css). If they reach the
-    // browser as-is, the request hits ai-watch.dev/assets/... and falls through
+    // browser as-is, the request hits aiwatch.maicarons.cc/assets/... and falls through
     // to the SPA — the exact failure mode the proxy must prevent.
     const res = await request.get('/reports/')
     const html = await res.text()

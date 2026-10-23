@@ -20,7 +20,7 @@ describe('renderExtensionPrivacyPage (#837)', () => {
 
   it('is indexable + canonical to /extension-privacy', () => {
     expect(html).toContain('rel="canonical"')
-    expect(html).toContain('https://ai-watch.dev/extension-privacy')
+    expect(html).toContain('https://aiwatch.maicarons.cc/extension-privacy')
     expect(html).not.toMatch(/noindex/i)
   })
 

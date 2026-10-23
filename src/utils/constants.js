@@ -121,12 +121,12 @@ export const SERVICE_SITE_URL = {
   chatgpt: 'https://chatgpt.com', claudeai: 'https://claude.ai', deepseekapp: 'https://chat.deepseek.com', grok: 'https://grok.com', kimiapp: 'https://www.kimi.com',
 }
 
-/** Disclosed outbound referral URL for a recommended alternative (appends `ref=ai-watch.dev`).
+/** Disclosed outbound referral URL for a recommended alternative (appends `ref=aiwatch.maicarons.cc`).
  *  Returns null when no curated URL → caller omits the "Open ↗" affordance. Mirror of the Edge helper. */
 export function outboundReferralUrl(id) {
   const base = SERVICE_SITE_URL[id]
   if (!base) return null
-  return `${base}${base.includes('?') ? '&' : '?'}ref=ai-watch.dev`
+  return `${base}${base.includes('?') ? '&' : '?'}ref=aiwatch.maicarons.cc`
 }
 
 // Worker base for the consent-free referral beacon (mirrors src/utils/vitals.js ENDPOINT derivation).
@@ -179,12 +179,12 @@ export const NO_FEED_SERVICES = ['bedrock', 'azureopenai']
 // Per-service incident RSS feed URL, or null when the service has no feed.
 export function feedUrlOf(serviceId) {
   if (!serviceId || NO_FEED_SERVICES.includes(serviceId)) return null
-  return `https://ai-watch.dev/feed/${FEED_SLUG_OVERRIDE[serviceId] ?? serviceId}`
+  return `https://aiwatch.maicarons.cc/feed/${FEED_SLUG_OVERRIDE[serviceId] ?? serviceId}`
 }
 
 // All-services incident feed — surfaced wherever a global subscribe affordance
 // makes sense (Settings Alerts, incident banner, sidebar footer — #433).
-export const ALL_SERVICES_FEED_URL = 'https://ai-watch.dev/feed.xml'
+export const ALL_SERVICES_FEED_URL = 'https://aiwatch.maicarons.cc/feed.xml'
 
 // Fallback tier priority — API services (1-9) and coding agents (11) use distinct number ranges
 // so TIER_LABEL maps each tier number to one unambiguous label. Within a category, getFallbacks

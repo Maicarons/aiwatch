@@ -50,7 +50,7 @@ export function buildCspWithHashes(hashes: string[], opts: { enforce?: boolean }
     "form-action 'self' https://*.kakao.com",
     `script-src 'self' ${scriptHashes} https://www.googletagmanager.com https://t1.kakaocdn.net`,
     "connect-src 'self' https://aiwatch-worker.p2c2kbf.workers.dev https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com",
-    "img-src 'self' data: https://ai-watch.dev https://aiwatch-worker.p2c2kbf.workers.dev",
+    "img-src 'self' data: https://aiwatch.maicarons.cc https://aiwatch-worker.p2c2kbf.workers.dev",
     "style-src 'self' https://fonts.googleapis.com 'unsafe-inline'",
     "font-src 'self' https://fonts.gstatic.com",
     'report-uri /api/csp-report',

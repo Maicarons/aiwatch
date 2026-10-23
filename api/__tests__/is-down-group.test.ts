@@ -19,7 +19,7 @@ afterEach(() => {
 
 function makeReq(family: string, extraParams?: Record<string, string>): Request {
   const params = new URLSearchParams({ family, ...extraParams })
-  return new Request(`https://ai-watch.dev/api/is-down-group?${params.toString()}`, { method: 'GET' })
+  return new Request(`https://aiwatch.maicarons.cc/api/is-down-group?${params.toString()}`, { method: 'GET' })
 }
 
 interface MockIncident {
@@ -338,7 +338,7 @@ describe('is-down-group.ts', () => {
       expect(html).toContain('<title>Is Anthropic (Claude) Down? Partly Unknown | AIWatch</title>')
       expect(meta(html, 'name', 'description')).toBe(sentence)
       expect(html).toContain(`<p class="headline">${sentence}</p>`)
-      expect(html).toContain(`"@type":"WebPage","name":"Is Anthropic (Claude) Down? Partly Unknown | AIWatch","url":"https://ai-watch.dev/is-claude-down","description":"${sentence}"`)
+      expect(html).toContain(`"@type":"WebPage","name":"Is Anthropic (Claude) Down? Partly Unknown | AIWatch","url":"https://aiwatch.maicarons.cc/is-claude-down","description":"${sentence}"`)
       expect(html.match(/"@type":"FAQPage"[\s\S]*?"text":"([^"]*)"/)?.[1]).toBe(sentence)
       expect(html).toContain('Is Anthropic (Claude) down? Partly Unknown. Live status')
     })
@@ -697,7 +697,7 @@ describe('is-down-group.ts — og:url pin (#1063/#804 parity, group page)', () =
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain('og:url" content="https://ai-watch.dev/is-claude-down">')
+    expect(html).toContain('og:url" content="https://aiwatch.maicarons.cc/is-claude-down">')
   })
 
   it('with ?e=degraded&i=<token>, og:url carries BOTH — a distinct, per-incident card identity', async () => {
@@ -707,7 +707,7 @@ describe('is-down-group.ts — og:url pin (#1063/#804 parity, group page)', () =
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude', { e: 'degraded', i: 'opus47' }))).text()
-    expect(html).toContain('og:url" content="https://ai-watch.dev/is-claude-down?e=degraded&amp;i=opus47">')
+    expect(html).toContain('og:url" content="https://aiwatch.maicarons.cc/is-claude-down?e=degraded&amp;i=opus47">')
     // The og:image reflects the PINNED status, not the live 'operational' data above.
     expect(html).toContain('og:image" content="https://aiwatch-worker.p2c2kbf.workers.dev/api/og?service=Anthropic+%28Claude%29&amp;status=degraded">')
     // og:title pins too — otherwise the card reads "Operational" over a "Degraded" image.
@@ -734,7 +734,7 @@ describe('is-down-group.ts — og:url pin (#1063/#804 parity, group page)', () =
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude', { e: '__proto__' }))).text()
-    expect(html).toContain('og:url" content="https://ai-watch.dev/is-claude-down">')
+    expect(html).toContain('og:url" content="https://aiwatch.maicarons.cc/is-claude-down">')
     expect(html).toContain('og:image" content="https://aiwatch-worker.p2c2kbf.workers.dev/api/og?service=Anthropic+%28Claude%29&amp;status=down&amp;v=')
   })
 
@@ -745,7 +745,7 @@ describe('is-down-group.ts — og:url pin (#1063/#804 parity, group page)', () =
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude', { i: 'opus47' }))).text()
-    expect(html).toContain('og:url" content="https://ai-watch.dev/is-claude-down?i=opus47">')
+    expect(html).toContain('og:url" content="https://aiwatch.maicarons.cc/is-claude-down?i=opus47">')
     expect(html).not.toContain('&amp;v=')
   })
 })
@@ -1142,7 +1142,7 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
   it('X share URL carries the status pin, the x UTM and the active incident token', async () => {
     fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(degradedFamily())
     const html = await (await handler(makeReq('claude'))).text()
-    const shared = 'https://ai-watch.dev/is-claude-down?e=degraded'
+    const shared = 'https://aiwatch.maicarons.cc/is-claude-down?e=degraded'
       + '&utm_source=x&utm_medium=social&utm_campaign=outage&i=q7txxvbsftgq'
     expect(html).toContain(`&amp;url=${encodeURIComponent(shared)}"`)
   })
@@ -1152,16 +1152,16 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
     const html = await (await handler(makeReq('claude'))).text()
     // The old bar interpolated the unpinned URL into the tweet TEXT, where it renders as the shared
     // link. Both `text=` and `url=` are encodeURIComponent'd, so match that form.
-    expect(html).not.toContain(encodeURIComponent('Live status → https://ai-watch.dev/is-claude-down'))
-    expect(html).not.toContain(`&amp;url=${encodeURIComponent('https://ai-watch.dev/is-claude-down')}"`)
+    expect(html).not.toContain(encodeURIComponent('Live status → https://aiwatch.maicarons.cc/is-claude-down'))
+    expect(html).not.toContain(`&amp;url=${encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down')}"`)
   })
 
   it('copy-link shares the same pin under its own UTM (copy-link/share), not the bare URL', async () => {
     fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(degradedFamily())
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain('data-url="https://ai-watch.dev/is-claude-down?e=degraded'
+    expect(html).toContain('data-url="https://aiwatch.maicarons.cc/is-claude-down?e=degraded'
       + '&amp;utm_source=copy-link&amp;utm_medium=share&amp;utm_campaign=outage&amp;i=q7txxvbsftgq"')
-    expect(html).not.toContain('data-url="https://ai-watch.dev/is-claude-down"')
+    expect(html).not.toContain('data-url="https://aiwatch.maicarons.cc/is-claude-down"')
   })
 
   it('pins to the WORST-OF status, so one member down outranks another merely degraded', async () => {
@@ -1171,7 +1171,7 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain(encodeURIComponent('https://ai-watch.dev/is-claude-down?e=down'))
+    expect(html).toContain(encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down?e=down'))
   })
 
   it('uses the ONGOING incident as the token, not a more-recently-resolved one', async () => {
@@ -1198,7 +1198,7 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
     }
     fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(degradedFamily([resolvedOnly]))
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain(encodeURIComponent('https://ai-watch.dev/is-claude-down?e=degraded'))
+    expect(html).toContain(encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down?e=degraded'))
     expect(html).not.toContain(encodeURIComponent('&i='))
   })
 
@@ -1225,7 +1225,7 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude', { e: 'down', i: 'stale-incident' }))).text()
-    expect(html).toContain(`&amp;url=${encodeURIComponent('https://ai-watch.dev/is-claude-down')}"`)
+    expect(html).toContain(`&amp;url=${encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down')}"`)
     expect(html).not.toContain(encodeURIComponent('?e=down&utm_source=x'))
     expect(html).not.toContain(encodeURIComponent('&i=stale-incident'))
   })
@@ -1240,8 +1240,8 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
     // Anchored on the attribute's closing quote: the ENCODED bare URL is a prefix of the encoded
     // pinned one (`…is-claude-down` vs `…is-claude-down%3Fe%3D…`), so an unanchored `toContain` would
     // pass on a pinned URL too and this case would assert nothing.
-    expect(html).toContain(`&amp;url=${encodeURIComponent('https://ai-watch.dev/is-claude-down')}"`)
-    expect(html).toContain('data-url="https://ai-watch.dev/is-claude-down"')
+    expect(html).toContain(`&amp;url=${encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down')}"`)
+    expect(html).toContain('data-url="https://aiwatch.maicarons.cc/is-claude-down"')
     expect(html).not.toContain('utm_source=x')
   })
 
@@ -1252,8 +1252,8 @@ describe('is-down-group.ts — public share bar carries the OG pin + UTM (#1243)
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain(`&amp;url=${encodeURIComponent('https://ai-watch.dev/is-claude-down')}"`)
-    expect(html).toContain('data-url="https://ai-watch.dev/is-claude-down"')
+    expect(html).toContain(`&amp;url=${encodeURIComponent('https://aiwatch.maicarons.cc/is-claude-down')}"`)
+    expect(html).toContain('data-url="https://aiwatch.maicarons.cc/is-claude-down"')
     // No pin of ANY value — not merely no `e=unknown`. `buildShareUrl` early-returns the canonical for
     // any status other than `down`/`degraded`, rather than inventing an outage hint.
     expect(html).not.toContain(encodeURIComponent('?e='))
@@ -1286,14 +1286,14 @@ describe('is-down-group.ts — Copy link parity with the individual pages (#1243
     fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(degraded())
     const html = await (await handler(makeReq('claude'))).text()
     expect(html).toContain('data-text="🟡 Is Anthropic (Claude) down? Degraded Performance. Live status →\n'
-      + 'https://ai-watch.dev/is-claude-down?e=degraded'
+      + 'https://aiwatch.maicarons.cc/is-claude-down?e=degraded'
       + '&amp;utm_source=copy-link&amp;utm_medium=share&amp;utm_campaign=outage&amp;i=q7txxvbsftgq"')
   })
 
   it('keeps data-url as the fallback the handler reads when data-text is absent', async () => {
     fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(degraded())
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain('data-url="https://ai-watch.dev/is-claude-down?e=degraded')
+    expect(html).toContain('data-url="https://aiwatch.maicarons.cc/is-claude-down?e=degraded')
   })
 
   it('tags the X link for GA4 so the delegated listener has something to forward', async () => {
@@ -1906,8 +1906,8 @@ describe('is-down-group.ts — the alert block matches the per-service page, per
     expect(html).toContain('<option value="claude" data-slug="claude-api">Claude API</option>')
     expect(html).toContain('<option value="claudeai" data-slug="claude-ai">claude.ai</option>')
     expect(html).toContain('<option value="claudecode" data-slug="claude-code">Claude Code</option>')
-    expect(html).toContain('data-slack="/feed subscribe https://ai-watch.dev/feed/claude-api" data-svc="claude"')
-    expect(html).toContain('data-rss="https://ai-watch.dev/feed/claude-api" data-svc="claude"')
+    expect(html).toContain('data-slack="/feed subscribe https://aiwatch.maicarons.cc/feed/claude-api" data-svc="claude"')
+    expect(html).toContain('data-rss="https://aiwatch.maicarons.cc/feed/claude-api" data-svc="claude"')
     expect(html).toContain('Get notified the next time Anthropic (Claude) goes down.')
   })
 
@@ -1924,7 +1924,7 @@ describe('is-down-group.ts — the alert block matches the per-service page, per
     picker.value = 'claudecode'
     picker.dispatchEvent(new Event('change'))
     slack.click()
-    expect(writeText).toHaveBeenCalledWith('/feed subscribe https://ai-watch.dev/feed/claude-code')
+    expect(writeText).toHaveBeenCalledWith('/feed subscribe https://aiwatch.maicarons.cc/feed/claude-code')
     await vi.waitFor(() => expect(gtag).toHaveBeenCalledWith('event', 'copy_slack_feed', { location: 'is_down_group_page', service_id: 'claudecode' }))
   })
 
@@ -1940,7 +1940,7 @@ describe('is-down-group.ts — the alert block matches the per-service page, per
     ;(document.getElementById('alert-service') as HTMLSelectElement).value = 'claudecode'
     new Function(script)()
     ;(document.getElementById('alert-slack') as HTMLButtonElement).click()
-    expect(writeText).toHaveBeenCalledWith('/feed subscribe https://ai-watch.dev/feed/claude-code')
+    expect(writeText).toHaveBeenCalledWith('/feed subscribe https://aiwatch.maicarons.cc/feed/claude-code')
   })
 
   it('points Add to Slack at the selected member (#1581)', async () => {
@@ -1962,7 +1962,7 @@ describe('is-down-group.ts — the alert block matches the per-service page, per
     picker.value = 'claudeai'
     picker.dispatchEvent(new Event('change'))
     rss.click()
-    expect(writeText).toHaveBeenCalledWith('https://ai-watch.dev/feed/claude-ai')
+    expect(writeText).toHaveBeenCalledWith('https://aiwatch.maicarons.cc/feed/claude-ai')
     await vi.waitFor(() => expect(gtag).toHaveBeenCalledWith('event', 'copy_rss', { location: 'is_down_group_page', service_id: 'claudeai' }))
     expect(rss.querySelector('.btn-label')!.textContent).toBe('Copied! Paste into your RSS reader')
     expect(rss.querySelector('svg'), 'the copied state keeps the RSS icon').not.toBeNull()
@@ -1979,7 +1979,7 @@ describe('is-down-group.ts — 30-day history links (#1612)', () => {
       { id: 'claudecode', name: 'Claude Code', status: 'operational' },
     ]))
     const html = await (await handler(makeReq('claude'))).text()
-    expect(html).toContain('href="https://ai-watch.dev/#incidents?service=claude&amp;period=30" data-ga="click_incident_history" data-ga-loc="is_down_group_page" data-ga-svc="claude"')
+    expect(html).toContain('href="https://aiwatch.maicarons.cc/#incidents?service=claude&amp;period=30" data-ga="click_incident_history" data-ga-loc="is_down_group_page" data-ga-svc="claude"')
     expect(html).toContain('data-ga-svc="claudecode">Claude Code</a>')
     expect(html).not.toContain('service=claudeai&amp;period=30')
   })

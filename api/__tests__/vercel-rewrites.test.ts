@@ -41,7 +41,7 @@ describe('vercel.json /api/status/cached rewrite (#452)', () => {
 
 describe('vercel.json /p/:slug plugin redirect (#920)', () => {
   it('redirects the short plugin link to the is-down page WITH the plugin UTM (zero Serverless Functions)', () => {
-    // The /aiwatch briefing links `ai-watch.dev/p/<slug>` (short, no query — survives the model
+    // The /aiwatch briefing links `aiwatch.maicarons.cc/p/<slug>` (short, no query — survives the model
     // relay + terminal); a config REDIRECT (not a function → no 12-fn cap cost) adds the UTM and
     // 307s to the real is-down page, so GA4 + the #842-B beacon attribute the plugin inflow.
     const rule = (vercelConfig.redirects ?? []).find((r) => r.source === '/p/:slug')
@@ -62,7 +62,7 @@ describe('vercel.json is-down routes ↔ api/_is-down slug-map (#1430)', () => {
   it('every is-down slug is listed in the sitemap', () => {
     const sitemap = readFileSync(join(repoRoot, 'public/sitemap.xml'), 'utf8')
     for (const slug of Object.keys(SLUG_TO_SERVICE)) {
-      expect(sitemap.includes(`<loc>https://ai-watch.dev/is-${slug}-down</loc>`), `/is-${slug}-down`).toBe(true)
+      expect(sitemap.includes(`<loc>https://aiwatch.maicarons.cc/is-${slug}-down</loc>`), `/is-${slug}-down`).toBe(true)
     }
   })
 

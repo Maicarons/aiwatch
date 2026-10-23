@@ -107,7 +107,7 @@ test.describe('Landing page (/intro)', () => {
     await expect(rssBadge).toBeVisible()
     const label = rssBadge.locator('.rss-label')
     await rssBadge.click()
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed.xml')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed.xml')
     await expect(label).toHaveText(/Copied ✓|복사됨 ✓/)
     // Restores to "RSS" after the 2s feedback window (guards the data-busy/reset path)
     await expect(label).toHaveText('RSS', { timeout: 4000 })
@@ -124,7 +124,7 @@ test.describe('Landing page (/intro)', () => {
     await page.locator('.lang-toggle button').filter({ hasText: 'EN' }).click()
     await expect(label).toHaveText('Copy RSS feed')
     await ctaRss.click()
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed.xml')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed.xml')
     await expect(label).toHaveText('Copied ✓')
     await expect(label).toHaveText('Copy RSS feed', { timeout: 4000 }) // restores after the timeout
 

@@ -890,7 +890,7 @@ describe('is-down handler — which live sections say they could not load (#1742
   let fetchMock: ReturnType<typeof vi.spyOn>
   beforeEach(() => { fetchMock = spyFetchWithEmptyReportFeed() })
   afterEach(() => { fetchMock.mockRestore() })
-  const req = (slug: string) => new Request(`https://ai-watch.dev/api/is-down?slug=${slug}`)
+  const req = (slug: string) => new Request(`https://aiwatch.maicarons.cc/api/is-down?slug=${slug}`)
   const svc = (id: string, name: string) => ({ id, name, category: 'api', status: 'operational', latency: 1, uptime30d: 99.9, lastChecked: new Date().toISOString(), incidents: [], aiwatchScore: 90, scoreGrade: 'excellent', scoreConfidence: 'high' })
   const ok = (services: unknown[]) => new Response(JSON.stringify({ services, aiAnalysis: {} }), { status: 200, headers: { 'Content-Type': 'application/json' } })
 

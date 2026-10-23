@@ -694,7 +694,7 @@ test.describe('ServiceDetails RSS feed link (#432)', () => {
     await expect(page.locator('main').getByText(/Copied ✓|복사됨 ✓/)).toBeVisible()
     // #1164 — /is-claude-down became the Anthropic family group page; the single-service Claude API
     // page (and its feed slug) moved to '-api'. FEED_SLUG_OVERRIDE.claude -> 'claude-api'.
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed/claude-api')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed/claude-api')
   })
 
   test('Claude Code feed URL uses the is-down slug, not the service ID', async ({ page, context }) => {
@@ -702,7 +702,7 @@ test.describe('ServiceDetails RSS feed link (#432)', () => {
     await page.goto('/#claudecode')
     await expect(page.locator('main').getByText(/Status Calendar|상태 캘린더/)).toBeVisible({ timeout: 20000 })
     await page.locator('main').getByRole('button', { name: /RSS/ }).click()
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed/claude-code')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed/claude-code')
   })
 
   test('estimate-only Bedrock has no RSS link', async ({ page }) => {

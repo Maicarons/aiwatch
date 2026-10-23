@@ -8,7 +8,7 @@ import handler from '../confirm'
 
 const HASH = 'a'.repeat(64)
 const CODE = '123456'
-const ok = (h = HASH, c = CODE) => new Request(`https://ai-watch.dev/confirm?h=${h}&c=${c}`)
+const ok = (h = HASH, c = CODE) => new Request(`https://aiwatch.maicarons.cc/confirm?h=${h}&c=${c}`)
 
 describe('/confirm GET — crawler safety', () => {
   it('does NOT call fetch on GET (no auto-confirm on prefetch)', async () => {
@@ -37,7 +37,7 @@ describe('/confirm — worker API target selection (workerApiFor)', () => {
   // The button POSTs to a worker chosen by the request host. A regression that always returned the
   // local worker would make EVERY production confirm silently POST to localhost:8788 and never
   // activate — the render-only tests above wouldn't catch it, so pin the host branch explicitly.
-  it('targets the PRODUCTION worker when served from ai-watch.dev', async () => {
+  it('targets the PRODUCTION worker when served from aiwatch.maicarons.cc', async () => {
     const html = await (await handler(ok())).text()
     expect(html).toContain('aiwatch-worker.p2c2kbf.workers.dev')
     expect(html).not.toContain('localhost:8788')
@@ -58,7 +58,7 @@ describe('/confirm — worker API target selection (workerApiFor)', () => {
 
 describe('/confirm GET — param validation (XSS gate)', () => {
   it('rejects a malformed hash with 400 and renders no button', async () => {
-    const res = await handler(new Request('https://ai-watch.dev/confirm?h=short&c=123456'))
+    const res = await handler(new Request('https://aiwatch.maicarons.cc/confirm?h=short&c=123456'))
     expect(res.status).toBe(400)
     const html = await res.text()
     expect(html).toContain('Invalid confirmation link')
@@ -66,12 +66,12 @@ describe('/confirm GET — param validation (XSS gate)', () => {
   })
 
   it('rejects a non-6-digit code with 400', async () => {
-    const res = await handler(new Request('https://ai-watch.dev/confirm?h=' + HASH + '&c=12'))
+    const res = await handler(new Request('https://aiwatch.maicarons.cc/confirm?h=' + HASH + '&c=12'))
     expect(res.status).toBe(400)
   })
 
   it('rejects missing params with 400', async () => {
-    const res = await handler(new Request('https://ai-watch.dev/confirm'))
+    const res = await handler(new Request('https://aiwatch.maicarons.cc/confirm'))
     expect(res.status).toBe(400)
   })
 
@@ -79,7 +79,7 @@ describe('/confirm GET — param validation (XSS gate)', () => {
     // A hash containing </script> or quotes must never reach the inline script — the regex gate
     // returns the 400 page first, so the payload is not echoed into executable context.
     const evil = '"></script><script>alert(1)</script>'
-    const res = await handler(new Request('https://ai-watch.dev/confirm?h=' + encodeURIComponent(evil) + '&c=123456'))
+    const res = await handler(new Request('https://aiwatch.maicarons.cc/confirm?h=' + encodeURIComponent(evil) + '&c=123456'))
     expect(res.status).toBe(400)
     const html = await res.text()
     expect(html).not.toContain('<script>alert(1)</script>')

@@ -131,7 +131,7 @@ describe('renderPluginPage SSR contract (#920)', () => {
 
   it('is an indexable HTML doc with the canonical /plugin URL + SoftwareApplication JSON-LD', () => {
     expect(html).toContain('<!DOCTYPE html>')
-    expect(html).toContain('<link rel="canonical" href="https://ai-watch.dev/plugin">')
+    expect(html).toContain('<link rel="canonical" href="https://aiwatch.maicarons.cc/plugin">')
     expect(html).toContain('<meta name="robots" content="index, follow">')
     expect(html).toContain('"@type":"SoftwareApplication"')
     expect(html).toContain('AIWatch for Claude Code')
@@ -144,6 +144,6 @@ describe('renderPluginPage SSR contract (#920)', () => {
 
   it('renders the install section + the discoverability cross-link to the statusline guide', () => {
     expect(html).toContain(PLUGIN_INSTALL_CMD)
-    expect(html).toContain('ai-watch.dev/#statusline')
+    expect(html).toContain('aiwatch.maicarons.cc/#statusline')
   })
 })

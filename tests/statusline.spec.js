@@ -4,7 +4,7 @@
 // `/api/statusline/<preset>` (#918 — the Worker renders the final string
 // server-side; the path is both the route and the WAE adoption tag). A regression
 // in any of these would re-block Phase 1's "snippet documented somewhere reachable
-// from ai-watch.dev" criterion or silently invalidate the traction baseline.
+// from aiwatch.maicarons.cc" criterion or silently invalidate the traction baseline.
 
 import { test, expect } from './fixtures.js'
 import { waitForDataLoad } from './helpers.js'
@@ -20,14 +20,14 @@ test.describe('Statusline guide page (#400 Phase 0)', () => {
     await page.goto('/#statusline')
     await waitForDataLoad(page)
     // Pin the canonical thin-curl pieces: the Worker host + per-preset path (#438 —
-    // polls hit the Worker directly, not the Vercel-proxied ai-watch.dev path),
+    // polls hit the Worker directly, not the Vercel-proxied aiwatch.maicarons.cc path),
     // 2s timeout, fail-silent fallback. The display logic is server-side now (#918),
     // so there is NO jq in the snippet.
     const code = page.locator('pre').first()
     await expect(code).toBeVisible()
     const text = (await code.textContent()) || ''
     expect(text).toContain('aiwatch-worker.p2c2kbf.workers.dev/api/statusline/branded')
-    expect(text).not.toContain('ai-watch.dev/api/') // must not poll the Vercel-proxied path
+    expect(text).not.toContain('aiwatch.maicarons.cc/api/') // must not poll the Vercel-proxied path
     expect(text).not.toContain('jq')                // formatting moved server-side
     expect(text).toContain('--max-time 2')
     expect(text).toContain('|| true')

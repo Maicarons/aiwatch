@@ -243,7 +243,7 @@ function renderGroupPage(
   const pageDesc = mixed
     ? `Partly unknown — AIWatch cannot confirm the status of ${unknownNames}. Operational: ${operationalNames}.`
     : desc
-  const canonical = `https://ai-watch.dev/is-${family.slug}-down`
+  const canonical = `https://aiwatch.maicarons.cc/is-${family.slug}-down`
   // #1164 follow-up — the group page originally used the static site-wide og-intro.png, unlike every
   // individual is-down page (which draws a live status card via the worker's /api/og). Reuses that
   // SAME endpoint: `service`/`status` alone render a full card (STATUS_STYLE covers 'unknown' too —
@@ -409,7 +409,7 @@ ${communityReports.slice(0, 20).map((report) => `<div class="community-report"><
 ${memberErrors.map(({ member, errors }) => `<details class="err-group"${SLUG_TO_SERVICE[member.slug]?.category === 'api' ? ' open' : ''}><summary>${esc(member.name)} errors <span class="incidents-window">(${errors.items.length})</span></summary>
 <div class="err-body">${renderErrorList(errors)}</div></details>`).join('\n')}`
 
-  const alertFeed = (slug: string) => `https://ai-watch.dev/feed/${esc(slug)}`
+  const alertFeed = (slug: string) => `https://aiwatch.maicarons.cc/feed/${esc(slug)}`
   const alertOptions = members.map((member) => `<option value="${esc(member.id)}" data-slug="${esc(member.slug)}">${esc(member.name)}</option>`).join('')
   const firstMember = members[0]
   const alertSection = `<div class="cta">
@@ -420,7 +420,7 @@ ${memberErrors.map(({ member, errors }) => `<details class="err-group"${SLUG_TO_
 <button type="button" class="btn btn-brand" id="alert-rss" data-rss="${alertFeed(firstMember.slug)}" data-svc="${esc(firstMember.id)}">${RSS_ICON_SVG}<span class="btn-label">Copy RSS feed</span></button>
 </div>
 <p class="cta-alt">Can't install Slack apps? <button type="button" class="link-btn" id="alert-slack" data-slack="/feed subscribe ${alertFeed(firstMember.slug)}" data-svc="${esc(firstMember.id)}">Copy the /feed command</button></p>
-<p class="cta-alt"><a href="https://ai-watch.dev/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_group_page" data-ga-source="status_banner_secondary">Prefer Discord push alerts? Set up here &rarr;</a></p>
+<p class="cta-alt"><a href="https://aiwatch.maicarons.cc/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_group_page" data-ga-source="status_banner_secondary">Prefer Discord push alerts? Set up here &rarr;</a></p>
 </div>`
 
   // #1164 review — a share affordance, matching the individual is-down pages (X + copy link). Kept
@@ -488,7 +488,7 @@ ${memberErrors.map(({ member, errors }) => `<details class="err-group"${SLUG_TO_
     '@graph': [
       {
         '@type': 'WebPage', name: title, url: canonical, description: pageDesc,
-        isPartOf: { '@type': 'WebSite', name: 'AIWatch', url: 'https://ai-watch.dev/' },
+        isPartOf: { '@type': 'WebSite', name: 'AIWatch', url: 'https://aiwatch.maicarons.cc/' },
         ...(latestChecked ? { dateModified: latestChecked } : {}),
       },
       {
@@ -499,7 +499,7 @@ ${memberErrors.map(({ member, errors }) => `<details class="err-group"${SLUG_TO_
       },
       {
         '@type': 'BreadcrumbList', itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'AIWatch', item: 'https://ai-watch.dev/' },
+          { '@type': 'ListItem', position: 1, name: 'AIWatch', item: 'https://aiwatch.maicarons.cc/' },
           { '@type': 'ListItem', position: 2, name: `Is ${family.name} Down?`, item: canonical },
         ],
       },
@@ -674,7 +674,7 @@ ${alertCopyClientJs('is_down_group_page')};(function(){
   var picker = document.getElementById('alert-service'), slackBtn = document.getElementById('alert-slack'), rssBtn = document.getElementById('alert-rss'), installLink = document.getElementById('alert-slack-install')
   if (!picker || !slackBtn || !rssBtn || !installLink) return
   picker.addEventListener('change', function(){ installLink.href = ${JSON.stringify(slackInstallUrl())} + '?services=' + encodeURIComponent(picker.value); installLink.dataset.gaSvc = picker.value })
-  function selectedFeed(){ return 'https://ai-watch.dev/feed/' + picker.options[picker.selectedIndex].getAttribute('data-slug') }
+  function selectedFeed(){ return 'https://aiwatch.maicarons.cc/feed/' + picker.options[picker.selectedIndex].getAttribute('data-slug') }
   slackBtn.addEventListener('click', function(){ slackBtn.dataset.slack = '/feed subscribe ' + selectedFeed(); slackBtn.dataset.svc = picker.value; copySlackFeed(slackBtn) })
   rssBtn.addEventListener('click', function(){ rssBtn.dataset.rss = selectedFeed(); rssBtn.dataset.svc = picker.value; copyRss(rssBtn) })
 })()
@@ -1012,7 +1012,7 @@ export default async function handler(req: Request) {
   } catch (err) {
     console.error('[is-down-group] Unhandled error:', err instanceof Error ? err.stack : err)
     return new Response(
-      '<!DOCTYPE html><html><head><title>AIWatch - Temporarily Unavailable</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please try again or visit <a href="https://ai-watch.dev" style="color:#58a6ff">AIWatch</a>.</p></body></html>',
+      '<!DOCTYPE html><html><head><title>AIWatch - Temporarily Unavailable</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please try again or visit <a href="https://aiwatch.maicarons.cc" style="color:#58a6ff">AIWatch</a>.</p></body></html>',
       { status: 500, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' } },
     )
   }

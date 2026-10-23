@@ -1,7 +1,7 @@
 // Vercel Edge Function — /confirm landing page for the per-user Discord subscription opt-in (#486 PR2).
 //
 // The double-opt-in challenge (#486): when a user subscribes, the worker posts a link into their
-// Discord channel — https://ai-watch.dev/confirm?h={hash}&c={code}. Proving they can READ that link
+// Discord channel — https://aiwatch.maicarons.cc/confirm?h={hash}&c={code}. Proving they can READ that link
 // (i.e. control the channel) is the identity check. This page is the landing target.
 //
 // CRITICAL — crawler-safety: Discord (and email/AV scanners) PREFETCH links to build previews. If a
@@ -9,7 +9,7 @@
 // challenge and letting an attacker's registration self-confirm via the channel's own crawler. So:
 //   - GET renders a page with an [Activate] button and has ZERO side effects.
 //   - Activation happens only on the button's POST to the worker's /api/webhook/confirm (crawlers
-//     don't POST). The worker is CORS-guarded to ai-watch.dev, which this page is served from.
+//     don't POST). The worker is CORS-guarded to aiwatch.maicarons.cc, which this page is served from.
 //
 // Self-contained SSR (inline CSS/JS, no external data fetch) — mirrors api/intro.ts, reusing the same
 // design tokens (src/index.css dark theme) + the AI<green>Watch</green> wordmark with the favicon so
@@ -90,7 +90,7 @@ export default async function handler(req: Request): Promise<Response> {
       return new Response(page(`
         <h1>Invalid confirmation link</h1>
         <p>This link is malformed or incomplete. Re-add your webhook in
-        <a href="https://ai-watch.dev/#settings">AIWatch &rarr; Settings</a> to get a fresh one.</p>
+        <a href="https://aiwatch.maicarons.cc/#settings">AIWatch &rarr; Settings</a> to get a fresh one.</p>
       `), { status: 400, headers })
     }
 
@@ -124,7 +124,7 @@ export default async function handler(req: Request): Promise<Response> {
                 btn.style.display = 'none';
               } else if (r.status === 410) {
                 msg.className = 'muted err';
-                msg.innerHTML = 'This confirmation expired. Re-add your webhook in <a href="https://ai-watch.dev/#settings">AIWatch Settings</a>.';
+                msg.innerHTML = 'This confirmation expired. Re-add your webhook in <a href="https://aiwatch.maicarons.cc/#settings">AIWatch Settings</a>.';
                 btn.disabled = false;
               } else if (r.status >= 500) {
                 // Server fault (storage error) — genuinely retryable, so keep the button enabled.
@@ -135,7 +135,7 @@ export default async function handler(req: Request): Promise<Response> {
                 // Other 4xx (e.g. 400 incorrect/tampered code) — retrying the same link can never
                 // succeed, so DON'T re-enable the button; point the user to re-add for a fresh link.
                 msg.className = 'muted err';
-                msg.innerHTML = 'This confirmation link is invalid. Re-add your webhook in <a href="https://ai-watch.dev/#settings">AIWatch Settings</a> to get a fresh one.';
+                msg.innerHTML = 'This confirmation link is invalid. Re-add your webhook in <a href="https://aiwatch.maicarons.cc/#settings">AIWatch Settings</a> to get a fresh one.';
               }
             }).catch(function () {
               msg.className = 'muted err';
@@ -149,6 +149,6 @@ export default async function handler(req: Request): Promise<Response> {
   } catch (err) {
     console.error('[confirm] render failed:', err instanceof Error ? err.stack : err)
     return new Response(page(`<h1>Something went wrong</h1><p>Please try again or visit
-      <a href="https://ai-watch.dev">AIWatch</a>.</p>`), { status: 500, headers })
+      <a href="https://aiwatch.maicarons.cc">AIWatch</a>.</p>`), { status: 500, headers })
   }
 }

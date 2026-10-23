@@ -5,7 +5,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import handler from '../is-down'
 import { spyFetchWithEmptyReportFeed } from './fetch-stub'
 
-const req = (slug: string) => new Request(`https://ai-watch.dev/api/is-down?slug=${slug}`, { method: 'GET' })
+const req = (slug: string) => new Request(`https://aiwatch.maicarons.cc/api/is-down?slug=${slug}`, { method: 'GET' })
 
 const payload = (fallbackSuppressed: boolean) => {
   const now = new Date().toISOString()

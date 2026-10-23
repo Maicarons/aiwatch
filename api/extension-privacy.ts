@@ -22,7 +22,7 @@ export function renderExtensionPrivacyPage(): string {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy — AIWatch Claude Status (Chrome extension)</title>
 <meta name="description" content="Privacy policy for the AIWatch Claude Status Chrome extension. No analytics, no cookies, no page reading — it only polls the public AIWatch status API.">
-<link rel="canonical" href="https://ai-watch.dev/extension-privacy">
+<link rel="canonical" href="https://aiwatch.maicarons.cc/extension-privacy">
 <meta name="robots" content="index, follow">
 <style>
   :root { color-scheme: dark; }
@@ -49,7 +49,7 @@ export function renderExtensionPrivacyPage(): string {
   <p class="updated">Chrome extension · Last updated: ${UPDATED}</p>
   <p class="lead">The <strong>AIWatch — Claude Status</strong> Chrome extension is designed to collect <strong>no personal data</strong>. This policy explains exactly what it does and does not do.</p>
 
-  <div class="note">This policy covers the <strong>Chrome extension only</strong>. It is separate from the <a href="https://ai-watch.dev">ai-watch.dev</a> website policy: unlike the website, the extension uses <strong>no analytics, no cookies, and does not read any web page</strong>.</div>
+  <div class="note">This policy covers the <strong>Chrome extension only</strong>. It is separate from the <a href="https://aiwatch.maicarons.cc">aiwatch.maicarons.cc</a> website policy: unlike the website, the extension uses <strong>no analytics, no cookies, and does not read any web page</strong>.</div>
 
   <h2>1. What the extension does</h2>
   <ul>
@@ -101,7 +101,7 @@ export function renderExtensionPrivacyPage(): string {
   <p>For privacy inquiries, contact <a href="mailto:${CONTACT}">${CONTACT}</a>.</p>
 
   <footer>
-    <a href="https://ai-watch.dev">AIWatch Dashboard</a> · <a href="https://github.com/bentleypark/aiwatch">Open source (AGPL)</a>
+    <a href="https://aiwatch.maicarons.cc">AIWatch Dashboard</a> · <a href="https://github.com/bentleypark/aiwatch">Open source (AGPL)</a>
   </footer>
 </main>
 </body>
@@ -127,7 +127,7 @@ export default async function handler(_req: Request) {
   } catch (err) {
     console.error('[extension-privacy] Render failed:', err instanceof Error ? err.stack : err)
     return new Response(
-      '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AIWatch</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please visit <a href="https://ai-watch.dev" style="color:#58a6ff">AIWatch</a>.</p></body></html>',
+      '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AIWatch</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please visit <a href="https://aiwatch.maicarons.cc" style="color:#58a6ff">AIWatch</a>.</p></body></html>',
       { status: 500, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' } },
     )
   }

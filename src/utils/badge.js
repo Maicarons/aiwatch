@@ -14,7 +14,7 @@ const BADGE_BASE = 'https://aiwatch-worker.p2c2kbf.workers.dev'
 /** Resolve the badge's link target: the crawlable is-down page when one exists, else the SPA detail route. */
 export function buildBadgeLinkTarget(serviceId) {
   const slug = SERVICE_ID_TO_SLUG[serviceId]
-  return slug ? `https://ai-watch.dev/is-${slug}-down` : `https://ai-watch.dev/#${serviceId}`
+  return slug ? `https://aiwatch.maicarons.cc/is-${slug}-down` : `https://aiwatch.maicarons.cc/#${serviceId}`
 }
 
 /** Build the copy-paste markdown for an embeddable status badge. */

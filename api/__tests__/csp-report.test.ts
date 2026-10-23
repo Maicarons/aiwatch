@@ -10,7 +10,7 @@ describe('parseCspReports', () => {
   it('parses the report-uri shape ({ "csp-report": {...} })', () => {
     const body = JSON.stringify({
       'csp-report': {
-        'document-uri': 'https://ai-watch.dev/is-claude-down',
+        'document-uri': 'https://aiwatch.maicarons.cc/is-claude-down',
         'violated-directive': "script-src-elem",
         'blocked-uri': 'inline',
       },
@@ -45,25 +45,25 @@ describe('parseCspReports', () => {
 describe('summarizeCspReport', () => {
   it('summarizes the kebab-case (report-uri) fields with source location', () => {
     const s = summarizeCspReport({
-      'document-uri': 'https://ai-watch.dev/intro',
+      'document-uri': 'https://aiwatch.maicarons.cc/intro',
       'violated-directive': 'script-src',
       'blocked-uri': 'inline',
-      'source-file': 'https://ai-watch.dev/intro',
+      'source-file': 'https://aiwatch.maicarons.cc/intro',
       'line-number': 1076,
     })
     expect(s).toContain('directive=script-src')
     expect(s).toContain('blocked=inline')
-    expect(s).toContain('doc=https://ai-watch.dev/intro')
-    expect(s).toContain('src=https://ai-watch.dev/intro:1076')
+    expect(s).toContain('doc=https://aiwatch.maicarons.cc/intro')
+    expect(s).toContain('src=https://aiwatch.maicarons.cc/intro:1076')
   })
 
   it('summarizes the camelCase (report-to) fields and omits source when absent', () => {
     const s = summarizeCspReport({
-      documentURL: 'https://ai-watch.dev/',
+      documentURL: 'https://aiwatch.maicarons.cc/',
       effectiveDirective: 'connect-src',
       blockedURL: 'https://evil.example/x',
     })
-    expect(s).toBe('directive=connect-src blocked=https://evil.example/x doc=https://ai-watch.dev/')
+    expect(s).toBe('directive=connect-src blocked=https://evil.example/x doc=https://aiwatch.maicarons.cc/')
   })
 
   it('falls back to ? for missing fields', () => {

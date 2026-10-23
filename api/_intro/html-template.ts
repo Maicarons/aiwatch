@@ -44,10 +44,10 @@ ${CONSENT_INIT_COMMENT}
 ${consentInitScript(nonce)}
 <meta name="description" content="Track Claude, OpenAI, Gemini, Cursor and more. AI analyzes incidents and recommends fallback options instantly. Free.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ai-watch.dev/intro">
+<meta property="og:url" content="https://aiwatch.maicarons.cc/intro">
 <meta property="og:title" content="AIWatch — Real-time AI Service Monitoring">
 <meta property="og:description" content="Track Claude, OpenAI, Gemini, Cursor and more. AI analyzes incidents and recommends fallback options instantly. Free.">
-<meta property="og:image" content="https://ai-watch.dev/og-intro.png">
+<meta property="og:image" content="https://aiwatch.maicarons.cc/og-intro.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
@@ -55,20 +55,20 @@ ${consentInitScript(nonce)}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AIWatch — Real-time AI Service Monitoring">
 <meta name="twitter:description" content="Track Claude, OpenAI, Gemini, Cursor and more. AI analyzes incidents and recommends fallback options instantly. Free.">
-<meta name="twitter:image" content="https://ai-watch.dev/og-intro.png">
-<link rel="canonical" href="https://ai-watch.dev/intro">
+<meta name="twitter:image" content="https://aiwatch.maicarons.cc/og-intro.png">
+<link rel="canonical" href="https://aiwatch.maicarons.cc/intro">
 <meta name="theme-color" content="#080c10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
   "name": "AIWatch",
-  "url": "https://ai-watch.dev",
+  "url": "https://aiwatch.maicarons.cc",
   "description": "Real-time status monitoring for 48 AI services including Claude, ChatGPT, Gemini, Cursor, and Codex. AI-powered incident analysis with fallback recommendations.",
   "applicationCategory": "DeveloperApplication",
   "operatingSystem": "Web",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-  "screenshot": "https://ai-watch.dev/og-intro.png"
+  "screenshot": "https://aiwatch.maicarons.cc/og-intro.png"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -522,7 +522,7 @@ ${announcementHtml}
       <button class="lang-btn active" data-lang="ko">KO</button>
       <button class="lang-btn" data-lang="en">EN</button>
     </div>
-    <a href="https://ai-watch.dev" class="nav-cta" data-i18n="nav.cta" data-ga="click_dashboard" data-ga-loc="landing_nav">대시보드 열기 →</a>
+    <a href="https://aiwatch.maicarons.cc" class="nav-cta" data-i18n="nav.cta" data-ga="click_dashboard" data-ga-loc="landing_nav">대시보드 열기 →</a>
   </div>
 </nav>
 
@@ -533,7 +533,7 @@ ${announcementHtml}
     <h1 data-i18n="hero.title"><em>AI 서비스</em> 장애를 즉시 파악하고,<br>갈아탈 대안까지 한 번에.</h1>
     <p data-i18n="hero.sub">48개 AI 서비스 상태를 한 화면에서.<span class="hero-sub-line"> AIWatch가 신뢰도를 랭킹하고 장애를 분석해,</span> 멈추는 순간 대안을 즉시 추천합니다. 무료 · 오픈소스 · 무가입.</p>
     <div class="hero-ctas">
-      <a href="https://ai-watch.dev" class="btn-primary" data-i18n="hero.cta1" data-ga="click_dashboard" data-ga-loc="landing_hero">대시보드 열기 →</a>
+      <a href="https://aiwatch.maicarons.cc" class="btn-primary" data-i18n="hero.cta1" data-ga="click_dashboard" data-ga-loc="landing_hero">대시보드 열기 →</a>
       <a href="https://github.com/bentleypark/aiwatch" target="_blank" rel="noopener noreferrer" class="btn-secondary" data-i18n="hero.cta2" data-ga="click_github_header" data-ga-loc="landing_hero">GitHub에서 보기</a>
     </div>
     <p class="hero-trust" data-i18n="hero.trust">로그인 없음 · 실시간 상태 · 완전 무료 오픈소스 (AGPL)</p>
@@ -906,7 +906,7 @@ ${announcementHtml}
         <div class="feature-tag">SEO PAGE</div>
         <div class="feature-icon">🔍</div>
         <div class="feature-title" data-i18n="feat.4.title">"Is X Down?" 전용 페이지</div>
-        <div class="feature-desc" data-i18n="feat.4.desc">ai-watch.dev/is-claude-api-down 같은 전용 페이지에서 실시간 상태, AI 분석, 대안 추천을 한 번에 확인합니다.</div>
+        <div class="feature-desc" data-i18n="feat.4.desc">aiwatch.maicarons.cc/is-claude-api-down 같은 전용 페이지에서 실시간 상태, AI 분석, 대안 추천을 한 번에 확인합니다.</div>
       </div>
     </div>
   </div>
@@ -968,7 +968,7 @@ ${announcementHtml}
     <h2 class="section-title" data-i18n="alert.title">장애 알림, 원하는 방식으로</h2>
     <p class="section-sub" data-i18n="alert.sub">장애 발생 시 실시간 알림 + AI 분석 + Fallback 추천까지 한 번에. 무료입니다.</p>
     <div class="alert-channels">
-      <a class="ch-badge ch-discord" href="https://ai-watch.dev/#settings?focus=alerts" title="Set up Discord push alerts" data-ga="click_cta_alerts" data-ga-loc="landing_alert" data-ga-source="discord_badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="#5865F2" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>Discord</a>
+      <a class="ch-badge ch-discord" href="https://aiwatch.maicarons.cc/#settings?focus=alerts" title="Set up Discord push alerts" data-ga="click_cta_alerts" data-ga-loc="landing_alert" data-ga-source="discord_badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="#5865F2" aria-hidden="true"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>Discord</a>
       <a class="ch-badge ch-slack" href="${slackInstallUrl()}" title="Add AIWatch to a Slack channel" data-ga="click_add_to_slack" data-ga-loc="landing_alert" data-ga-source="slack_badge">${slackLogoSvg(13)}<span>Slack</span></a>
       <button type="button" class="ch-badge ch-rss" data-action="copy-rss" title="Copy RSS feed URL" aria-label="Copy RSS feed URL"><svg width="13" height="13" viewBox="0 0 24 24" fill="#f26522" aria-hidden="true"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83C19.56 11.4 12.6 4.44 4 4.44zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg><span class="rss-label">RSS</span></button>
     </div>
@@ -997,7 +997,7 @@ ${announcementHtml}
                 <div class="d-embed-text" style="color:#dbdee1;font-weight:500;margin-bottom:4px;">👉 SUGGESTED FALLBACK</div>
                 <div class="d-embed-text" style="color:#3fb950;margin-bottom:6px;">• Cohere API (Score 100) · DeepSeek API (Score 100)</div>
                 <div class="d-embed-text" style="color:#949ba4;font-family:var(--font-mono);font-size:11px;margin-bottom:6px;">┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈</div>
-                <a href="https://ai-watch.dev" class="d-embed-link" style="color:#00a8fc;">View on AIWatch</a>
+                <a href="https://aiwatch.maicarons.cc" class="d-embed-link" style="color:#00a8fc;">View on AIWatch</a>
                 <div class="d-embed-footer" style="color:#949ba4;margin-top:4px;">AIWatch Worker · Today 2:48 PM</div>
               </div>
             </div>
@@ -1013,7 +1013,7 @@ ${announcementHtml}
                 <div class="d-embed-title" style="color:#dbdee1;">🟢 Together AI — Service Recovered (47m)</div>
                 <div class="d-embed-text" style="color:#b5bac1;"><strong style="color:#dbdee1;">Together AI</strong> is back to operational</div>
                 <div class="d-embed-divider" style="background:#3d3f45;"></div>
-                <a href="https://ai-watch.dev" class="d-embed-link" style="color:#00a8fc;">View on AIWatch</a>
+                <a href="https://aiwatch.maicarons.cc" class="d-embed-link" style="color:#00a8fc;">View on AIWatch</a>
                 <div class="d-embed-footer" style="color:#949ba4;margin-top:4px;">AIWatch Worker · Today 3:35 PM</div>
               </div>
             </div>
@@ -1095,9 +1095,9 @@ ${announcementHtml}
     <h2 data-i18n="cta.title">지금 바로 확인하세요</h2>
     <p data-i18n="cta.sub">완전 무료 · 설치 불필요 · Discord/Slack 알림 무료</p>
     <div class="cta-btns">
-      <a href="https://ai-watch.dev" class="btn-primary" style="font-size:16px;padding:14px 32px;" data-i18n="cta.btn1" data-ga="click_dashboard" data-ga-loc="landing_cta">대시보드 열기 →</a>
+      <a href="https://aiwatch.maicarons.cc" class="btn-primary" style="font-size:16px;padding:14px 32px;" data-i18n="cta.btn1" data-ga="click_dashboard" data-ga-loc="landing_cta">대시보드 열기 →</a>
       <a class="btn-slack" href="${slackInstallUrl()}" style="padding:12px 24px;" data-ga="click_add_to_slack" data-ga-loc="landing_cta">${slackLogoSvg(16)}<span data-i18n="alert.slack.btn">Slack에 추가</span></a>
-      <a href="https://ai-watch.dev/#settings?focus=alerts" class="btn-secondary" style="font-size:14px;padding:12px 24px;" data-i18n="cta.btn2" data-ga="click_cta_alerts" data-ga-loc="landing_cta">알림 설정하기</a>
+      <a href="https://aiwatch.maicarons.cc/#settings?focus=alerts" class="btn-secondary" style="font-size:14px;padding:12px 24px;" data-i18n="cta.btn2" data-ga="click_cta_alerts" data-ga-loc="landing_cta">알림 설정하기</a>
       ${renderExtInstallCta(EXTENSION_STORE_URL, { loc: 'landing_cta', variant: 'landing' })}
     </div>
     <div class="cta-rss">
@@ -1115,8 +1115,8 @@ ${announcementHtml}
     <div class="footer-links">
       <a href="https://github.com/bentleypark/aiwatch">GitHub</a>
       <a href="/reports/" data-i18n="footer.report">월간 리포트</a>
-      <a href="https://ai-watch.dev/#settings?focus=alerts" data-i18n="footer.alert" data-ga="click_cta_alerts" data-ga-loc="landing_footer">알림 설정</a>
-      <a href="https://ai-watch.dev/is-claude-down">Is Claude Down?</a>
+      <a href="https://aiwatch.maicarons.cc/#settings?focus=alerts" data-i18n="footer.alert" data-ga="click_cta_alerts" data-ga-loc="landing_footer">알림 설정</a>
+      <a href="https://aiwatch.maicarons.cc/is-claude-down">Is Claude Down?</a>
     </div>
   </div>
 </footer>
@@ -1138,7 +1138,7 @@ const i18n = {
     'feat.1.title': 'AIWatch Score', 'feat.1.desc': 'Uptime(40) + 인시던트 영향 일수(25) + 복구 시간(15) + 응답성(20)을 종합한 0~100점 신뢰도 지표입니다. 서비스마다 흩어진 공식 데이터를 통합해 한눈에 비교할 수 있게 합니다. 데이터 미제공 서비스는 업계 평균 + 패널티가 적용됩니다.',
     'feat.2.title': 'AI 장애 분석', 'feat.2.desc': '장애 발생 시 AIWatch가 패턴을 분석해 예상 복구 시간과 영향 범위를 알려줍니다. "언제쯤 복구될까?"에 빠르게 답합니다.',
     'feat.3.title': 'Fallback 추천', 'feat.3.desc': '장애 중인 서비스의 대안을 같은 카테고리 Score 상위 순으로 즉시 제안합니다. 같은 제공사 서비스는 자동 제외됩니다.',
-    'feat.4.title': '"Is X Down?" 전용 페이지', 'feat.4.desc': 'ai-watch.dev/is-claude-api-down 같은 전용 페이지에서 실시간 상태, AI 분석, 대안 추천을 한 번에 확인합니다.',
+    'feat.4.title': '"Is X Down?" 전용 페이지', 'feat.4.desc': 'aiwatch.maicarons.cc/is-claude-api-down 같은 전용 페이지에서 실시간 상태, AI 분석, 대안 추천을 한 번에 확인합니다.',
     'how.title': '이렇게 동작합니다', 'how.sub': '각 서비스의 공식 상태 페이지 데이터를 기반으로 동작합니다',
     'compare.title': '공식 상태 페이지와 무엇이 다른가요?', 'compare.sub': '공식 페이지 데이터를 기반으로, 48개를 한 화면에서 통합합니다', 'compare.col1': '공식 상태 페이지', 'compare.r2': '장애 알림', 'compare.r2a': '제공사마다 개별 구독', 'compare.r2b': '48개를 한 곳에서 — Discord · Slack · RSS', 'compare.r3': 'AIWatch Score', 'compare.r3a': '종합 점수 없음 (업타임 %만)', 'compare.r3b': 'AIWatch Score — Uptime + 영향 일수 + 복구 + 응답성', 'compare.r4': '장애 분석', 'compare.r4b': 'AI가 원인 · 복구 시간 분석', 'compare.r5': '대안 추천', 'compare.r5b': 'Fallback 서비스 즉시 제안', 'compare.r6': '월간 리포트', 'compare.r6b': '매월 리포트 공개', 'compare.r7': '비용', 'compare.r7a': '무료', 'compare.r7b': '완전 무료 · 오픈소스',
     'how.1.badge': '자동', 'how.2.badge': '장애 감지 시', 'how.3.badge': '실시간', 'how.4.badge': '매월',
@@ -1167,7 +1167,7 @@ const i18n = {
     'feat.1.title': 'AIWatch Score', 'feat.1.desc': 'A 0–100 reliability score combining Uptime (40) + Incident impact days (25) + Recovery time (15) + Responsiveness (20). Services without official data use industry averages with a penalty.',
     'feat.2.title': 'AI Incident Analysis', 'feat.2.desc': 'When an outage hits, AIWatch analyzes the pattern and tells you the estimated recovery time and impact scope. No more guessing.',
     'feat.3.title': 'Fallback Recommendations', 'feat.3.desc': 'Get instant alternative suggestions ranked by Score within the same category. Same-provider services are automatically excluded.',
-    'feat.4.title': '"Is X Down?" Dedicated Pages', 'feat.4.desc': 'Pages like ai-watch.dev/is-claude-api-down show real-time status, AI analysis, and fallback recommendations — all in one place.',
+    'feat.4.title': '"Is X Down?" Dedicated Pages', 'feat.4.desc': 'Pages like aiwatch.maicarons.cc/is-claude-api-down show real-time status, AI analysis, and fallback recommendations — all in one place.',
     'how.title': 'How it works', 'how.sub': 'Powered by official status page data from each provider',
     'compare.title': 'How is AIWatch different?', 'compare.sub': 'Built on official status data — aggregated across 48 services in one place', 'compare.col1': 'Official Status Page', 'compare.r2': 'Alerts', 'compare.r2a': 'Subscribe per provider, separately', 'compare.r2b': 'All 48 in one — Discord · Slack · RSS', 'compare.r3': 'AIWatch Score', 'compare.r3a': 'No composite score (uptime % only)', 'compare.r3b': 'AIWatch Score — Uptime + Impact days + Recovery + Responsiveness', 'compare.r4': 'Incident analysis', 'compare.r4b': 'AI analyzes cause & recovery', 'compare.r5': 'Fallback', 'compare.r5b': 'Alternative services suggested', 'compare.r6': 'Monthly report', 'compare.r6b': 'Monthly report published', 'compare.r7': 'Cost', 'compare.r7a': 'Free', 'compare.r7b': 'Free & open source',
     'how.1.badge': 'Auto', 'how.2.badge': 'On detection', 'how.3.badge': 'Real-time', 'how.4.badge': 'Monthly',
@@ -1205,7 +1205,7 @@ function setLang(lang) {
 // contexts; copy_rss fires only on a confirmed copy. Labels come from i18n so
 // the copied/restored text follows the current language.
 function copyRss(btn) {
-  var url = 'https://ai-watch.dev/feed.xml';
+  var url = 'https://aiwatch.maicarons.cc/feed.xml';
   var el = btn.querySelector('.rss-label') || btn; // swap only the label, keep the icon
   if (el.getAttribute('data-busy')) return;         // ignore re-clicks during the pending write + feedback window
   var orig = el.textContent;
@@ -1227,7 +1227,7 @@ function copyRss(btn) {
 // Slack /feed subscribe (#824) — zero-config: copies the command to paste into any channel.
 // Mirrors copyRss (i18n label swap, data-busy re-click guard); swaps the button's .slack-label.
 function copySlackFeed(btn) {
-  var cmd = '/feed subscribe https://ai-watch.dev/feed.xml';
+  var cmd = '/feed subscribe https://aiwatch.maicarons.cc/feed.xml';
   var el = btn.querySelector('.slack-label') || btn;
   if (el.getAttribute('data-busy')) return;
   var orig = el.textContent;

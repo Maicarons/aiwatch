@@ -6,7 +6,7 @@ const API = 'https://aiwatch-worker.p2c2kbf.workers.dev/api/slack/manage'
 
 describe('/slack result page', () => {
   it.each(['installed', 'denied', 'expired', 'error', 'unavailable'])('renders the %s result', async (result) => {
-    const res = await handler(new Request(`https://ai-watch.dev/api/slack-alerts?result=${result}`))
+    const res = await handler(new Request(`https://aiwatch.maicarons.cc/api/slack-alerts?result=${result}`))
     expect(res.status).toBe(200)
     expect(res.headers.get('Content-Security-Policy')).toContain("script-src 'self' 'nonce-")
     expect(res.headers.get('Cache-Control')).toContain('no-store')
@@ -25,7 +25,7 @@ describe('/slack result page', () => {
 
 describe('/slack/manage', () => {
   it('serves the manage view, which talks to the production worker', async () => {
-    const res = await handler(new Request('https://ai-watch.dev/api/slack-alerts?view=manage'))
+    const res = await handler(new Request('https://aiwatch.maicarons.cc/api/slack-alerts?view=manage'))
     const html = await res.text()
     expect(html).toContain('Slack alert settings')
     expect(html).toContain('"https://aiwatch-worker.p2c2kbf.workers.dev/api/slack/manage"')

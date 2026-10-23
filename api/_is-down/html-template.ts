@@ -471,7 +471,7 @@ export function renderPage(
     ? `Is ${seo.displayName} Down? ${statusTitleLabel(assertableStatus(service))} | AIWatch`
     : `Is ${seo.displayName} Down? Live Status | AIWatch`
   const desc = buildMetaDescription(seo, service, aiInsight ?? null)
-  const canonical = `https://ai-watch.dev/is-${slug}-down`
+  const canonical = `https://aiwatch.maicarons.cc/is-${slug}-down`
 
   // Dynamic OG image URL — cache busted per 10-min window on the LIVE page only (see the `v` line).
   // Pin the card status to the share hint when present (so a tweet's card matches the post moment,
@@ -544,7 +544,7 @@ export function renderPage(
 <meta name="description" content="${esc(desc)}">
 <link rel="canonical" href="${esc(canonical)}">
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="alternate" type="application/rss+xml" title="${esc(seo.displayName)} incidents — AIWatch" href="https://ai-watch.dev/feed/${esc(slug)}">
+<link rel="alternate" type="application/rss+xml" title="${esc(seo.displayName)} incidents — AIWatch" href="https://aiwatch.maicarons.cc/feed/${esc(slug)}">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -791,9 +791,9 @@ function renderJsonLd(slug: string, seo: ServiceSEO, service: ServiceData | null
     '@context': 'https://schema.org',
     '@type': 'WebPage',
     'name': `Is ${seo.displayName} Down?`,
-    'url': `https://ai-watch.dev/is-${slug}-down`,
+    'url': `https://aiwatch.maicarons.cc/is-${slug}-down`,
     'description': seo.description,
-    'isPartOf': { '@type': 'WebSite', 'name': 'AIWatch', 'url': 'https://ai-watch.dev' },
+    'isPartOf': { '@type': 'WebSite', 'name': 'AIWatch', 'url': 'https://aiwatch.maicarons.cc' },
   }
   if (service) {
     data['dateModified'] = service.lastChecked
@@ -809,20 +809,20 @@ function renderBreadcrumbJsonLd(slug: string, seo: ServiceSEO): string {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     'itemListElement': [
-      { '@type': 'ListItem', 'position': 1, 'name': 'AIWatch', 'item': 'https://ai-watch.dev/' },
-      { '@type': 'ListItem', 'position': 2, 'name': `Is ${seo.displayName} Down?`, 'item': `https://ai-watch.dev/is-${slug}-down` },
+      { '@type': 'ListItem', 'position': 1, 'name': 'AIWatch', 'item': 'https://aiwatch.maicarons.cc/' },
+      { '@type': 'ListItem', 'position': 2, 'name': `Is ${seo.displayName} Down?`, 'item': `https://aiwatch.maicarons.cc/is-${slug}-down` },
     ],
   }
   return `<script type="application/ld+json">${safeJsonLd(data)}</script>`
 }
 
 // Linkify the curated status/dashboard URLs in an FAQ answer for the ON-PAGE render only (the JSON-LD
-// FAQ answer must stay plain text per schema.org). Targeted prefixes — ai-watch.dev / aistudio.google.com
+// FAQ answer must stay plain text per schema.org). Targeted prefixes — aiwatch.maicarons.cc / aistudio.google.com
 // / status.<provider>.<tld> / <provider>status.com (groqstatus.com) — so bare BRAND
 // mentions in the prose (e.g. "claude.ai", "character.ai") are NOT turned into links. esc()s the non-URL
 // segments; the matched URLs are our own curated content. `(?<!\/\/)` skips a domain already preceded by
 // a scheme so we never emit a stray "https://" before the anchor (current FAQ answers use bare domains).
-const FAQ_URL_RE = /(?<!\/\/)(ai-watch\.dev|aistudio\.google\.com|status\.[a-z0-9.-]+\.[a-z]{2,}|[a-z0-9-]+status\.com)(\/[#\w/-]*)?/gi
+const FAQ_URL_RE = /(?<!\/\/)(aiwatch\.maicarons\.cc|aistudio\.google\.com|status\.[a-z0-9.-]+\.[a-z]{2,}|[a-z0-9-]+status\.com)(\/[#\w/-]*)?/gi
 export function linkifyFaqAnswer(text: string): string {
   let out = ''
   let last = 0
@@ -1134,7 +1134,7 @@ function renderStatusHeader(service: ServiceData | null, seo: ServiceSEO): strin
     return `<div class="header">
 <h1>Is ${esc(seo.displayName)} Down?</h1>
 <p class="meta">Status data is temporarily unavailable. Please check back shortly.</p>
-<p class="meta" style="margin-top:12px"><a href="https://ai-watch.dev" class="btn" data-ga="click_dashboard" data-ga-loc="is_down_page" data-ga-source="fallback">View AIWatch Dashboard</a></p>
+<p class="meta" style="margin-top:12px"><a href="https://aiwatch.maicarons.cc" class="btn" data-ga="click_dashboard" data-ga-loc="is_down_page" data-ga-source="fallback">View AIWatch Dashboard</a></p>
 </div>`
   }
 
@@ -1227,7 +1227,7 @@ ${'' /* #857 — this meta line always renders. When the service is ranked it le
    `s.scoreConfidence === target.scoreConfidence`), never a combined high+medium count — so a medium-
    confidence service's "#N of M" must say what M actually counts, or a small M (e.g. "of 4") reads as an
    unexplained shrink for a reader who just saw a much larger number on the dashboard's high table. */}
-<p class="meta">${service.rank ? `${esc(seo.displayName)} is ranked <strong>#${service.rank}${service.rankTied ? ' (tied)' : ''}</strong> of ${service.totalRanked} AI services${service.scoreConfidence === 'medium' ? ' with no official uptime metric (scored on incidents, recovery, and responsiveness only)' : ''} by <a href="https://ai-watch.dev/#ranking" data-ga="click_ranking" data-ga-loc="is_down_page" data-ga-source="header">AIWatch reliability score</a>` : `See how AI services rank on reliability, uptime, and incidents each month`} &middot; <a href="${REPORTS_INDEX_HREF}" data-ga="click_reports" data-ga-loc="is_down_page" data-ga-source="header">${REPORTS_INDEX_LABEL} &rarr;</a></p>
+<p class="meta">${service.rank ? `${esc(seo.displayName)} is ranked <strong>#${service.rank}${service.rankTied ? ' (tied)' : ''}</strong> of ${service.totalRanked} AI services${service.scoreConfidence === 'medium' ? ' with no official uptime metric (scored on incidents, recovery, and responsiveness only)' : ''} by <a href="https://aiwatch.maicarons.cc/#ranking" data-ga="click_ranking" data-ga-loc="is_down_page" data-ga-source="header">AIWatch reliability score</a>` : `See how AI services rank on reliability, uptime, and incidents each month`} &middot; <a href="${REPORTS_INDEX_HREF}" data-ga="click_reports" data-ga-loc="is_down_page" data-ga-source="header">${REPORTS_INDEX_LABEL} &rarr;</a></p>
 </div>`
 }
 
@@ -1427,10 +1427,10 @@ export function renderCTA(seo: ServiceSEO, status: string, slug: string, svcId: 
 <p class="cta-title">${esc(message)}</p>
 <div class="cta-buttons">
 <a class="btn btn-brand btn-slack" href="${esc(slackInstallUrl([svcId]))}" data-ga="click_add_to_slack" data-ga-loc="is_down_page" data-ga-svc="${esc(svcId)}">${slackLogoSvg()}<span>Add to Slack</span></a>
-<button type="button" class="btn btn-brand" data-rss="https://ai-watch.dev/feed/${esc(slug)}" data-svc="${esc(svcId)}" data-action="copy-rss">${RSS_ICON_SVG}<span class="btn-label">Copy RSS feed</span></button>
+<button type="button" class="btn btn-brand" data-rss="https://aiwatch.maicarons.cc/feed/${esc(slug)}" data-svc="${esc(svcId)}" data-action="copy-rss">${RSS_ICON_SVG}<span class="btn-label">Copy RSS feed</span></button>
 </div>
-<p class="cta-alt">Can't install Slack apps? <button type="button" class="link-btn" data-slack="/feed subscribe https://ai-watch.dev/feed/${esc(slug)}" data-svc="${esc(svcId)}" data-action="copy-slack">Copy the /feed command</button></p>
-<p class="cta-alt"><a href="https://ai-watch.dev/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_page" data-ga-source="status_banner_secondary">Prefer Discord push alerts? Set up here &rarr;</a></p>
+<p class="cta-alt">Can't install Slack apps? <button type="button" class="link-btn" data-slack="/feed subscribe https://aiwatch.maicarons.cc/feed/${esc(slug)}" data-svc="${esc(svcId)}" data-action="copy-slack">Copy the /feed command</button></p>
+<p class="cta-alt"><a href="https://aiwatch.maicarons.cc/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_page" data-ga-source="status_banner_secondary">Prefer Discord push alerts? Set up here &rarr;</a></p>
 <!-- #575: 1st-party crowd report (category + short description). We COLLECT it; the recent-report
      list is shown ONLY on a gated surface (when an independent signal already shows a problem) — we
      never render a public "N reporting" verdict that could contradict an operational status. -->
@@ -1759,7 +1759,7 @@ ${summary ? `<p style="font-size:14px;margin-bottom:12px;padding:10px 14px;backg
 <p style="font-size:14px;margin-bottom:12px">${esc(seo.description)}</p>
 ${seo.insight ? `<p style="font-size:14px;margin-bottom:12px;padding:10px 14px;background:#161b22;border-left:3px solid #58a6ff;border-radius:0 4px 4px 0"><strong>AIWatch Insight:</strong> ${esc(seo.insight)}</p>` : ''}
 <p style="font-size:14px">${esc(seo.whenDown)}</p>
-<p style="font-size:13px;color:#484f58;margin-top:12px">This page provides real-time status and recent incident details; uptime history is shown only when the official source publishes sufficient comparable records &mdash; updated every 5 minutes by <a href="https://ai-watch.dev">AIWatch</a>.</p>
+<p style="font-size:13px;color:#484f58;margin-top:12px">This page provides real-time status and recent incident details; uptime history is shown only when the official source publishes sufficient comparable records &mdash; updated every 5 minutes by <a href="https://aiwatch.maicarons.cc">AIWatch</a>.</p>
 </div>`
 }
 
@@ -1851,7 +1851,7 @@ ${tryBtn}
 ${items}
 ${anyOutbound ? `<p class="mono fallback-disclosure">Open &#8599; goes to the provider site &middot; ranked by AIWatch Score, not paid.</p>` : ''}
 <div class="links" style="margin-top:12px">
-<a href="https://ai-watch.dev/#ranking" data-ga="click_ranking" data-ga-loc="is_down_page" data-ga-source="alternatives">Reliability rankings &rarr;</a>
+<a href="https://aiwatch.maicarons.cc/#ranking" data-ga="click_ranking" data-ga-loc="is_down_page" data-ga-source="alternatives">Reliability rankings &rarr;</a>
 <a href="/reports/" data-ga="click_reports" data-ga-loc="is_down_page" data-ga-source="alternatives">Monthly reports &rarr;</a>
 </div>
 </div>`
@@ -2018,7 +2018,7 @@ function shareKakao(){
       },
       buttons:[
         {title:'Live Status',link:{mobileWebUrl:${jsCanonical},webUrl:${jsCanonical}}},
-        {title:'Dashboard',link:{mobileWebUrl:"https://ai-watch.dev",webUrl:"https://ai-watch.dev"}}
+        {title:'Dashboard',link:{mobileWebUrl:"https://aiwatch.maicarons.cc",webUrl:"https://aiwatch.maicarons.cc"}}
       ]
     });
     gtag('event','share',{method:'kakao',content_type:'is_x_down',item_id:${jsDisplayName}});
@@ -2066,7 +2066,7 @@ export const FOOTER_CATEGORY_ORDER: ReadonlyArray<{ key: string; label: string }
 export function renderBadgeEmbed(slug: string, seo: ServiceSEO): string {
   const serviceId = SLUG_TO_SERVICE[slug]?.id ?? slug
   const badgeImg = `https://aiwatch-worker.p2c2kbf.workers.dev/badge/${serviceId}`
-  const markdown = `[![${seo.displayName}](${badgeImg})](https://ai-watch.dev/is-${slug}-down)`
+  const markdown = `[![${seo.displayName}](${badgeImg})](https://aiwatch.maicarons.cc/is-${slug}-down)`
   return `<div style="margin:28px 0;padding:16px;background:#0d1117;border:1px solid rgba(255,255,255,0.08);border-radius:8px">
 <h2 style="margin:0 0 4px">Embed this status badge</h2>
 <p class="meta" style="margin:0 0 12px">Show your users ${esc(seo.displayName)}'s live status — drop this badge in your README, docs, or status page. It links back to this live page.</p>
@@ -2110,8 +2110,8 @@ export function renderFooter(slug: string): string {
     .join('')
 
   return `<div class="footer">
-<p style="margin-bottom:12px"><a href="https://ai-watch.dev" class="btn" data-ga="click_dashboard" data-ga-loc="is_down_page" data-ga-source="footer">View Full Dashboard</a></p>
-<p><a href="https://ai-watch.dev/#${esc(seoEntry?.id ?? slug)}" data-ga="click_service_detail" data-ga-loc="is_down_page" data-ga-svc="${esc(seoEntry?.id ?? slug)}">Detailed service page</a> &middot; <a href="/reports/" data-ga="click_reports" data-ga-loc="is_down_page" data-ga-source="footer">Monthly reports</a> &middot; <a href="https://ai-watch.dev/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_page" data-ga-source="footer">Set up alerts</a> &middot; <a href="https://ai-watch.dev/methodology#score" data-ga="click_methodology" data-ga-loc="is_down_page" data-ga-source="footer">How we measure this</a></p>
+<p style="margin-bottom:12px"><a href="https://aiwatch.maicarons.cc" class="btn" data-ga="click_dashboard" data-ga-loc="is_down_page" data-ga-source="footer">View Full Dashboard</a></p>
+<p><a href="https://aiwatch.maicarons.cc/#${esc(seoEntry?.id ?? slug)}" data-ga="click_service_detail" data-ga-loc="is_down_page" data-ga-svc="${esc(seoEntry?.id ?? slug)}">Detailed service page</a> &middot; <a href="/reports/" data-ga="click_reports" data-ga-loc="is_down_page" data-ga-source="footer">Monthly reports</a> &middot; <a href="https://aiwatch.maicarons.cc/#settings?focus=alerts" data-ga="click_cta_alerts" data-ga-loc="is_down_page" data-ga-source="footer">Set up alerts</a> &middot; <a href="https://aiwatch.maicarons.cc/methodology#score" data-ga="click_methodology" data-ga-loc="is_down_page" data-ga-source="footer">How we measure this</a></p>
 ${relatedLinks ? `<p style="margin-top:12px;font-size:13px">Related: ${relatedLinks}</p>` : ''}
 ${otherGroups ? `<p style="margin-top:8px;font-size:12px">Also check:${otherGroups}</p>` : ''}
 <p style="margin-top:12px">&copy; 2026 AIWatch. Real-time AI service status monitoring.</p>

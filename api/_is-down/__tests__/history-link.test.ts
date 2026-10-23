@@ -6,7 +6,7 @@ const daysAgo = (n: number) => new Date(Date.now() - n * 86_400_000).toISOString
 const inc = (startedAt: string) => ({ id: startedAt, title: 'Elevated errors', status: 'resolved', impact: 'minor', startedAt, resolvedAt: startedAt, duration: '10m', timeline: [] })
 const svc = (over: Partial<ServiceData>): ServiceData => ({ id: 'openai', name: 'OpenAI API', status: 'operational', incidents: [], ...over } as unknown as ServiceData)
 
-const HREF = 'href="https://ai-watch.dev/#incidents?service=openai&amp;period=30"'
+const HREF = 'href="https://aiwatch.maicarons.cc/#incidents?service=openai&amp;period=30"'
 
 describe('renderIncidents — 30-day history link (#1612)', () => {
   it('links to the service-scoped 30-day Incidents view under a non-empty list', () => {

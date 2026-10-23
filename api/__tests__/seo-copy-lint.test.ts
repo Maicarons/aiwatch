@@ -26,7 +26,7 @@ const BACKED: Record<string, { slugs: string[]; source: string }> = {
     { slugs: ['chatgpt'], source: 'https://help.openai.com/en/articles/7996703' },
   'Not always — enterprise deployments can route inference through a cloud provider instead.':
     { slugs: ['claude-code'], source: 'https://code.claude.com/docs/en/third-party-integrations — "Organizations can deploy Claude Code through Anthropic directly or through a cloud provider."' },
-  'Check the AIWatch dashboard at ai-watch.dev to see if Claude API is also experiencing issues — they often share the same incidents.':
+  'Check the AIWatch dashboard at aiwatch.maicarons.cc to see if Claude API is also experiencing issues — they often share the same incidents.':
     { slugs: ['claude-code', 'claude-ai'], source: AIWATCH_SHARED_IDS },
   'An API-level outage will typically affect claude.ai as well.':
     { slugs: ['claude-ai'], source: AIWATCH_SHARED_IDS },

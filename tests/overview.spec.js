@@ -583,7 +583,7 @@ test.describe('RSS subscribe affordances (#433)', () => {
     const rssBtn = page.locator('main').getByRole('button', { name: /Copy RSS feed|RSS 피드 복사/ })
     await expect(rssBtn).toBeVisible()
     await rssBtn.click()
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed.xml')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed.xml')
   })
 
   test('sidebar footer shows an always-visible RSS copy icon', async ({ page, context }) => {
@@ -601,7 +601,7 @@ test.describe('RSS subscribe affordances (#433)', () => {
     const rssBtn = page.locator('aside').getByRole('button', { name: /Copy RSS feed URL|RSS 피드 URL 복사/ })
     await expect(rssBtn).toBeVisible()
     await rssBtn.click()
-    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://ai-watch.dev/feed.xml')
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('https://aiwatch.maicarons.cc/feed.xml')
   })
 })
 

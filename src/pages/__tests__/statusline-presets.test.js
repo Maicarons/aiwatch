@@ -18,7 +18,7 @@ describe('PRESET_BRANDED statusline snippet (#918 server-rendered)', () => {
   it('polls the Worker domain at the per-preset path — never the Vercel-proxied path (#438)', () => {
     expect(SLUG_BRANDED).toBe('branded')
     expect(cmd).toContain('aiwatch-worker.p2c2kbf.workers.dev/api/statusline/branded')
-    expect(cmd).not.toContain('ai-watch.dev/api/') // must not route polls through Vercel
+    expect(cmd).not.toContain('aiwatch.maicarons.cc/api/') // must not route polls through Vercel
   })
 
   it('carries the preset in the PATH, not a ?src query tag (WAE tags on the path now)', () => {

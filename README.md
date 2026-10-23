@@ -1,21 +1,21 @@
 # AIWatch
 
-[![Tests](https://github.com/bentleypark/aiwatch/actions/workflows/test.yml/badge.svg)](https://github.com/bentleypark/aiwatch/actions/workflows/test.yml)
+[![Tests](https://github.com/Maicarons/aiwatch/actions/workflows/test.yml/badge.svg)](https://github.com/Maicarons/aiwatch/actions/workflows/test.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Deploy](https://img.shields.io/badge/Deploy-ai--watch.dev-blue)](https://ai-watch.dev)
-[![GitHub stars](https://img.shields.io/github/stars/bentleypark/aiwatch)](https://github.com/bentleypark/aiwatch/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/bentleypark/aiwatch)](https://github.com/bentleypark/aiwatch/commits/main)
+[![Deploy](https://img.shields.io/badge/Deploy-aiwatch.maicarons.cc-blue)](https://aiwatch.maicarons.cc)
+[![GitHub stars](https://img.shields.io/github/stars/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/commits/main)
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://ai-watch.dev/is-github-copilot-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://aiwatch.maicarons.cc/is-github-copilot-down)
 
 **English** | [한국어](README.ko.md) | [中文](README_zh.md)
 
 Real-time monitoring dashboard for **48 AI services** — track status, latency, uptime, and incidents across major AI providers.
 
-**[Dashboard](https://ai-watch.dev)** · **[Landing Page](https://ai-watch.dev/intro)**
+**[Dashboard](https://aiwatch.maicarons.cc)** · **[Landing Page](https://aiwatch.maicarons.cc/intro)**
 
 | Desktop | Mobile |
 |---------|--------|
@@ -29,7 +29,7 @@ Real-time monitoring dashboard for **48 AI services** — track status, latency,
 
 ## 🛰️ Live Demo
 
-Visit **[ai-watch.dev](https://ai-watch.dev)** — no signup required. Updated every 5 minutes via Cloudflare Workers.
+Visit **[aiwatch.maicarons.cc](https://aiwatch.maicarons.cc)** — no signup required. Updated every 5 minutes via Cloudflare Workers.
 
 ## Features
 
@@ -38,7 +38,7 @@ Visit **[ai-watch.dev](https://ai-watch.dev)** — no signup required. Updated e
 - **Latency monitoring** — Direct endpoint response time (RTT) for 36 probe-capable services; no latency is shown for a service without one
 - **24h latency trend** — Chart.js line chart with 5-min probe snapshots
 - **Incident history** — Timeline with details from multiple status page formats
-- **Uptime** — 30-day uptime **computed by AIWatch** from each provider's own published records, rather than copied from the % they display (weighted: full outage 1.0, partial/degraded 0.3, announced maintenance excluded). Sources that don't fit that formula carry their own label instead — so our figure can differ from a provider's own, by design ([how it works](https://ai-watch.dev/methodology))
+- **Uptime** — 30-day uptime **computed by AIWatch** from each provider's own published records, rather than copied from the % they display (weighted: full outage 1.0, partial/degraded 0.3, announced maintenance excluded). Sources that don't fit that formula carry their own label instead — so our figure can differ from a provider's own, by design ([how it works](https://aiwatch.maicarons.cc/methodology))
 - **Component status breakdown** — Real-time per-component status (models, API surfaces, …) on ServiceDetails + Is X Down for the services we track per-component, with collapsible section/model groups for long lists
 - **Status calendar** — 30-day (Statuspage) or 14-day (incident.io) daily status visualization
 - **Discord & Slack alerts** — Discord webhook on status changes/incidents + Slack via its native `/feed` RSS app (zero-config) + RSS feeds
@@ -47,7 +47,7 @@ Visit **[ai-watch.dev](https://ai-watch.dev)** — no signup required. Updated e
 - **Dark/Light theme** — System-aware with manual toggle
 - **Bilingual** — Korean / English
 - **Mobile responsive** — Sidebar overlay, mobile action bar
-- **AIWatch Score** — Composite reliability score combining uptime, incidents, recovery time, and probe-based responsiveness ([how it works](https://ai-watch.dev/methodology#score))
+- **AIWatch Score** — Composite reliability score combining uptime, incidents, recovery time, and probe-based responsiveness ([how it works](https://aiwatch.maicarons.cc/methodology#score))
 - **RTT degradation detection** — AIWatch's direct API probes flag latency degradation that official status pages often never report (dashboard badge + Discord daily summary). Independent detection within the ~5-min polling cycle of the official report (MTTD)
 - **Regional availability** — Per-region incident status for SpaceXAI, Gemini, OpenAI with switch recommendation
 - **Smart alerts** — Discord alerts for degraded/down status with anti-flapping, incident suppression, and recovery duration
@@ -58,7 +58,7 @@ Visit **[ai-watch.dev](https://ai-watch.dev)** — no signup required. Updated e
 - **AI Analysis (Beta)** — Hybrid AI auto-analysis on incidents (Gemma 4 primary + Sonnet fallback): cause estimation, recovery time, affected scope, contextual fallback recommendations. Merged into incident Discord alert (single embed), Topbar Analyze modal, Is X Down AI Insight card
 - **Landing page** — Landing page (`/intro`) with dashboard preview mock, KO/EN i18n, flow animation, optional `?banner=` campaign slot, and GA4 tracking
 - **Chrome extension** — Claude-only toolbar badge + popup showing live Claude API / claude.ai / Claude Code status, AIWatch Score, active incidents (with AI summary), gated community reports, and a one-click issue report. Polls the lite `?src=ext-claude` API only — reads no page content (zero data collection) — [install from the Chrome Web Store](https://chromewebstore.google.com/detail/aiwatch-%E2%80%94-claude-status-d/mmngmhijlancegmfgcbegiackjkalocc)
-- **Claude Code plugin (Beta)** — a background outage monitor that notifies you the moment an upstream AI service goes down or recovers, plus an `/aiwatch` command that briefs the current incident (title, impact, AI summary, fallback). Reads no code, collects no data. `/plugin marketplace add bentleypark/aiwatch` — [details](https://ai-watch.dev/plugin)
+- **Claude Code plugin (Beta)** — a background outage monitor that notifies you the moment an upstream AI service goes down or recovers, plus an `/aiwatch` command that briefs the current incident (title, impact, AI summary, fallback). Reads no code, collects no data. `/plugin marketplace add bentleypark/aiwatch` — [details](https://aiwatch.maicarons.cc/plugin)
 - **Web Vitals monitoring** — Real user LCP, FCP, TTFB, CLS, INP collection with p75 aggregation and threshold-based alerts in Discord Daily Report
 - **Weekly briefing** — Sunday Discord digest with AI service changelog detection (OpenAI, Google, Anthropic), incident summary, and stability trends
 - **Security monitoring** — AI service security incident detection via Hacker News, Reddit (r/netsec, r/cybersecurity), and OSV.dev SDK vulnerability scanning across 24 AI SDK packages (PyPI + npm, including Langchain ecosystem adapters) with dashboard alerts + Discord digest
@@ -217,7 +217,7 @@ Cloudflare KV
 ### Frontend
 
 ```bash
-git clone https://github.com/bentleypark/aiwatch.git
+git clone https://github.com/Maicarons/aiwatch.git
 cd aiwatch
 npm install
 npm run dev        # localhost:5173
@@ -303,10 +303,10 @@ Response includes: `id`, `name`, `provider`, `category`, `group` (fine taxonomy 
 Embed real-time status badges in your README, docs, or blog.
 
 ```markdown
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 ```
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 
 ### Parameters
 
@@ -318,10 +318,10 @@ Embed real-time status badges in your README, docs, or blog.
 
 ### Examples
 
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://ai-watch.dev/is-claude-down)
-[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://ai-watch.dev/is-cursor-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://aiwatch.maicarons.cc/is-claude-down)
+[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://aiwatch.maicarons.cc/is-cursor-down)
 
 ### Available Service IDs
 
@@ -356,7 +356,7 @@ Every monitored service — the same ids `/api/v1/status` returns.
 
 ## Claude Code Statusline Integration
 
-Surface AI service outages — Claude API, OpenAI, Gemini, GitHub Copilot, and 44 more — directly in your [Claude Code statusline](https://docs.claude.com/en/docs/claude-code/statusline). The recommended preset keeps an always-on, clickable **AIWatch** label (`AIWatch 🟢` while all healthy, `AIWatch 🔴 Claude API` when something breaks — cmd/ctrl+click opens the dashboard). Prefer zero footprint when healthy? A minimalist preset that stays empty until something degrades is on the [presets page](https://ai-watch.dev/#statusline).
+Surface AI service outages — Claude API, OpenAI, Gemini, GitHub Copilot, and 44 more — directly in your [Claude Code statusline](https://docs.claude.com/en/docs/claude-code/statusline). The recommended preset keeps an always-on, clickable **AIWatch** label (`AIWatch 🟢` while all healthy, `AIWatch 🔴 Claude API` when something breaks — cmd/ctrl+click opens the dashboard). Prefer zero footprint when healthy? A minimalist preset that stays empty until something degrades is on the [presets page](https://aiwatch.maicarons.cc/#statusline).
 
 Quickest install — add to `~/.claude/settings.json`:
 
@@ -371,13 +371,13 @@ Quickest install — add to `~/.claude/settings.json`:
 
 > Requires an OSC 8-compatible terminal (iTerm2, Warp, kitty, WezTerm, VS Code terminal, Terminal.app on macOS 12+) for the clickable label; others show it as plain text. Targets the Worker domain directly so per-prompt polls don't count as Vercel bandwidth.
 
-Other presets — **minimalist** (empty when healthy), compact badge, full list, scoped to specific providers, and clickable per-service links: **[ai-watch.dev/#statusline](https://ai-watch.dev/#statusline)**
+Other presets — **minimalist** (empty when healthy), compact badge, full list, scoped to specific providers, and clickable per-service links: **[aiwatch.maicarons.cc/#statusline](https://aiwatch.maicarons.cc/#statusline)**
 
 Properties: single GET per render, 5-min KV-cached on Cloudflare's edge, 2-second timeout, no `jq` dependency, no Anthropic API requests, no client identifier. On a network error the line stays empty; when AIWatch cannot read its own status snapshot it renders `AIWatch ⚪` (unknown) rather than a green it cannot support. Compatible with any statusline tool that supports shell-command output (including `ccstatusline`'s Custom Command widget).
 
 ## Claude Code Plugin (Beta)
 
-Beyond the status bar, the [AIWatch Claude Code plugin](https://ai-watch.dev/plugin) surfaces AI outages inside Claude Code with two pieces:
+Beyond the status bar, the [AIWatch Claude Code plugin](https://aiwatch.maicarons.cc/plugin) surfaces AI outages inside Claude Code with two pieces:
 
 - **Background outage monitor** — notifies you the moment a monitored provider goes down (`🔴 Claude API is down`) or recovers (`✅ Claude API has recovered`), naming each service. Diffs each poll (default every 60s), so it only speaks up on a real transition — never spams.
 - **`/aiwatch` command** — briefs which AI services are degraded/down right now, each with its active incident (title + impact), an AI summary, and a fallback suggestion.
@@ -389,7 +389,7 @@ Reads no code and collects no data — it only polls AIWatch's public status fee
 /plugin install aiwatch@aiwatch-dev
 ```
 
-Source + docs: [`plugin/aiwatch/`](plugin/aiwatch/). Full details: **[ai-watch.dev/plugin](https://ai-watch.dev/plugin)**.
+Source + docs: [`plugin/aiwatch/`](plugin/aiwatch/). Full details: **[aiwatch.maicarons.cc/plugin](https://aiwatch.maicarons.cc/plugin)**.
 
 ## Project Structure
 

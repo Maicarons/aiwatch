@@ -12,7 +12,7 @@
 //   export const ANNOUNCEMENTS: AnnouncementMap = {
 //     'launch-2026-06': {
 //       html: '🚀 New: per-region fallback routing — <strong>see what changed</strong>',
-//       href: 'https://ai-watch.dev/#changelog',
+//       href: 'https://aiwatch.maicarons.cc/#changelog',
 //     },
 //   }
 

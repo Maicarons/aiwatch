@@ -48,7 +48,7 @@ describe('renderMethodologyPage', () => {
 
   it('is indexable + canonical to /methodology', () => {
     expect(html).toContain('rel="canonical"')
-    expect(html).toContain('https://ai-watch.dev/methodology')
+    expect(html).toContain('https://aiwatch.maicarons.cc/methodology')
     expect(html).not.toMatch(/noindex/i)
   })
 

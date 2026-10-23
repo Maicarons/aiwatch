@@ -1,20 +1,20 @@
 # AIWatch
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Deploy](https://img.shields.io/badge/Deploy-ai--watch.dev-blue)](https://ai-watch.dev)
-[![GitHub stars](https://img.shields.io/github/stars/bentleypark/aiwatch)](https://github.com/bentleypark/aiwatch/stargazers)
-[![Last commit](https://img.shields.io/github/last-commit/bentleypark/aiwatch)](https://github.com/bentleypark/aiwatch/commits/main)
+[![Deploy](https://img.shields.io/badge/Deploy-aiwatch.maicarons.cc-blue)](https://aiwatch.maicarons.cc)
+[![GitHub stars](https://img.shields.io/github/stars/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/stargazers)
+[![Last commit](https://img.shields.io/github/last-commit/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/commits/main)
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://ai-watch.dev/is-github-copilot-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://aiwatch.maicarons.cc/is-github-copilot-down)
 
 [English](README.md) | **한국어** | [中文](README_zh.md)
 
 **48개 AI 서비스**의 상태, 지연시간, 가동률, 인시던트를 실시간으로 모니터링하는 대시보드입니다.
 
-**[대시보드](https://ai-watch.dev)** · **[랜딩 페이지](https://ai-watch.dev/intro)**
+**[대시보드](https://aiwatch.maicarons.cc)** · **[랜딩 페이지](https://aiwatch.maicarons.cc/intro)**
 
 | 데스크탑 | 모바일 |
 |---------|--------|
@@ -28,7 +28,7 @@
 
 ## 🛰️ 라이브 데모
 
-**[ai-watch.dev](https://ai-watch.dev)** — 회원가입 불필요. Cloudflare Workers로 5분마다 갱신.
+**[aiwatch.maicarons.cc](https://aiwatch.maicarons.cc)** — 회원가입 불필요. Cloudflare Workers로 5분마다 갱신.
 
 ## 주요 기능
 
@@ -37,7 +37,7 @@
 - **지연시간 측정** — 36개 probe 대상 서비스의 엔드포인트 직접 RTT 측정, probe 대상이 아닌 서비스는 레이턴시 미표시
 - **24시간 지연시간 추세** — Chart.js 라인 차트 (5분 간격 probe 스냅샷)
 - **인시던트 이력** — 다양한 상태 페이지 형식의 타임라인 상세 정보
-- **가동률** — 제공사가 표시하는 %를 복사하지 않고, 제공사가 공개한 원기록으로부터 **AIWatch가 직접 계산**한 30일 가동률(가중: 전면 장애 1.0, 부분/성능저하 0.3, 사전 공지된 점검 제외). 이 공식에 맞지 않는 소스는 별도 라벨을 답니다 — 따라서 제공사 페이지의 %와 다를 수 있으며, 이는 설계된 동작입니다 ([계산 방식](https://ai-watch.dev/methodology))
+- **가동률** — 제공사가 표시하는 %를 복사하지 않고, 제공사가 공개한 원기록으로부터 **AIWatch가 직접 계산**한 30일 가동률(가중: 전면 장애 1.0, 부분/성능저하 0.3, 사전 공지된 점검 제외). 이 공식에 맞지 않는 소스는 별도 라벨을 답니다 — 따라서 제공사 페이지의 %와 다를 수 있으며, 이는 설계된 동작입니다 ([계산 방식](https://aiwatch.maicarons.cc/methodology))
 - **구성요소 상태 분해** — 컴포넌트 단위로 추적하는 서비스의 서비스별 상세 + Is X Down에 구성요소별(모델·API 표면 등) 실시간 상태 표시. 많으면 섹션/모델 그룹으로 접힘
 - **상태 캘린더** — 30일(Statuspage) 또는 14일(incident.io) 일별 상태 시각화
 - **Discord & Slack 알림** — 상태 변경/인시던트 Discord Webhook + Slack 내장 `/feed` RSS 앱(설정 0) + RSS 피드
@@ -46,7 +46,7 @@
 - **다크/라이트 테마** — 시스템 설정 감지 + 수동 전환
 - **한국어/영어** — 이중 언어 지원
 - **모바일 반응형** — 사이드바 오버레이, 모바일 액션 바
-- **AIWatch Score** — uptime, 인시던트, 복구 시간, probe 기반 응답성을 결합한 종합 신뢰도 점수 ([계산 방식](https://ai-watch.dev/methodology#score))
+- **AIWatch Score** — uptime, 인시던트, 복구 시간, probe 기반 응답성을 결합한 종합 신뢰도 점수 ([계산 방식](https://aiwatch.maicarons.cc/methodology#score))
 - **RTT 저하 감지** — AIWatch의 직접 API probe가 공식 상태 페이지에 보고되지 않는 지연(latency) 저하를 포착 (대시보드 배지 + Discord 일일 요약). 공식 발표 대비 ~5분 폴링 주기 내 독립 감지(MTTD)
 - **리전별 가용성** — SpaceXAI, Gemini, OpenAI의 리전별 인시던트 상태 및 전환 추천
 - **스마트 알림** — degraded/down 상태 Discord 알림 (anti-flapping + 인시던트 억제 + 복구 지속 시간)
@@ -57,7 +57,7 @@
 - **AI 분석 (Beta)** — 장애 발생 시 하이브리드 AI 자동 분석 (Gemma 4 primary + Sonnet fallback): 원인 추정, 예상 복구 시간, 영향 범위, 대체 서비스 추천. 인시던트 Discord 알림에 통합(단일 embed), Topbar Analyze 모달, Is X Down AI Insight 카드
 - **랜딩 페이지** — 랜딩 페이지(`/intro`), 대시보드 프리뷰 mock, KO/EN 이중 언어, Flow 애니메이션, `?banner=` 캠페인 슬롯(선택), GA4 트래킹
 - **Chrome 확장 프로그램** — Claude 전용 툴바 배지 + 팝업으로 Claude API / claude.ai / Claude Code 실시간 상태, AIWatch Score, 진행 중 인시던트(AI 요약 포함), gated 커뮤니티 리포트, 원클릭 이슈 리포트 제공. lite `?src=ext-claude` API만 폴링하며 페이지 내용은 읽지 않음(데이터 수집 없음) — [Chrome 웹 스토어에서 설치](https://chromewebstore.google.com/detail/aiwatch-%E2%80%94-claude-status-d/mmngmhijlancegmfgcbegiackjkalocc)
-- **Claude Code 플러그인 (Beta)** — 업스트림 AI 서비스가 다운되거나 복구되는 순간 알려주는 백그라운드 아웃티지 모니터 + 현재 인시던트(제목, 영향도, AI 요약, 대체 서비스)를 브리핑하는 `/aiwatch` 명령. 코드를 읽지 않고 데이터도 수집하지 않음. `/plugin marketplace add bentleypark/aiwatch` — [자세히](https://ai-watch.dev/plugin)
+- **Claude Code 플러그인 (Beta)** — 업스트림 AI 서비스가 다운되거나 복구되는 순간 알려주는 백그라운드 아웃티지 모니터 + 현재 인시던트(제목, 영향도, AI 요약, 대체 서비스)를 브리핑하는 `/aiwatch` 명령. 코드를 읽지 않고 데이터도 수집하지 않음. `/plugin marketplace add bentleypark/aiwatch` — [자세히](https://aiwatch.maicarons.cc/plugin)
 - **Web Vitals 모니터링** — 실사용자 LCP, FCP, TTFB, CLS, INP 수집, p75 집계 및 Discord Daily Report 임계값 알림
 - **주간 브리핑** — 매주 일요일 Discord 다이제스트: AI 서비스 변경 감지(OpenAI, Google, Anthropic), 인시던트 요약, 안정성 트렌드
 - **보안 모니터링** — Hacker News, Reddit(r/netsec, r/cybersecurity), OSV.dev를 통한 AI 서비스 보안 사고 감지 및 24개 AI SDK 패키지(PyPI + npm, Langchain 에코시스템 어댑터 포함) 취약점 스캔, 대시보드 알림 + Discord 다이제스트
@@ -216,7 +216,7 @@ Cloudflare KV
 ### 프론트엔드
 
 ```bash
-git clone https://github.com/bentleypark/aiwatch.git
+git clone https://github.com/Maicarons/aiwatch.git
 cd aiwatch
 npm install
 npm run dev        # localhost:5173
@@ -302,10 +302,10 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 README, 문서, 블로그에 실시간 상태 배지를 임베드할 수 있습니다.
 
 ```markdown
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 ```
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 
 ### 파라미터
 
@@ -317,10 +317,10 @@ README, 문서, 블로그에 실시간 상태 배지를 임베드할 수 있습�
 
 ### 예시
 
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://ai-watch.dev/is-claude-down)
-[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://ai-watch.dev/is-cursor-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://aiwatch.maicarons.cc/is-claude-down)
+[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://aiwatch.maicarons.cc/is-cursor-down)
 
 ### 사용 가능한 서비스 ID
 
@@ -355,7 +355,7 @@ README, 문서, 블로그에 실시간 상태 배지를 임베드할 수 있습�
 
 ## Claude Code Statusline 통합
 
-Claude API, OpenAI, Gemini, GitHub Copilot 등 48개 AI 서비스의 장애 여부를 [Claude Code 스테이터스라인](https://docs.claude.com/en/docs/claude-code/statusline)에 직접 표시합니다. 추천 프리셋은 항상 표시되는 클릭 가능한 **AIWatch** 라벨을 유지합니다 — 모두 정상이면 `AIWatch 🟢`, 장애 시 `AIWatch 🔴 Claude API`, 라벨 cmd/ctrl+클릭 시 대시보드 열림. 정상일 때 공간을 비우고 싶으면 [프리셋 페이지](https://ai-watch.dev/#statusline)의 minimalist 프리셋을 쓰면 됩니다.
+Claude API, OpenAI, Gemini, GitHub Copilot 등 48개 AI 서비스의 장애 여부를 [Claude Code 스테이터스라인](https://docs.claude.com/en/docs/claude-code/statusline)에 직접 표시합니다. 추천 프리셋은 항상 표시되는 클릭 가능한 **AIWatch** 라벨을 유지합니다 — 모두 정상이면 `AIWatch 🟢`, 장애 시 `AIWatch 🔴 Claude API`, 라벨 cmd/ctrl+클릭 시 대시보드 열림. 정상일 때 공간을 비우고 싶으면 [프리셋 페이지](https://aiwatch.maicarons.cc/#statusline)의 minimalist 프리셋을 쓰면 됩니다.
 
 가장 빠른 설정 — `~/.claude/settings.json`에 추가:
 
@@ -370,13 +370,13 @@ Claude API, OpenAI, Gemini, GitHub Copilot 등 48개 AI 서비스의 장애 여�
 
 > 클릭 가능한 라벨은 OSC 8 지원 터미널(iTerm2, Warp, kitty, WezTerm, VS Code 터미널, macOS 12+ Terminal.app)에서 동작하고, 미지원은 plain text로 표시됩니다. Worker 도메인을 직접 호출해 렌더링당 폴링이 Vercel 대역폭으로 잡히지 않습니다.
 
-프리셋 모음 — **minimalist**(정상 시 빈 출력), 컴팩트 배지, 전체 목록, 특정 프로바이더만, 서비스별 clickable 링크: **[ai-watch.dev/#statusline](https://ai-watch.dev/#statusline)**
+프리셋 모음 — **minimalist**(정상 시 빈 출력), 컴팩트 배지, 전체 목록, 특정 프로바이더만, 서비스별 clickable 링크: **[aiwatch.maicarons.cc/#statusline](https://aiwatch.maicarons.cc/#statusline)**
 
 특성: 렌더링당 단일 GET, Cloudflare edge에 5분 KV 캐시, 2초 타임아웃, `jq` 의존성 없음, Anthropic API 호출 없음, 클라이언트 식별자 미수집. 네트워크 에러 시에는 줄이 비고, AIWatch가 자체 상태 스냅샷을 읽지 못할 때는 근거 없는 초록 대신 `AIWatch ⚪`(unknown)를 표시합니다. shell 명령 출력을 지원하는 모든 statusline 도구와 호환 (`ccstatusline`의 Custom Command 위젯 포함).
 
 ## Claude Code 플러그인 (Beta)
 
-상태 바를 넘어, [AIWatch Claude Code 플러그인](https://ai-watch.dev/plugin)은 Claude Code 안에서 AI 장애를 두 가지로 알려줍니다:
+상태 바를 넘어, [AIWatch Claude Code 플러그인](https://aiwatch.maicarons.cc/plugin)은 Claude Code 안에서 AI 장애를 두 가지로 알려줍니다:
 
 - **백그라운드 아웃티지 모니터** — 모니터링 중인 프로바이더가 다운(`🔴 Claude API is down`)되거나 복구(`✅ Claude API has recovered`)되는 순간, 서비스명을 명시해 알림. 매 폴링(기본 60초)을 이전과 diff하여 **실제 상태 변화 시에만** 알리므로 스팸이 없음.
 - **`/aiwatch` 명령** — 지금 degraded/down인 AI 서비스를 각각의 진행 인시던트(제목+영향도), AI 요약, 대체 서비스 제안과 함께 브리핑.
@@ -388,7 +388,7 @@ Claude API, OpenAI, Gemini, GitHub Copilot 등 48개 AI 서비스의 장애 여�
 /plugin install aiwatch@aiwatch-dev
 ```
 
-소스 + 문서: [`plugin/aiwatch/`](plugin/aiwatch/). 자세히: **[ai-watch.dev/plugin](https://ai-watch.dev/plugin)**.
+소스 + 문서: [`plugin/aiwatch/`](plugin/aiwatch/). 자세히: **[aiwatch.maicarons.cc/plugin](https://aiwatch.maicarons.cc/plugin)**.
 
 ## 프로젝트 구조
 

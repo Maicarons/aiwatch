@@ -36,7 +36,7 @@ export function badgeMarkdownFor(slug: string): string {
   const svc = SLUG_TO_SERVICE[slug]
   const id = svc?.id ?? slug
   const name = svc?.name ?? slug
-  return `[![${name}](${WORKER}/badge/${id})](https://ai-watch.dev/is-${slug}-down)`
+  return `[![${name}](${WORKER}/badge/${id})](https://aiwatch.maicarons.cc/is-${slug}-down)`
 }
 
 function renderCard(slug: string): string {
@@ -83,18 +83,18 @@ ${consentInitScript(nonce)}
 <meta name="description" content="Embed a live, real-time status badge for any of ${total} AI services (Claude, OpenAI, Gemini, and more) in your README, docs, or status page. Free, auto-updating, links to the live AIWatch status page.">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ai-watch.dev/badges">
+<meta property="og:url" content="https://aiwatch.maicarons.cc/badges">
 <meta property="og:title" content="AI Status Badges — Embed Live AI Service Status | AIWatch">
 <meta property="og:description" content="Free, auto-updating status badges for ${total} AI services. Drop one in your README, docs, or status page.">
-<meta property="og:image" content="https://ai-watch.dev/og-intro.png">
+<meta property="og:image" content="https://aiwatch.maicarons.cc/og-intro.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:site_name" content="AIWatch">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Status Badges | AIWatch">
 <meta name="twitter:description" content="Free, auto-updating status badges for ${total} AI services.">
-<meta name="twitter:image" content="https://ai-watch.dev/og-intro.png">
-<link rel="canonical" href="https://ai-watch.dev/badges">
+<meta name="twitter:image" content="https://aiwatch.maicarons.cc/og-intro.png">
+<link rel="canonical" href="https://aiwatch.maicarons.cc/badges">
 <meta name="theme-color" content="#080c10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -142,8 +142,8 @@ ${consentInitScript(nonce)}
 </head>
 <body>
 <nav class="topnav">
-  <a class="nav-logo" href="https://ai-watch.dev"><span>AI</span><span class="nav-green">Watch</span></a>
-  <a href="https://ai-watch.dev" class="nav-cta">Open Dashboard →</a>
+  <a class="nav-logo" href="https://aiwatch.maicarons.cc"><span>AI</span><span class="nav-green">Watch</span></a>
+  <a href="https://aiwatch.maicarons.cc" class="nav-cta">Open Dashboard →</a>
 </nav>
 <div class="wrap">
   <div class="doc-head">
@@ -161,7 +161,7 @@ ${consentInitScript(nonce)}
   </div>
 </div>
 <footer>
-  © 2026 AIWatch · AGPL-3.0 · <a href="https://ai-watch.dev">Dashboard</a> · <a href="https://ai-watch.dev/methodology">Methodology</a> · <a href="https://github.com/bentleypark/aiwatch">GitHub</a>
+  © 2026 AIWatch · AGPL-3.0 · <a href="https://aiwatch.maicarons.cc">Dashboard</a> · <a href="https://aiwatch.maicarons.cc/methodology">Methodology</a> · <a href="https://github.com/bentleypark/aiwatch">GitHub</a>
 </footer>
 <script${nonceAttr(nonce)}>
 // CSP-safe (#482): no inline on*= handlers — interactivity wired via delegated listeners.

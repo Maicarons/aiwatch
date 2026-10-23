@@ -76,7 +76,7 @@ export function renderResult(result: string, nonce: string): string {
   return page(r.title, `
     <h1 class="${r.ok ? 'ok' : ''}">${esc(r.title)}</h1>
     <p>${esc(r.body)}</p>
-    <div class="row">${again}<a class="btn" href="https://ai-watch.dev">Open the dashboard</a></div>
+    <div class="row">${again}<a class="btn" href="https://aiwatch.maicarons.cc">Open the dashboard</a></div>
   `, nonce)
 }
 

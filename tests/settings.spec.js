@@ -150,7 +150,7 @@ test.describe('Settings — RSS feed (#433)', () => {
     // All-services feed URL surfaced in the Alerts section. There are now two read-only
     // inputs (RSS feed + Slack /feed command, #467) — the RSS feed is first in DOM order.
     const feedInput = page.locator('main input[readonly]').first()
-    await expect(feedInput).toHaveValue('https://ai-watch.dev/feed.xml')
+    await expect(feedInput).toHaveValue('https://aiwatch.maicarons.cc/feed.xml')
     const shownUrl = await feedInput.inputValue()
 
     // Copy button → clipboard + "Copied ✓" feedback (success path). Assert the
@@ -173,7 +173,7 @@ test.describe('Settings — RSS feed (#433)', () => {
     // Slack subscribes via its native /feed RSS app — no webhook. The command embeds the feed URL.
     // Second read-only input in DOM order (after the RSS feed URL).
     const slackInput = page.locator('main input[readonly]').nth(1)
-    await expect(slackInput).toHaveValue('/feed subscribe https://ai-watch.dev/feed.xml')
+    await expect(slackInput).toHaveValue('/feed subscribe https://aiwatch.maicarons.cc/feed.xml')
     const shownCmd = await slackInput.inputValue()
 
     const copyBtn = slackInput.locator('xpath=following-sibling::button')

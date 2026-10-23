@@ -6,7 +6,7 @@
 // `mayCache` gate is removed or its call site is deleted.
 import { describe, it, expect, beforeEach, vi } from 'vitest'
 
-const ORIGIN = 'https://ai-watch.dev'
+const ORIGIN = 'https://aiwatch.maicarons.cc'
 
 // A Cache Storage stub backed by a Map. `openDelay` defers `open()` past the current microtask so a
 // `clone()` moved out of the synchronous path would throw "body already used" here, as it does in a

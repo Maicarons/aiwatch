@@ -1,6 +1,6 @@
 // AIWatch Claude Code statusline integration guide (#400 Phase 0).
 // Self-hosted surface so Phase 1 acceptance ("snippet documented somewhere
-// reachable from ai-watch.dev") doesn't depend on third-party merge timelines.
+// reachable from aiwatch.maicarons.cc") doesn't depend on third-party merge timelines.
 
 import { useState } from 'react'
 import { useLang } from '../hooks/useLang'
@@ -15,8 +15,8 @@ import { trackEvent } from '../utils/analytics'
 // future display change ships to all users via a Worker deploy, and drops the jq
 // dependency entirely. See worker/src/statusline.ts `renderStatuslinePreset`.
 //
-// Point snippets at the Worker domain directly, NOT ai-watch.dev (#438): the
-// ai-watch.dev path is a Vercel rewrite that *proxies* to the Worker, so
+// Point snippets at the Worker domain directly, NOT aiwatch.maicarons.cc (#438): the
+// aiwatch.maicarons.cc path is a Vercel rewrite that *proxies* to the Worker, so
 // per-prompt polls counted as Vercel Fast Data Transfer (the #1 bandwidth route).
 // Hitting the Worker keeps it on Cloudflare.
 const STATUSLINE_API = 'https://aiwatch-worker.p2c2kbf.workers.dev/api/statusline'

@@ -13,8 +13,8 @@ import { tierFor, tierLabelFor, API_TIER, TIER_LABEL, getFallbacks, getGroupedFa
 // section in the UI.
 describe('outboundReferralUrl (#842 SPA wedge)', () => {
   it('appends a disclosed ref param to a curated URL', () => {
-    expect(outboundReferralUrl('gemini')).toBe('https://ai.google.dev?ref=ai-watch.dev')
-    expect(outboundReferralUrl('elevenlabs')).toBe('https://elevenlabs.io?ref=ai-watch.dev')
+    expect(outboundReferralUrl('gemini')).toBe('https://ai.google.dev?ref=aiwatch.maicarons.cc')
+    expect(outboundReferralUrl('elevenlabs')).toBe('https://elevenlabs.io?ref=aiwatch.maicarons.cc')
   })
   it('returns null for an uncurated / unknown id (graceful)', () => {
     expect(outboundReferralUrl('bedrock')).toBeNull() // EXCLUDE_FALLBACK, intentionally absent

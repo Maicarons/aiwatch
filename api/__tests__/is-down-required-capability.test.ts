@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import handler from '../is-down'
 import { spyFetchWithEmptyReportFeed } from './fetch-stub'
 
-const req = (slug: string) => new Request(`https://ai-watch.dev/api/is-down?slug=${slug}`, { method: 'GET' })
+const req = (slug: string) => new Request(`https://aiwatch.maicarons.cc/api/is-down?slug=${slug}`, { method: 'GET' })
 const now = () => new Date().toISOString()
 const svc = (id: string, name: string, status: string, score: number, extra: Record<string, unknown> = {}) => ({
   id, name, category: 'api', status, latency: 200, uptime30d: 99.9, lastChecked: now(), aiwatchScore: score, scoreGrade: 'good', scoreConfidence: 'high',

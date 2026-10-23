@@ -3,7 +3,7 @@ import { buildShareUrl } from '../_is-down/share-url'
 import { renderShareButtons, type ServiceData } from '../_is-down/html-template'
 import type { ServiceSEO } from '../_is-down/seo-content'
 
-const CANON = 'https://ai-watch.dev/is-claude-down'
+const CANON = 'https://aiwatch.maicarons.cc/is-claude-down'
 
 const SEO: ServiceSEO = { displayName: 'Claude', description: '', insight: '', whenDown: '', faqs: [] }
 const incident = (id: string, status = 'investigating') => ({

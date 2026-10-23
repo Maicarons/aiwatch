@@ -61,7 +61,7 @@ test.describe('Is X Down? SSR pages', () => {
       test(`has canonical URL`, async ({ page: p }) => {
         await p.goto(`/is-${page.slug}-down`, { waitUntil: 'domcontentloaded' })
         const canonical = p.locator('link[rel="canonical"]')
-        await expect(canonical).toHaveAttribute('href', `https://ai-watch.dev/is-${page.slug}-down`)
+        await expect(canonical).toHaveAttribute('href', `https://aiwatch.maicarons.cc/is-${page.slug}-down`)
       })
 
       test(`has FAQ section with schema.org markup`, async ({ page: p }) => {
@@ -99,7 +99,7 @@ test.describe('Is X Down? SSR pages', () => {
         await expect(p.locator('.cta button.link-btn[data-slack]')).toBeVisible()
         await expect(p.locator('.cta button[data-rss]')).toBeVisible()
         await expect(p.locator('.cta a.btn-primary')).toHaveCount(0)
-        await expect(p.locator('.cta .cta-alt a')).toHaveAttribute('href', 'https://ai-watch.dev/#settings?focus=alerts')
+        await expect(p.locator('.cta .cta-alt a')).toHaveAttribute('href', 'https://aiwatch.maicarons.cc/#settings?focus=alerts')
       })
 
       test(`has GA4 tag`, async ({ page: p }) => {
@@ -211,7 +211,7 @@ test.describe('Is X Down? SSR pages', () => {
   test('OG meta tags point to dynamic OG image', async ({ page }) => {
     await page.goto('/is-claude-api-down', { waitUntil: 'domcontentloaded' })
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /Is Claude Down/)
-    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://ai-watch.dev/is-claude-api-down')
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', 'https://aiwatch.maicarons.cc/is-claude-api-down')
     // Dynamic OG image URL should contain /api/og with service param
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', /\/api\/og\?service=Claude/)
     await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute('content', /\/api\/og\?service=Claude/)
@@ -404,7 +404,7 @@ test.describe('Is X Down? SSR pages', () => {
       await page.goto('/is-claude-down', { waitUntil: 'domcontentloaded' })
       await expect(page).toHaveTitle(/Is Anthropic \(Claude\) Down\?/)
       const canonical = page.locator('link[rel="canonical"]')
-      await expect(canonical).toHaveAttribute('href', 'https://ai-watch.dev/is-claude-down')
+      await expect(canonical).toHaveAttribute('href', 'https://aiwatch.maicarons.cc/is-claude-down')
       await expect(page.locator('a[href="/is-claude-api-down"]').first()).toBeAttached()
       await expect(page.locator('a[href="/is-claude-ai-down"]').first()).toBeAttached()
       await expect(page.locator('a[href="/is-claude-code-down"]').first()).toBeAttached()
@@ -414,7 +414,7 @@ test.describe('Is X Down? SSR pages', () => {
       await page.goto('/is-openai-down', { waitUntil: 'domcontentloaded' })
       await expect(page).toHaveTitle(/Is OpenAI Down\?/)
       const canonical = page.locator('link[rel="canonical"]')
-      await expect(canonical).toHaveAttribute('href', 'https://ai-watch.dev/is-openai-down')
+      await expect(canonical).toHaveAttribute('href', 'https://aiwatch.maicarons.cc/is-openai-down')
       await expect(page.locator('a[href="/is-openai-api-down"]').first()).toBeAttached()
       await expect(page.locator('a[href="/is-chatgpt-down"]').first()).toBeAttached()
       await expect(page.locator('a[href="/is-codex-down"]').first()).toBeAttached()

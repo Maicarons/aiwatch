@@ -28,10 +28,10 @@ ${consentInitScript(nonce)}
 <meta name="description" content="Transparent, independent measurement of AI service reliability. How AIWatch determines status, computes uptime and the AIWatch Score, and — explicitly — what we can't measure and why. 48 services, polled every 5 min, UTC.">
 <meta name="robots" content="index, follow">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://ai-watch.dev/methodology">
+<meta property="og:url" content="https://aiwatch.maicarons.cc/methodology">
 <meta property="og:title" content="How AIWatch Works — Methodology | AIWatch">
 <meta property="og:description" content="Transparent, independent measurement of AI service reliability. We publish what we can measure — and are explicit about what we can't.">
-<meta property="og:image" content="https://ai-watch.dev/og-intro.png">
+<meta property="og:image" content="https://aiwatch.maicarons.cc/og-intro.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_US">
@@ -39,8 +39,8 @@ ${consentInitScript(nonce)}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How AIWatch Works — Methodology | AIWatch">
 <meta name="twitter:description" content="Transparent, independent measurement of AI service reliability. We publish what we can measure — and are explicit about what we can't.">
-<meta name="twitter:image" content="https://ai-watch.dev/og-intro.png">
-<link rel="canonical" href="https://ai-watch.dev/methodology">
+<meta name="twitter:image" content="https://aiwatch.maicarons.cc/og-intro.png">
+<link rel="canonical" href="https://aiwatch.maicarons.cc/methodology">
 <meta name="theme-color" content="#080c10">
 <script type="application/ld+json">
 {
@@ -48,10 +48,10 @@ ${consentInitScript(nonce)}
   "@type": "TechArticle",
   "headline": "How AIWatch Works — Methodology",
   "description": "Transparent, independent measurement of AI service reliability: status determination, uptime, the AIWatch Score, latency probing, incident counting, and the limits of what is measurable.",
-  "url": "https://ai-watch.dev/methodology",
-  "author": { "@type": "Organization", "name": "AIWatch", "url": "https://ai-watch.dev" },
-  "publisher": { "@type": "Organization", "name": "AIWatch", "url": "https://ai-watch.dev" },
-  "mainEntityOfPage": "https://ai-watch.dev/methodology"
+  "url": "https://aiwatch.maicarons.cc/methodology",
+  "author": { "@type": "Organization", "name": "AIWatch", "url": "https://aiwatch.maicarons.cc" },
+  "publisher": { "@type": "Organization", "name": "AIWatch", "url": "https://aiwatch.maicarons.cc" },
+  "mainEntityOfPage": "https://aiwatch.maicarons.cc/methodology"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,7 +234,7 @@ ${consentInitScript(nonce)}
       <button type="button" class="lang-btn" data-lang="ko">KO</button>
       <button type="button" class="lang-btn active" data-lang="en">EN</button>
     </div>
-    <a href="https://ai-watch.dev" class="nav-cta" data-i18n="nav.cta" data-ga="click_dashboard" data-ga-loc="methodology_nav">대시보드 열기 →</a>
+    <a href="https://aiwatch.maicarons.cc" class="nav-cta" data-i18n="nav.cta" data-ga="click_dashboard" data-ga-loc="methodology_nav">대시보드 열기 →</a>
   </div>
 </nav>
 
@@ -546,10 +546,10 @@ ${consentInitScript(nonce)}
   <div class="footer-inner">
     <div class="footer-left">© 2026 AIWatch · AGPL-3.0</div>
     <div class="footer-links">
-      <a href="https://ai-watch.dev" data-i18n="footer.dashboard" data-ga="click_dashboard" data-ga-loc="methodology_footer">라이브 대시보드</a>
+      <a href="https://aiwatch.maicarons.cc" data-i18n="footer.dashboard" data-ga="click_dashboard" data-ga-loc="methodology_footer">라이브 대시보드</a>
       <a href="/reports/" data-i18n="footer.reports">월간 리포트</a>
       <a href="https://github.com/bentleypark/aiwatch" data-i18n="footer.github" data-ga="click_github" data-ga-loc="methodology_footer">GitHub (오픈소스)</a>
-      <a href="https://ai-watch.dev/feed.xml" data-i18n="footer.rss">RSS</a>
+      <a href="https://aiwatch.maicarons.cc/feed.xml" data-i18n="footer.rss">RSS</a>
     </div>
   </div>
 </footer>

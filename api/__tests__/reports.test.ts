@@ -91,7 +91,7 @@ describe('reports proxy fires the Edge-fallback alert (#1368, #378)', () => {
     delete process.env.VERCEL_ENV
   })
 
-  const get = (path: string) => handler(new Request(`https://ai-watch.dev${path}`, { method: 'GET' }))
+  const get = (path: string) => handler(new Request(`https://aiwatch.maicarons.cc${path}`, { method: 'GET' }))
 
   it('alerts with surface "reports" and the sanitized path when the upstream is unreachable', async () => {
     const res = await get('/reports/2026-03/')

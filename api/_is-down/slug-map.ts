@@ -235,5 +235,5 @@ export const SERVICE_SITE_URL: Record<string, string> = {
 export function outboundReferralUrl(id: string): string | null {
   const base = SERVICE_SITE_URL[id]
   if (!base) return null
-  return `${base}${base.includes('?') ? '&' : '?'}ref=ai-watch.dev`
+  return `${base}${base.includes('?') ? '&' : '?'}ref=aiwatch.maicarons.cc`
 }

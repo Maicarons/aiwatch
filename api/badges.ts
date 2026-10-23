@@ -32,7 +32,7 @@ export default async function handler(_req: Request) {
   } catch (err) {
     console.error('[badges] Render failed:', err instanceof Error ? err.stack : err)
     return new Response(
-      '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AIWatch</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please visit <a href="https://ai-watch.dev" style="color:#58a6ff">AIWatch Dashboard</a>.</p></body></html>',
+      '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>AIWatch</title></head><body style="background:#080c10;color:#e6edf3;font-family:sans-serif;text-align:center;padding:60px"><h1>Something went wrong</h1><p>Please visit <a href="https://aiwatch.maicarons.cc" style="color:#58a6ff">AIWatch Dashboard</a>.</p></body></html>',
       { status: 500, headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' } },
     )
   }

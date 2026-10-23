@@ -9,7 +9,7 @@ import handler from '../is-down'
 import { spyFetchWithEmptyReportFeed } from './fetch-stub'
 
 function makeReq(slug: string): Request {
-  return new Request(`https://ai-watch.dev/api/is-down?slug=${slug}`, { method: 'GET' })
+  return new Request(`https://aiwatch.maicarons.cc/api/is-down?slug=${slug}`, { method: 'GET' })
 }
 
 function makeWorkerSuccess(): Response {

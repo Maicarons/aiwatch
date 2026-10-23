@@ -2,26 +2,26 @@
 
 [![Tests](https://github.com/Maicarons/aiwatch/actions/workflows/test.yml/badge.svg)](https://github.com/Maicarons/aiwatch/actions/workflows/test.yml)
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
-[![Deploy](https://img.shields.io/badge/Deploy-ai--watch.dev-blue)](https://ai-watch.dev)
+[![Deploy](https://img.shields.io/badge/Deploy-aiwatch.maicarons.cc-blue)](https://aiwatch.maicarons.cc)
 [![GitHub stars](https://img.shields.io/github/stars/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/stargazers)
 [![Last commit](https://img.shields.io/github/last-commit/Maicarons/aiwatch)](https://github.com/Maicarons/aiwatch/commits/main)
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://ai-watch.dev/is-github-copilot-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![GitHub Copilot](https://aiwatch-worker.p2c2kbf.workers.dev/badge/copilot)](https://aiwatch.maicarons.cc/is-github-copilot-down)
 
 [English](README.md) | [한국어](README.ko.md) | **中文**
 
 面向 **48 项 AI 服务**的实时监控仪表盘 — 追踪主流 AI 服务商的状态、延迟、可用率与故障事件。
 
-**[仪表盘](https://ai-watch.dev)** · **[介绍页](https://ai-watch.dev/intro)**
+**[仪表盘](https://aiwatch.maicarons.cc)** · **[介绍页](https://aiwatch.maicarons.cc/intro)**
 
 | 桌面端 | 移动端 |
 |---------|--------|
 | ![AIWatch 仪表盘](docs/screenshot.png?v=3) | ![AIWatch 移动端](docs/screenshot-mobile.png?v=1) |
 
-> 本仓库是 [bentleypark/aiwatch](https://github.com/bentleypark/aiwatch) 的 fork，所有提交只发布到
+> 本仓库是 [Maicarons/aiwatch](https://github.com/Maicarons/aiwatch) 的 fork，所有提交只发布到
 > [Maicarons/aiwatch](https://github.com/Maicarons/aiwatch)。
 
 **分享**
@@ -32,7 +32,7 @@
 
 ## 🛰️ 在线演示
 
-访问 **[ai-watch.dev](https://ai-watch.dev)** — 无需注册。通过 Cloudflare Workers 每 5 分钟更新一次。
+访问 **[aiwatch.maicarons.cc](https://aiwatch.maicarons.cc)** — 无需注册。通过 Cloudflare Workers 每 5 分钟更新一次。
 
 ## 功能
 
@@ -41,7 +41,7 @@
 - **延迟监控** — 对 36 个可探测服务直接测量端点响应时间（RTT）；不可探测的服务不显示延迟
 - **24 小时延迟趋势** — Chart.js 折线图，5 分钟探测快照
 - **故障历史** — 时间线，支持多种状态页格式的详情
-- **可用率** — 30 天可用率由 **AIWatch 计算**，基于各服务商公开的记录，而不是照抄它们展示的百分比（加权：完全中断 1.0，部分/降级 0.3，已公告的维护不计入）。不符合该公式的数据源会使用各自的标注 — 因此我们的数字可能与服务商自身的数字不同，这是有意为之（[工作原理](https://ai-watch.dev/methodology)）
+- **可用率** — 30 天可用率由 **AIWatch 计算**，基于各服务商公开的记录，而不是照抄它们展示的百分比（加权：完全中断 1.0，部分/降级 0.3，已公告的维护不计入）。不符合该公式的数据源会使用各自的标注 — 因此我们的数字可能与服务商自身的数字不同，这是有意为之（[工作原理](https://aiwatch.maicarons.cc/methodology)）
 - **组件状态明细** — 在服务详情页和 Is X Down 页面实时显示逐组件状态（模型、API 接口等），长列表支持折叠的分组/模型
 - **状态日历** — 30 天（Statuspage）或 14 天（incident.io）每日状态可视化
 - **Discord 与 Slack 提醒** — 状态变化/故障时发送 Discord webhook + 通过 Slack 原生 `/feed` RSS 应用接入（零配置）+ RSS 订阅
@@ -50,7 +50,7 @@
 - **深色/浅色主题** — 跟随系统并可手动切换
 - **多语言** — 韩语 / 英语 / 中文
 - **移动端响应式** — 侧边栏抽屉、移动操作栏
-- **AIWatch Score** — 综合可用率、故障、恢复时间和基于探测的响应性的可靠性评分（[工作原理](https://ai-watch.dev/methodology#score)）
+- **AIWatch Score** — 综合可用率、故障、恢复时间和基于探测的响应性的可靠性评分（[工作原理](https://aiwatch.maicarons.cc/methodology#score)）
 - **RTT 退化检测** — AIWatch 的直接 API 探测可发现官方状态页常常不会报告的延迟退化（仪表盘徽章 + Discord 每日摘要）。在官方报告约 5 分钟的轮询周期内独立检测（MTTD）
 - **区域可用性** — SpaceXAI、Gemini、OpenAI 的逐区域故障状态，并给出切换建议
 - **智能提醒** — 降级/故障状态的 Discord 提醒，带防抖动、故障抑制和恢复时长
@@ -61,7 +61,7 @@
 - **AI 分析（测试版）** — 故障的混合 AI 自动分析（Gemma 4 主用 + Sonnet 兜底）：原因估计、恢复时间、影响范围、结合上下文的替代建议。合并进故障 Discord 提醒（单个 embed）、顶栏分析弹窗、Is X Down AI 洞察卡片
 - **介绍页** — 介绍页（`/intro`），带仪表盘预览模型、韩/英 i18n、流程动画、可选的 `?banner=` 活动位和 GA4 跟踪
 - **Chrome 扩展** — 仅 Claude 的工具栏徽章 + 弹窗，显示 Claude API / claude.ai / Claude Code 实时状态、AIWatch Score、活跃故障（含 AI 摘要）、受控的社区报告和一键问题报告。仅轮询精简的 `?src=ext-claude` API — 不读取页面内容（零数据收集）— [从 Chrome 应用商店安装](https://chromewebstore.google.com/detail/aiwatch-%E2%80%94-claude-status-d/mmngmhijlancegmfgcbegiackjkalocc)
-- **Claude Code 插件（测试版）** — 后台故障监控器，在上游 AI 服务故障或恢复的瞬间通知你，并提供 `/aiwatch` 命令简报当前故障（标题、影响、AI 摘要、替代方案）。不读取代码，不收集数据。`/plugin marketplace add Maicarons/aiwatch` — [详情](https://ai-watch.dev/plugin)
+- **Claude Code 插件（测试版）** — 后台故障监控器，在上游 AI 服务故障或恢复的瞬间通知你，并提供 `/aiwatch` 命令简报当前故障（标题、影响、AI 摘要、替代方案）。不读取代码，不收集数据。`/plugin marketplace add bentleypark/aiwatch` — [详情](https://aiwatch.maicarons.cc/plugin)
 - **Web Vitals 监控** — 收集真实用户的 LCP、FCP、TTFB、CLS、INP，按 p75 聚合，并在 Discord 每日报告中发送阈值告警
 - **每周简报** — 周日 Discord 摘要，包含 AI 服务变更检测（OpenAI、Google、Anthropic）、故障汇总和稳定性趋势
 - **安全监控** — 通过 Hacker News、Reddit（r/netsec、r/cybersecurity）和 OSV.dev 对 24 个 AI SDK 包（PyPI + npm，包括 LangChain 生态适配器）进行 SDK 漏洞扫描，提供仪表盘提醒 + Discord 摘要
@@ -306,10 +306,10 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 在 README、文档或博客中嵌入实时状态徽章。
 
 ```markdown
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 ```
 
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://ai-watch.dev/is-claude-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude)](https://aiwatch.maicarons.cc/is-claude-down)
 
 ### 参数
 
@@ -321,10 +321,10 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 
 ### 示例
 
-[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://ai-watch.dev/is-openai-down)
-[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://ai-watch.dev/is-gemini-down)
-[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://ai-watch.dev/is-claude-down)
-[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://ai-watch.dev/is-cursor-down)
+[![OpenAI API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/openai)](https://aiwatch.maicarons.cc/is-openai-down)
+[![Gemini API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/gemini)](https://aiwatch.maicarons.cc/is-gemini-down)
+[![Claude API](https://aiwatch-worker.p2c2kbf.workers.dev/badge/claude?uptime=true)](https://aiwatch.maicarons.cc/is-claude-down)
+[![Cursor](https://aiwatch-worker.p2c2kbf.workers.dev/badge/cursor?style=flat-square)](https://aiwatch.maicarons.cc/is-cursor-down)
 
 ### 可用的服务 ID
 
@@ -359,7 +359,7 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 
 ## Claude Code 状态栏集成
 
-在 [Claude Code 状态栏](https://docs.claude.com/en/docs/claude-code/statusline)中直接显示 AI 服务故障 — Claude API、OpenAI、Gemini、GitHub Copilot 等 44 项以上。推荐预设保留常驻且可点击的 **AIWatch** 标签（全部正常时 `AIWatch 🟢`，出问题时 `AIWatch 🔴 Claude API` — cmd/ctrl+click 打开仪表盘）。希望健康时完全零占用？[预设页面](https://ai-watch.dev/#statusline)提供一个在有服务降级前保持空白的极简预设。
+在 [Claude Code 状态栏](https://docs.claude.com/en/docs/claude-code/statusline)中直接显示 AI 服务故障 — Claude API、OpenAI、Gemini、GitHub Copilot 等 44 项以上。推荐预设保留常驻且可点击的 **AIWatch** 标签（全部正常时 `AIWatch 🟢`，出问题时 `AIWatch 🔴 Claude API` — cmd/ctrl+click 打开仪表盘）。希望健康时完全零占用？[预设页面](https://aiwatch.maicarons.cc/#statusline)提供一个在有服务降级前保持空白的极简预设。
 
 最快安装 — 添加到 `~/.claude/settings.json`：
 
@@ -374,13 +374,13 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 
 > 可点击标签需要支持 OSC 8 的终端（iTerm2、Warp、kitty、WezTerm、VS Code 终端、macOS 12+ 的 Terminal.app）；其他终端会显示为纯文本。直接访问 Worker 域名，因此每次提示的轮询不会计入 Vercel 带宽。
 
-其他预设 — **极简**（健康时为空）、紧凑徽章、完整列表、限定特定服务商，以及可点击的逐服务链接：**[ai-watch.dev/#statusline](https://ai-watch.dev/#statusline)**
+其他预设 — **极简**（健康时为空）、紧凑徽章、完整列表、限定特定服务商，以及可点击的逐服务链接：**[aiwatch.maicarons.cc/#statusline](https://aiwatch.maicarons.cc/#statusline)**
 
 特性：每次渲染一次 GET，Cloudflare 边缘 5 分钟 KV 缓存，2 秒超时，不依赖 `jq`，不向 Anthropic API 发送请求，无客户端标识符。网络错误时该行保持空白；AIWatch 无法读取自身状态快照时显示 `AIWatch ⚪`（未知），而不是它无法支撑的绿色。兼容任何支持 shell 命令输出的状态栏工具（包括 `ccstatusline` 的 Custom Command 组件）。
 
 ## Claude Code 插件（测试版）
 
-除状态栏外，[AIWatch Claude Code 插件](https://ai-watch.dev/plugin)通过两部分在 Claude Code 中呈现 AI 故障：
+除状态栏外，[AIWatch Claude Code 插件](https://aiwatch.maicarons.cc/plugin)通过两部分在 Claude Code 中呈现 AI 故障：
 
 - **后台故障监控器** — 在被监控的服务商故障（`🔴 Claude API is down`）或恢复（`✅ Claude API has recovered`）时立即通知你，并指明服务。每次轮询（默认每 60 秒）做差异比较，因此只在真实变化时发声 — 绝不刷屏。
 - **`/aiwatch` 命令** — 简报当前哪些 AI 服务降级/故障，每项包含其活跃故障（标题 + 影响）、AI 摘要和替代建议。
@@ -388,11 +388,11 @@ curl https://aiwatch-worker.p2c2kbf.workers.dev/api/v1/status/claude
 不读取代码，不收集数据 — 仅轮询 AIWatch 的公开状态源。从 AIWatch 自己的市场安装：
 
 ```
-/plugin marketplace add Maicarons/aiwatch
+/plugin marketplace add bentleypark/aiwatch
 /plugin install aiwatch@aiwatch-dev
 ```
 
-源码 + 文档：[`plugin/aiwatch/`](plugin/aiwatch/)。完整说明：**[ai-watch.dev/plugin](https://ai-watch.dev/plugin)**。
+源码 + 文档：[`plugin/aiwatch/`](plugin/aiwatch/)。完整说明：**[aiwatch.maicarons.cc/plugin](https://aiwatch.maicarons.cc/plugin)**。
 
 ## 项目结构
 
